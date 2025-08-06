@@ -1,4 +1,5 @@
 import 'package:e_vote/screens/splash.dart';
+import 'package:e_vote/screens/voters/login.dart';
 import 'package:e_vote/screens/welcome.dart';
 import 'package:e_vote/theme/theme_controller.dart';
 import 'package:e_vote/theme/theme_data.dart';
@@ -25,14 +26,21 @@ class EVote extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
 
+      home: LoginScreen(),
+
+      /*
+
 // The first screen to display once the app is launch.
       initialRoute: '/',
 
 // Defining the varous screen routes
       routes: {
         '/': (context) => SplashScreen(),
-        '/welcome': (context) => WelcomeScreen()
+        '/welcome': (context) => WelcomeScreen(),
+        'login': (context) => LoginScreen()
       },
+
+      */
 
 // Theme data for the App
 
