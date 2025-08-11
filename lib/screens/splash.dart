@@ -40,7 +40,15 @@ class _SplashScreenState extends State<SplashScreen> {
               width: 338,
               height: 310,
               ),
-              Text('E-Vote')
+              Text('E-Vote',
+              style: TextStyle(
+                              fontFamily: 'Roboto',
+                  fontSize: 48,
+                  fontWeight: FontWeight.w700,
+                  color: Color.fromRGBO(255, 255, 255, 1,)
+                ),
+                            
+              )
             ],
           ),
           

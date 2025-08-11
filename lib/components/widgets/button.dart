@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 
 class MyButton extends StatelessWidget {
   // properties for the button class
@@ -39,7 +39,8 @@ class MyButton extends StatelessWidget {
         
       ),
       child: Text(buttonText,
-     style: GoogleFonts.roboto(
+     style: TextStyle(
+       fontFamily: 'Roboto',
                   fontSize: 24,
                   fontWeight: FontWeight.w700,
                   color: Color.fromRGBO(255, 255, 255, 1,)
