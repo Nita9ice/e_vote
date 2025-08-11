@@ -52,13 +52,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
 // space
                 SizedBox(height: 29,),
-                 Text('Admin',
-                style: GoogleFonts.roboto(
+
+                TextButton(
+                        onPressed: () {
+                          // Navigate to forgot password screen
+                          Navigator.pushNamed(context, '/onboard');
+                        },
+                        child: Text(
+                          'Admin',
+                          style: GoogleFonts.roboto(
                   fontSize: 36,
                   fontWeight: FontWeight.w700,
                   color: Color.fromRGBO(255, 255, 255, 1,)
                 ),
-                ),
+                          
+                        ),
+                      ),
+                
                 // space
                 SizedBox(height: 41,),
 
@@ -66,13 +76,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 // space
                 SizedBox(height: 29,),
 
-                 Text('User',
-                style: GoogleFonts.roboto(
+                                 TextButton(
+                        onPressed: () {
+                          // Navigate to forgot password screen
+                          Navigator.pushNamed(context, '/signup');
+                        },
+                        child: Text(
+                          'User',
+                          style: GoogleFonts.roboto(
                   fontSize: 36,
                   fontWeight: FontWeight.w700,
                   color: Color.fromRGBO(255, 255, 255, 1,)
                 ),
-                ),
+                          
+                        ),
+                      ),
 
 
                     

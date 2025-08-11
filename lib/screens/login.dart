@@ -1,34 +1,23 @@
-
 import 'package:e_vote/components/widgets/button.dart';
 import 'package:e_vote/components/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 
-class OnboardScreen extends StatefulWidget {
-  const OnboardScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<OnboardScreen> createState() => _OnboardScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _OnboardScreenState extends State<OnboardScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   // Controller for handling input in the email text field
-  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
 
   // Controller for handling input in the password text field
-  final TextEditingController lastNameController = TextEditingController();
-
-   // Controller for handling input in the password text field
-  final TextEditingController emailController = TextEditingController();
-
-  
-
-// Controller for handling input in the password text field
   final TextEditingController passwordController = TextEditingController();
 
-  // Controller for handling input in the password text field
-  final TextEditingController confirmPasswordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,9 +36,9 @@ class _OnboardScreenState extends State<OnboardScreen> {
               
               children: [
                 // space
-                SizedBox(height: 150,),
+                SizedBox(height: 241,),
                 // Main text 
-                Text('Welcome Onboard',
+                Text('Welcome Back',
                 style: GoogleFonts.roboto(
                   fontSize: 36,
                   fontWeight: FontWeight.w700,
@@ -58,43 +47,29 @@ class _OnboardScreenState extends State<OnboardScreen> {
                 ),
                     
                 // space
-                SizedBox(height: 31,),
+                SizedBox(height: 22,),
                     
-                
+                // sub text
+                Text('Login',
+                style: GoogleFonts.roboto(
+                  fontSize: 36,
+                  fontWeight: FontWeight.w700,
+                  color: Color.fromRGBO(255, 255, 255, 1,)
+                ),
+                ),
                     
-                
+                // space
+                SizedBox(height: 40,),
+                    
                 // Text field for user 
-                MyTextField(controller: firstNameController, 
-                hintText: 'First name:',
+                MyTextField(controller: usernameController, 
+                hintText: 'Username:',
                 onPressed: (){},
                 
                 ),
                     
                 // space
-                SizedBox(height: 31,),
-                    
-                MyTextField(controller: lastNameController, 
-                hintText: 'Last name:',
-                
-                onPressed: () {
-                  
-                },),
-
-                 // space
-                SizedBox(height: 31,),
-                    
-                MyTextField(controller: emailController, 
-                hintText: 'Email:',
-                
-                onPressed: () {
-                  
-                },),
-
-                
-                    
-               
-                     // space
-                SizedBox(height: 31,),
+                SizedBox(height: 42,),
                     
                 MyTextField(controller: passwordController, 
                 hintText: 'Password:',
@@ -102,32 +77,46 @@ class _OnboardScreenState extends State<OnboardScreen> {
                 onPressed: () {
                   
                 },),
-
-                 // space
-                SizedBox(height: 31,),
                     
-                MyTextField(controller: confirmPasswordController, 
-                hintText: 'Confirm Password:',
-                
-                onPressed: () {
-                  
-                },),
-                // 
-                
-                SizedBox(height: 29,),
-                // Register button
-                MyButton(buttonText: 'Register', onPressed: (){},
+                // space
+                SizedBox(height: 14,),
                     
+                // Forgot password
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                        onPressed: () {
+                          // Navigate to forgot password screen
+                          Navigator.pushNamed(context, '/forgot');
+                        },
+                        child: Text(
+                          'Forgot Password?',
+                          style: GoogleFonts.roboto(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w400,
+                  color: Color.fromRGBO(255, 255, 255, 1,)
                 ),
-                     
+                          
+                        ),
+                      ),
+                    ),
+                    
+                     // space
+                SizedBox(height: 61,),
+                    
+                // login button
+                MyButton(buttonText: 'Login', onPressed: (){},
                 
-                SizedBox(height: 13,),
+                ),
+                    
+                SizedBox(height: 8,),
+                    
                  // Create account text
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'have an account already?',
+                          'Don\'t have an account?',
                           style: GoogleFonts.roboto(
                   fontSize: 20,
                   fontWeight: FontWeight.w400,
@@ -137,10 +126,10 @@ class _OnboardScreenState extends State<OnboardScreen> {
                         ),
                         TextButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, '/signup');
+                            Navigator.pushNamed(context, '/register');
                           },
                           child: Text(
-                            'Login',
+                            'Sign up',
                              style: GoogleFonts.roboto(
                   fontSize: 20,
                   fontWeight: FontWeight.w400,

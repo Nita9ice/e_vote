@@ -1,6 +1,9 @@
 // import 'package:e_vote/screens/register.dart';
+import 'package:e_vote/screens/admin/onboard.dart';
+import 'package:e_vote/screens/register.dart';
 import 'package:e_vote/screens/splash.dart';
-import 'package:e_vote/screens/voters/login.dart';
+import 'package:e_vote/screens/login.dart';
+import 'package:e_vote/screens/voters/signup.dart';
 import 'package:e_vote/screens/welcome.dart';
 import 'package:e_vote/theme/theme_controller.dart';
 import 'package:e_vote/theme/theme_data.dart';
@@ -38,7 +41,10 @@ class EVote extends StatelessWidget {
       routes: {
         '/': (context) => SplashScreen(),
         '/welcome': (context) => WelcomeScreen(),
-        'login': (context) => LoginScreen()
+        'login': (context) => LoginScreen(),
+        '/register': (context) => RegisterScreen(),
+        '/signup': (context) =>SignupScreen(),
+        '/onboard': (context) => OnboardScreen(),
       },
 
       
