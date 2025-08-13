@@ -55,7 +55,7 @@ class WelcomeScreen extends StatelessWidget {
               const Text(
                 'E-Vote',
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 32,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
