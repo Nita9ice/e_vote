@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 
 class MyTextField extends StatelessWidget {
   // properties for this class
@@ -56,7 +56,8 @@ class MyTextField extends StatelessWidget {
             decoration: InputDecoration(
               hintText: hintText,
               
-              hintStyle: GoogleFonts.roboto(
+              hintStyle: TextStyle(
+                 fontFamily: 'Roboto',
                 fontSize: 20,
                         fontWeight: FontWeight.w400,
                         color: Color.fromRGBO(0, 0, 0, 1,)

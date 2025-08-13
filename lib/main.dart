@@ -1,7 +1,8 @@
 // import 'package:e_vote/screens/register.dart';
-import 'package:e_vote/firebase_options.dart';
+
 import 'package:e_vote/screens/splash.dart';
-import 'package:e_vote/screens/voters/login.dart';
+import 'package:e_vote/screens/login.dart';
+import 'package:e_vote/screens/signup.dart';
 import 'package:e_vote/screens/welcome.dart';
 import 'package:e_vote/theme/theme_data.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,9 @@ class EVote extends StatelessWidget {
       routes: {
         '/': (context) => SplashScreen(),
         '/welcome': (context) => WelcomeScreen(),
-        'login': (context) => LoginScreen(),
+        '/login': (context) => LoginScreen(),
+
+        '/signup': (context) => SignupScreen(),
       },
 
       // Theme data for the App

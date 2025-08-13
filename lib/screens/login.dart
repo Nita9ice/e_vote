@@ -1,8 +1,6 @@
 import 'package:e_vote/components/widgets/button.dart';
 import 'package:e_vote/components/widgets/text_field.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -39,7 +37,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: 241,),
                 // Main text 
                 Text('Welcome Back',
-                style: GoogleFonts.roboto(
+                style: TextStyle(
+                   fontFamily: 'Roboto',
                   fontSize: 36,
                   fontWeight: FontWeight.w700,
                   color: Color.fromRGBO(255, 255, 255, 1,)
@@ -51,7 +50,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     
                 // sub text
                 Text('Login',
-                style: GoogleFonts.roboto(
+                style: TextStyle(
+                   fontFamily: 'Roboto',
                   fontSize: 36,
                   fontWeight: FontWeight.w700,
                   color: Color.fromRGBO(255, 255, 255, 1,)
@@ -91,7 +91,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                         child: Text(
                           'Forgot Password?',
-                          style: GoogleFonts.roboto(
+                          style: TextStyle(
+                             fontFamily: 'Roboto',
                   fontSize: 20,
                   fontWeight: FontWeight.w400,
                   color: Color.fromRGBO(255, 255, 255, 1,)
@@ -117,7 +118,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         Text(
                           'Don\'t have an account?',
-                          style: GoogleFonts.roboto(
+                          style: TextStyle(
+                             fontFamily: 'Roboto',
                   fontSize: 20,
                   fontWeight: FontWeight.w400,
                   color: Color.fromRGBO(255, 255, 255, 1,)
@@ -130,7 +132,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           },
                           child: Text(
                             'Sign up',
-                             style: GoogleFonts.roboto(
+                             style: TextStyle(
+                               fontFamily: 'Roboto',
                   fontSize: 20,
                   fontWeight: FontWeight.w400,
                   color: Color.fromRGBO(255, 255, 255, 1,)
