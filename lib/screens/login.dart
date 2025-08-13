@@ -64,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 // Text field for user 
                 MyTextField(controller: usernameController, 
                 hintText: 'Username:',
-                onPressed: (){},
+                
                 
                 ),
                     
@@ -74,9 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 MyTextField(controller: passwordController, 
                 hintText: 'Password:',
                 
-                onPressed: () {
-                  
-                },),
+                ),
                     
                 // space
                 SizedBox(height: 14,),
@@ -106,7 +104,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: 61,),
                     
                 // login button
-                MyButton(buttonText: 'Login', onPressed: (){},
+                MyButton(buttonText: 'Login', onPressed: (){
+                   Navigator.pushNamed(context, '/forgot');
+                },
                 
                 ),
                     

@@ -78,7 +78,7 @@ String? selectedRole;
                 // Text field for user first name 
                 MyTextField(controller: firstNameController, 
                 hintText: 'First name:',
-                onPressed: (){},
+                
                 
                 ),
                     
@@ -89,9 +89,7 @@ String? selectedRole;
                 MyTextField(controller: lastNameController, 
                 hintText: 'Last name:',
                 
-                onPressed: () {
-                  
-                },),
+                ),
 
                  // space
                 SizedBox(height: 31,),
@@ -101,9 +99,7 @@ String? selectedRole;
                 MyTextField(controller: emailController, 
                 hintText: 'Email:',
                 
-                onPressed: () {
-                  
-                },),
+                ),
 
                  
             
@@ -115,9 +111,7 @@ String? selectedRole;
                 MyTextField(controller: passwordController, 
                 hintText: 'Password:',
                 
-                onPressed: () {
-                  
-                },),
+                ),
 
                  // space
                 SizedBox(height: 31,),
@@ -126,9 +120,7 @@ String? selectedRole;
                 MyTextField(controller: confirmPasswordController, 
                 hintText: 'Confirm Password:',
                 
-                onPressed: () {
-                  
-                },),
+                ),
 
 
                  SizedBox(height: 31,),
@@ -176,9 +168,17 @@ String? selectedRole;
           ],
         ),
 
- SizedBox(height: 20,),
+ SizedBox(height: 30,),
  // Register button
-                MyButton(buttonText: 'Register', onPressed: (){},
+                MyButton(buttonText: 'Register', 
+                onPressed: (){
+                  // Navigate to verify email screen
+                  
+                     Navigator.pushNamed(context, '/email');
+                    
+                  
+                         
+                },
                     
                 ),
 

@@ -6,8 +6,7 @@ class MyTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
   final bool obscureText;
-  final VoidCallback onPressed;
- 
+  
   
 
   // initializing the properties of the class
@@ -15,7 +14,7 @@ class MyTextField extends StatelessWidget {
     super.key,
     required this.controller,
     required this.hintText,
-    this.obscureText = false, required this.onPressed,
+    this.obscureText = false, 
    
     
     
