@@ -1,64 +1,50 @@
 // import 'package:e_vote/screens/register.dart';
 
-
 import 'package:e_vote/screens/splash.dart';
 import 'package:e_vote/screens/login.dart';
 import 'package:e_vote/screens/signup.dart';
 import 'package:e_vote/screens/welcome.dart';
-import 'package:e_vote/theme/theme_controller.dart';
 import 'package:e_vote/theme/theme_data.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:e_vote/firebase_options.dart';
 
-
-
-void main() {
-  runApp(
-    ChangeNotifierProvider(
-      create: (_) => ThemeController(),
-      child: const EVote(),
-    ),
-  );
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(EVote());
 }
 
 class EVote extends StatelessWidget {
   const EVote({super.key});
-  
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      //home: RegisterScreen(),
 
-      // home: RegisterScreen(),
-
-      
-
-// The first screen to display once the app is launch.
+      // The first screen to display once the app is launch.
       initialRoute: '/',
 
-// Defining the varous screen routes
+      // Defining the varous screen routes
       routes: {
         '/': (context) => SplashScreen(),
         '/welcome': (context) => WelcomeScreen(),
         '/login': (context) => LoginScreen(),
-       
-        '/signup': (context) =>SignupScreen(),
-       
+
+        '/signup': (context) => SignupScreen(),
       },
 
-      
+      // Theme data for the App
 
-// Theme data for the App
+      // this is the default theme based on the device theme
+      themeMode: ThemeMode.system,
 
-// this is the default theme based on the device theme
-themeMode: ThemeMode.system, 
-
-// light theme
-theme: AppTheme.lightTheme,
-// dark theme
-darkTheme: AppTheme.darkTheme,
-
-);
+      // light theme
+      theme: AppTheme.lightTheme,
+      // dark theme
+      darkTheme: AppTheme.darkTheme,
+    );
   }
 }
