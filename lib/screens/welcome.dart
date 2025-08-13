@@ -17,7 +17,7 @@ class WelcomeScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 400),
+              const SizedBox(height: 450),
       
               // Main text
               const Text(
@@ -42,14 +42,14 @@ class WelcomeScreen extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),
-              const SizedBox(height: 20),
+              // const SizedBox(height: 20),
       
               // Logo image
               Expanded(
                 child: Container(
-                  width: double.infinity,
+                  // width: double.infinity,
                   
-                  alignment: Alignment.topLeft,
+                  alignment: Alignment.topCenter,
                   child: Image.asset(
                     'assets/images/logo2.png',
                     width: double.infinity,
@@ -59,7 +59,7 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 10),
+             
       
             
             ],
