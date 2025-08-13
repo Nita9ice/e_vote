@@ -1,6 +1,8 @@
+import 'package:e_vote/components/utilities/app_dimension.dart';
+import 'package:flutter/material.dart';
 import 'package:e_vote/components/widgets/button.dart';
 import 'package:e_vote/components/widgets/text_field.dart';
-import 'package:flutter/material.dart';
+
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -11,141 +13,213 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   // Controller for handling input in the email text field
-  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
 
   // Controller for handling input in the password text field
   final TextEditingController passwordController = TextEditingController();
 
+  // Variable to control password visibility
+  bool obscurePassword = false;
+
+  String? selectedRole;
+  final List<String> roles = ['Super User', 'Admin', 'Voters'];
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    // Instantiate AppDimensions
+    final dimensions = AppDimensions(context);
+
     return Scaffold(
-     
       body: Container(
-         width: double.infinity,
-            height: double.infinity,
-            decoration: BoxDecoration(
-              image: DecorationImage(image: AssetImage('assets/images/background2.jpg'),
-              fit: BoxFit.cover)
-            ),
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/background2.jpg'),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: Padding(
-          padding: const EdgeInsets.all(32),
+          padding: EdgeInsets.all(dimensions.widthPercent(7.5)), // ~32.25px
           child: Center(
-            child: Column(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  // Space
+                  SizedBox(height: dimensions.heightPercent(26)), // ~242.32px
+                  // Main text
+                  Text(
+                    'Welcome Back',
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontSize: dimensions.widthPercent(8.4), // ~36.12px
+                      fontWeight: FontWeight.w700,
+                      color: const Color.fromRGBO(255, 255, 255, 1),
+                    ),
+                  ),
+                  // Space
+                  SizedBox(height: dimensions.heightPercent(2.4)), // ~22.37px
+                  // Sub text
+                  Text(
+                    'Login',
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontSize: dimensions.widthPercent(8.4), // ~36.12px
+                      fontWeight: FontWeight.w700,
+                      color: const Color.fromRGBO(255, 255, 255, 1),
+                    ),
+                  ),
+                  // Space
+                  SizedBox(height: dimensions.heightPercent(4.3)), // ~40.08px
+                  // Text field for user
+                  MyTextField(
+                    controller: emailController,
+                    hintText: 'Email:',
+                  ),
+                  // Space
+                  SizedBox(height: dimensions.heightPercent(4.5)), // ~41.94px
               
-              children: [
-                // space
-                SizedBox(height: 241,),
-                // Main text 
-                Text('Welcome Back',
-                style: TextStyle(
-                   fontFamily: 'Roboto',
-                  fontSize: 36,
-                  fontWeight: FontWeight.w700,
-                  color: Color.fromRGBO(255, 255, 255, 1,)
-                ),
-                ),
-                    
-                // space
-                SizedBox(height: 22,),
-                    
-                // sub text
-                Text('Login',
-                style: TextStyle(
-                   fontFamily: 'Roboto',
-                  fontSize: 36,
-                  fontWeight: FontWeight.w700,
-                  color: Color.fromRGBO(255, 255, 255, 1,)
-                ),
-                ),
-                    
-                // space
-                SizedBox(height: 40,),
-                    
-                // Text field for user 
-                MyTextField(controller: usernameController, 
-                hintText: 'Username:',
-                
-                
-                ),
-                    
-                // space
-                SizedBox(height: 42,),
-                    
-                MyTextField(controller: passwordController, 
-                hintText: 'Password:',
-                
-                ),
-                    
-                // space
-                SizedBox(height: 14,),
-                    
-                // Forgot password
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: TextButton(
-                        onPressed: () {
-                          // Navigate to forgot password screen
-                          Navigator.pushNamed(context, '/forgot');
-                        },
-                        child: Text(
-                          'Forgot Password?',
-                          style: TextStyle(
-                             fontFamily: 'Roboto',
-                  fontSize: 20,
-                  fontWeight: FontWeight.w400,
-                  color: Color.fromRGBO(255, 255, 255, 1,)
-                ),
+                   
+              
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: dimensions.widthPercent(2.8)), // ~12.04px
+                        decoration: BoxDecoration(
+                          color: const Color.fromRGBO(255, 255, 255, 1),
+                          borderRadius: BorderRadius.circular(dimensions.widthPercent(4.7)), // ~20.21px
+                          border: Border.all(color: Colors.grey.shade400, width: 1),
                           
+                        ),
+                        child: DropdownButton<String>(
+                          value: selectedRole,
+                          isExpanded: true,
+                          underline: const SizedBox(),
+                          iconSize: 30,
+                          hint: Text(
+                            'Choose a role',
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontSize: dimensions.widthPercent(4.7), // ~20.21px
+                              fontWeight: FontWeight.w400,
+                              color: const Color.fromRGBO(0, 0, 0, 1),
+                            ),
+                          ),
+                          items: roles.map((role) {
+                            return DropdownMenuItem(
+                              value: role,
+                              child: Text(
+                                role,
+                                style: TextStyle(
+                                  fontFamily: 'Roboto',
+                                  fontSize: dimensions.widthPercent(4.7), // ~20.21px
+                                  fontWeight: FontWeight.w400,
+                                  color: const Color.fromRGBO(0, 0, 0, 1),
+                                ),
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              selectedRole = value!;
+                            });
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+              
+                   SizedBox(height: dimensions.heightPercent(4.5)), // ~41.94px
+                  // Text field for password
+                  MyTextField(
+                    controller: passwordController,
+                    hintText: 'Password:',
+                    obscureText: obscurePassword,
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        obscurePassword ? Icons.visibility : Icons.visibility_off,
+                        color: const Color.fromRGBO(0, 0, 0, 1),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          obscurePassword = !obscurePassword;
+                        });
+                      },
+                    ),
+                  ),
+                  // Space
+                  SizedBox(height: dimensions.heightPercent(1.5)), // ~13.98px
+                  // Forgot password
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/forgot');
+                      },
+                      child: Text(
+                        'Forgot Password?',
+                        style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontSize: dimensions.widthPercent(4.7), // ~20.21px
+                          fontWeight: FontWeight.w400,
+                          color: const Color.fromRGBO(255, 255, 255, 1),
                         ),
                       ),
                     ),
-                    
-                     // space
-                SizedBox(height: 61,),
-                    
-                // login button
-                MyButton(buttonText: 'Login', onPressed: (){
-                   Navigator.pushNamed(context, '/forgot');
-                },
+                  ),
+              
+                                  // Space
                 
-                ),
-                    
-                SizedBox(height: 8,),
-                    
-                 // Create account text
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Don\'t have an account?',
-                          style: TextStyle(
-                             fontFamily: 'Roboto',
-                  fontSize: 20,
-                  fontWeight: FontWeight.w400,
-                  color: Color.fromRGBO(255, 255, 255, 1,)
-                ),
-                          
+                  // Space
+                  SizedBox(height: dimensions.heightPercent(6.6)), // ~61.51px
+                  // Login button
+                  MyButton(
+                    buttonText: 'Login',
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/home');
+                    },
+                  ),
+                  // Space
+                  SizedBox(height: dimensions.heightPercent(0.9)), // ~8.39px
+                  // Create account text
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Don\'t have an account?',
+                        style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontSize: dimensions.widthPercent(4.7), // ~20.21px
+                          fontWeight: FontWeight.w400,
+                          color: const Color.fromRGBO(255, 255, 255, 1),
                         ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/signup');
-                          },
-                          child: Text(
-                            'Sign up',
-                             style: TextStyle(
-                               fontFamily: 'Roboto',
-                  fontSize: 20,
-                  fontWeight: FontWeight.w400,
-                  color: Color.fromRGBO(255, 255, 255, 1,)
-                ),
-                            
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/signup');
+                        },
+                        child: Text(
+                          'Sign up',
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontSize: dimensions.widthPercent(4.7), // ~20.21px
+                            fontWeight: FontWeight.w400,
+                            color: const Color.fromRGBO(255, 255, 255, 1),
                           ),
                         ),
-                      ],
-                    ),
-                    
-                    
-              ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),

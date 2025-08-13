@@ -1,6 +1,7 @@
 // import 'package:e_vote/screens/register.dart';
 
 
+import 'package:e_vote/screens/admin/dashboard.dart';
 import 'package:e_vote/screens/forgot_password.dart';
 import 'package:e_vote/screens/splash.dart';
 import 'package:e_vote/screens/login.dart';
@@ -32,7 +33,8 @@ class EVote extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
 
-      // home: VerifyEmailScreen(),
+      // home: LoginScreen(),
+
 
       
 
@@ -46,9 +48,12 @@ class EVote extends StatelessWidget {
         '/login': (context) => LoginScreen(),
         '/forgot': (context) => ForgotPasswordScreen(),
         '/signup': (context) =>SignupScreen(),
-       '/email': (context) => VerifyEmailScreen()
+       '/email': (context) => VerifyEmailScreen(),
+       '/admin': (context) => AdminDashboardScreen()
        
       },
+
+    
 
       
 
