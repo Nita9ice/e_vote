@@ -1,19 +1,16 @@
 // import 'package:e_vote/screens/register.dart';
+import 'package:e_vote/firebase_options.dart';
 import 'package:e_vote/screens/splash.dart';
 import 'package:e_vote/screens/voters/login.dart';
 import 'package:e_vote/screens/welcome.dart';
-import 'package:e_vote/theme/theme_controller.dart';
 import 'package:e_vote/theme/theme_data.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
-  runApp(
-    ChangeNotifierProvider(
-      create: (_) => ThemeController(),
-      child: const EVote(),
-    ),
-  );
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(EVote());
 }
 
 class EVote extends StatelessWidget {
@@ -23,8 +20,7 @@ class EVote extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-
-      // home: RegisterScreen(),
+      //home: RegisterScreen(),
 
       // The first screen to display once the app is launch.
       initialRoute: '/',
