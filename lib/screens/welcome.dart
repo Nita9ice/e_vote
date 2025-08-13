@@ -1,73 +1,71 @@
-
-
 import 'package:flutter/material.dart';
 
-
-class WelcomeScreen extends StatefulWidget {
+class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
-
-  @override
-  State<WelcomeScreen> createState() => _WelcomeScreenState();
-}
-
-class _WelcomeScreenState extends State<WelcomeScreen> {
-  
-  @override
-  
-  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(image: AssetImage('assets/images/background1.jpg'))
-       
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/background1.jpg'),
+            fit: BoxFit.cover,
+          ),
         ),
         child: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 400,),
-              // Main text 
-                Text('Welcome Onboard',
+              const SizedBox(height: 400),
+      
+              // Main text
+              const Text(
+                'Welcome Onboard',
                 style: TextStyle(
                   fontFamily: 'Roboto',
                   fontSize: 36,
                   fontWeight: FontWeight.w700,
-                  color: Color.fromRGBO(255, 255, 255, 1,)
+                  color: Color.fromRGBO(255, 255, 255, 1),
                 ),
-                ),
-
-                
-
-                IconButton(onPressed: (){
-
-                   // Navigate to login password screen
-                          Navigator.pushNamed(context, '/login');
-                }, icon:Icon(Icons.arrow_circle_right_outlined,
-                size: 46,
-                color: Color.fromRGBO(255, 255, 255, 1,)
-                ), ),
-
-                SizedBox(height: 10,),
-
-
-              Image.asset('assets/images/logo2.jpg',
-              width: 200
-              
-             
               ),
-              Text('E-Vote')
+              const SizedBox(height: 10),
+      
+              // Button to navigate to login
+              IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/login');
+                },
+                icon: const Icon(
+                  Icons.arrow_circle_right_outlined,
+                  size: 60,
+                  color: Colors.white,
+                ),
+              ),
+              const SizedBox(height: 20),
+      
+              // Logo image
+              Expanded(
+                child: Container(
+                  width: double.infinity,
+                  
+                  alignment: Alignment.topLeft,
+                  child: Image.asset(
+                    'assets/images/logo2.png',
+                    width: double.infinity,
+                    fit: BoxFit.fill,
+                    
+                    
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10),
+      
+            
             ],
           ),
-          
-            
         ),
-
-      )
-    
-      );
-      
-    
+      ),
+    );
   }
 }
