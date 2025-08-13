@@ -45,8 +45,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                    // Navigate to login password screen
                           Navigator.pushNamed(context, '/login');
                 }, icon:Icon(Icons.arrow_circle_right_outlined,
-                size: 100,
+                size: 46,
+                color: Color.fromRGBO(255, 255, 255, 1,)
                 ), ),
+
+                SizedBox(height: 10,),
 
 
               Image.asset('assets/images/logo2.jpg',
