@@ -1,5 +1,0 @@
-class Admin{
-    String candidateName;
-    String candidateGroup
-Admin({required this.candidateName, required this.candidateGroup})
-}
