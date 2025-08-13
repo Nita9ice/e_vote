@@ -7,6 +7,7 @@ import 'package:e_vote/screens/welcome.dart';
 import 'package:e_vote/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:e_vote/firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
