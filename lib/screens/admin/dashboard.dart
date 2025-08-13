@@ -23,7 +23,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        elevation: 0,
+        // elevation: 0,
         iconTheme: IconThemeData(color: Color.fromRGBO(255, 255, 255, 1),),
       ),
       drawer: Drawer(
