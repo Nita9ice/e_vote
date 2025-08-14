@@ -6,7 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 
 class Firestoreservices {
-  FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
+  final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
   FirebaseAuth auth = FirebaseAuth.instance;
 
   Future<void> submitVote(votingSectionList) async {
@@ -19,11 +19,11 @@ class Firestoreservices {
     }
   }
 
+  //user details
   Future<void> uploadUserDetails(
     String firstName,
     String lastName,
     String email,
-    String role,
   ) async {
     final user = auth.currentUser;
     if (user != null) {
@@ -36,7 +36,28 @@ class Firestoreservices {
               firstName: firstName,
               lastName: lastName,
               email: email,
-              role: role,
+            ).toMap(),
+          );
+    }
+  }
+
+  // admin details
+  Future<void> uploadAdminDetails(
+    String firstName,
+    String lastName,
+    String email,
+  ) async {
+    final user = auth.currentUser;
+    if (user != null) {
+      final userId = user.uid;
+      _firebaseFirestore
+          .collection('users')
+          .doc(userId)
+          .set(
+            Userprofile(
+              firstName: firstName,
+              lastName: lastName,
+              email: email,
             ).toMap(),
           );
     }

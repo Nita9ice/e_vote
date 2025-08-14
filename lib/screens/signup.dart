@@ -34,7 +34,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
   // List of available roles the user can choose from.
   final List<String> roles = ['Super User', 'Admin', 'Voters'];
-
+  //signUp for users and admin
   Future<bool> signUp() async {
     try {
       final auth = Authservices();
@@ -47,9 +47,23 @@ class _SignupScreenState extends State<SignupScreen> {
       if (password != confirmPassword) {
         showSnackBar('password do not match');
         if (firstName.isNotEmpty && lastName.isNotEmpty) {
-          await auth.signUp(email, password);
-
-          return true;
+          if (selectedRole == 'Admin') {
+            await auth.signUp(email, password);
+            await firestoreservices.uploadAdminDetails(
+              firstName,
+              lastName,
+              email,
+            );
+            return true;
+          } else if (selectedRole == 'user') {
+            await auth.signUp(email, password);
+            await firestoreservices.uploadUserDetails(
+              firstName,
+              lastName,
+              email,
+            );
+            return true;
+          }
         }
         return false;
       }
