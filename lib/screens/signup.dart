@@ -106,11 +106,11 @@ class _SignupScreenState extends State<SignupScreen> {
     Navigator.pushNamed(context, '/login');
   }
 
-  //signout user after registeration
-  Future<void> signOut() async {
-    final auth = Authservices();
-    await auth.signOut();
-  }
+  // //signout user after registeration
+  // Future<void> signOut() async {
+  //   final auth = Authservices();
+  //   await auth.signOut();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -252,8 +252,10 @@ class _SignupScreenState extends State<SignupScreen> {
                     onPressed: () async {
                       final onsucess = await signUp();
                       if (onsucess) {
-                        await signOut();
-                        showSnackBar('success');
+                        // await signOut();
+                        showSnackBar(
+                          'a verification link has been sent to your email\n please verify and login',
+                        );
                         Timer(Duration(seconds: 5), () {
                           return navigateToLogin();
                         });

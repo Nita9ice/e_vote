@@ -21,3 +21,13 @@ class Authservices {
 
   Stream<User?> get authChanges => auth.authStateChanges();
 }
+
+class Emailservices {
+  final auth = FirebaseAuth.instance;
+  void sendEmailVerification(String email) {
+    final user = auth.currentUser;
+    if (user != null) {
+        user
+    }
+  }
+}
