@@ -1,16 +1,16 @@
-import 'package:e_vote/models/votesection.dart';
+import 'package:e_vote/models/candidate.dart';
 import 'package:flutter/material.dart';
 
-class Votesectionlist extends ChangeNotifier {
+class Candidatelistprovider extends ChangeNotifier {
   final _votingSectionList = [];
   get votingsectionlist => _votingSectionList;
 
-  void addCandidate(Votesection candidate) {
+  void addCandidate(Candidate candidate) {
     _votingSectionList.add(candidate);
     notifyListeners();
   }
 
-  void deleteCandidate(Votesection candidate) {
+  void deleteCandidate(Candidate candidate) {
     _votingSectionList.remove(candidate);
     notifyListeners();
   }

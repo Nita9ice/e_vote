@@ -49,18 +49,23 @@ class _SignupScreenState extends State<SignupScreen> {
         if (firstName.isNotEmpty && lastName.isNotEmpty) {
           if (selectedRole == 'Admin') {
             await auth.signUp(email, password);
-            await firestoreservices.uploadAdminDetails(
+            await firestoreservices.uploadAdminDetails({
               firstName,
               lastName,
+            }, email);
+            await firestoreservices.uploadUserDetails(
+              {firstName, lastName},
               email,
+              selectedRole.toString(),
             );
+
             return true;
           } else if (selectedRole == 'Voters') {
             await auth.signUp(email, password);
             await firestoreservices.uploadUserDetails(
-              firstName,
-              lastName,
+              {firstName, lastName},
               email,
+              selectedRole.toString(),
             );
             return true;
           }
