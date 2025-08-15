@@ -16,10 +16,8 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
-  // Controller for handling input in the email text field
+  // Controllers for input fields
   final TextEditingController firstNameController = TextEditingController();
-
-  // Controller for handling input in the password text field
   final TextEditingController lastNameController = TextEditingController();
 
   // Controller for handling input in the password text field
@@ -114,6 +112,9 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Instantiate AppDimensions
+    final dimensions = AppDimensions(context);
+
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -126,7 +127,7 @@ class _SignupScreenState extends State<SignupScreen> {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(32),
+          padding: EdgeInsets.all(dimensions.widthPercent(7.5)), // ~32.25px
           child: Center(
             child: SingleChildScrollView(
               child: Column(

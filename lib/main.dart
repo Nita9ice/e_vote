@@ -1,8 +1,12 @@
 // import 'package:e_vote/screens/register.dart';
 
+
+import 'package:e_vote/screens/admin/dashboard.dart';
+import 'package:e_vote/screens/forgot_password.dart';
 import 'package:e_vote/screens/splash.dart';
 import 'package:e_vote/screens/login.dart';
 import 'package:e_vote/screens/signup.dart';
+import 'package:e_vote/screens/verify_email.dart';
 import 'package:e_vote/screens/welcome.dart';
 import 'package:e_vote/theme/theme_data.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +26,11 @@ class EVote extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      //home: RegisterScreen(),
+
+      // home: LoginScreen(),
+
+
+      
 
       // The first screen to display once the app is launch.
       initialRoute: '/',
@@ -32,11 +40,18 @@ class EVote extends StatelessWidget {
         '/': (context) => SplashScreen(),
         '/welcome': (context) => WelcomeScreen(),
         '/login': (context) => LoginScreen(),
-
-        '/signup': (context) => SignupScreen(),
+        '/forgot': (context) => ForgotPasswordScreen(),
+        '/signup': (context) =>SignupScreen(),
+       '/email': (context) => VerifyEmailScreen(),
+       '/admin': (context) => AdminDashboardScreen()
+       
       },
 
-      // Theme data for the App
+    
+
+      
+
+// Theme data for the App
 
       // this is the default theme based on the device theme
       themeMode: ThemeMode.system,
