@@ -55,7 +55,7 @@ class _SignupScreenState extends State<SignupScreen> {
               email,
             );
             return true;
-          } else if (selectedRole == 'user') {
+          } else if (selectedRole == 'Voters') {
             await auth.signUp(email, password);
             await firestoreservices.uploadUserDetails(
               firstName,
@@ -78,6 +78,17 @@ class _SignupScreenState extends State<SignupScreen> {
     ScaffoldMessenger.of(
       context,
     ).showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  //disposing to avoid memory leaks
+  @override
+  void dispose() {
+    super.dispose();
+    firstNameController.dispose();
+    lastNameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
   }
 
   @override

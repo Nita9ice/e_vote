@@ -1,26 +1,18 @@
-class Votesection {
-  String title;
-  String? candidateimage;
-  String candidateName;
+class Candidate {
+  String? name;
+  String image;
+  int voteCount;
 
-  Votesection({
-    required this.title,
-    this.candidateimage,
-    required this.candidateName,
-  });
-  factory Votesection.fromMap(Map<String, dynamic> map) {
-    return Votesection(
-      title: map['title'],
-      candidateimage: map['candidateImage'],
-      candidateName: map['candidateName'],
+  Candidate({this.name, required this.image, required this.voteCount});
+  factory Candidate.fromMap(Map<String, dynamic> map) {
+    return Candidate(
+      name: map['candidateImage'],
+      image: map['candidateName'],
+      voteCount: map['voteCount'],
     );
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      'title': title,
-      'candidateimage': candidateimage,
-      'candidateName': candidateName,
-    };
+    return {'candidateimage': image, 'candidateName': name};
   }
 }

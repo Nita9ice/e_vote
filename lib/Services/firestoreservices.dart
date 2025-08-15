@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_vote/models/userprofile.dart';
-import 'package:e_vote/models/votesection.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:provider/provider.dart';
 
 class Firestoreservices {
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
@@ -19,7 +17,7 @@ class Firestoreservices {
     }
   }
 
-  //user details
+  //set voters details
   Future<void> uploadUserDetails(
     String firstName,
     String lastName,
@@ -41,7 +39,7 @@ class Firestoreservices {
     }
   }
 
-  // admin details
+  // set admin details
   Future<void> uploadAdminDetails(
     String firstName,
     String lastName,
@@ -51,7 +49,7 @@ class Firestoreservices {
     if (user != null) {
       final userId = user.uid;
       _firebaseFirestore
-          .collection('users')
+          .collection('tenants')
           .doc(userId)
           .set(
             Userprofile(
