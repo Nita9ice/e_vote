@@ -12,7 +12,11 @@ class Authservices {
   }
 
   Future<void> signOut() async {
-    await auth.signOut();
+    try {
+      await auth.signOut();
+    } catch (e) {
+      print(e.toString());
+    }
   }
 
   Stream<User?> get authChanges => auth.authStateChanges();

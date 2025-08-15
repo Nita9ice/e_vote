@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_vote/Services/authservices.dart';
 import 'package:e_vote/Services/firestoreservices.dart';
 import 'package:e_vote/components/widgets/button.dart';
 import 'package:e_vote/components/widgets/text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -36,6 +39,7 @@ class _SignupScreenState extends State<SignupScreen> {
   final List<String> roles = ['Super User', 'Admin', 'Voters'];
   //signUp for users and admin
   Future<bool> signUp() async {
+    print('selectedRole: $selectedRole');
     try {
       final auth = Authservices();
       final firestoreservices = Firestoreservices();
@@ -46,33 +50,34 @@ class _SignupScreenState extends State<SignupScreen> {
       final confirmPassword = confirmPasswordController.text.trim();
       if (password != confirmPassword) {
         showSnackBar('password do not match');
-        if (firstName.isNotEmpty && lastName.isNotEmpty) {
-          if (selectedRole == 'Admin') {
-            await auth.signUp(email, password);
-            await firestoreservices.uploadAdminDetails({
-              firstName,
-              lastName,
-            }, email);
-            await firestoreservices.uploadUserDetails(
-              {firstName, lastName},
-              email,
-              selectedRole.toString(),
-            );
-
-            return true;
-          } else if (selectedRole == 'Voters') {
-            await auth.signUp(email, password);
-            await firestoreservices.uploadUserDetails(
-              {firstName, lastName},
-              email,
-              selectedRole.toString(),
-            );
-            return true;
-          }
-        }
-        return false;
       }
-    } on FirebaseException catch (e) {
+
+      if (firstName.isNotEmpty &&
+          lastName.isNotEmpty &&
+          selectedRole == 'Admin') {
+        await auth.signUp(email, password);
+        await firestoreservices.uploadAdminDetails({
+          firstName,
+          lastName,
+        }, email);
+        await firestoreservices.uploadUserDetails(
+          {firstName, lastName},
+          email,
+          selectedRole.toString(),
+        );
+        return true;
+      } else if (firstName.isNotEmpty &&
+          lastName.isNotEmpty &&
+          selectedRole == 'Voters') {
+        await auth.signUp(email, password);
+        await firestoreservices.uploadUserDetails(
+          {firstName, lastName},
+          email,
+          selectedRole.toString(),
+        );
+        return true;
+      }
+    } catch (e) {
       print(e.toString());
     }
     return false;
@@ -94,6 +99,17 @@ class _SignupScreenState extends State<SignupScreen> {
     emailController.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();
+  }
+
+  //navigate to login
+  void navigateToLogin() {
+    Navigator.pushNamed(context, '/login');
+  }
+
+  //signout user after registeration
+  Future<void> signOut() async {
+    final auth = Authservices();
+    await auth.signOut();
   }
 
   @override
@@ -236,8 +252,14 @@ class _SignupScreenState extends State<SignupScreen> {
                     onPressed: () async {
                       final onsucess = await signUp();
                       if (onsucess) {
+                        await signOut();
                         showSnackBar('success');
+                        Timer(Duration(seconds: 5), () {
+                          return navigateToLogin();
+                        });
                       }
+                      // print('tapped');
+                      print('tapped');
                     },
                   ),
 
