@@ -1,10 +1,14 @@
+import 'package:e_vote/components/utilities/app_dimension.dart';
 import 'package:flutter/material.dart';
+
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final dims = AppDimensions(context);
+
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -15,49 +19,44 @@ class WelcomeScreen extends StatelessWidget {
         ),
         child: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 400),
+             
+              // Vertical spacing before the main text
+              SizedBox(height: dims.heightPercent(48)),
 
               // Main text
-              const Text(
+              Text(
                 'Welcome Onboard',
                 style: TextStyle(
                   fontFamily: 'Roboto',
-                  fontSize: 36,
+                  fontSize: dims.widthPercent(8), // 36px ≈ 8% of width
                   fontWeight: FontWeight.w700,
-                  color: Color.fromRGBO(255, 255, 255, 1),
+                  color: const Color.fromRGBO(255, 255, 255, 1),
                 ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: dims.heightPercent(1.5)),
 
               // Button to navigate to login
               IconButton(
                 onPressed: () {
                   Navigator.pushNamed(context, '/login');
                 },
-                icon: const Icon(
+                icon: Icon(
                   Icons.arrow_circle_right_outlined,
-                  size: 100,
+                  size: dims.widthPercent(14), // 60px ≈ 14% of width
                   color: Colors.white,
                 ),
               ),
-              const SizedBox(height: 20),
 
-              // Logo image
-              Image.asset(
-                'assets/images/logo2.png',
-                width: 200,
-              ),
-              const SizedBox(height: 10),
-
-              // App name text
-              const Text(
-                'E-Vote',
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+              // Logo image taking remaining height
+              Expanded(
+                child: Container(
+                  alignment: Alignment.topCenter,
+                  child: Image.asset(
+                    'assets/images/logo2.png',
+                    width: double.infinity, // 47% of screen width
+                    fit: BoxFit.contain,
+                  ),
                 ),
               ),
             ],
