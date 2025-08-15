@@ -27,7 +27,7 @@ class Emailservices {
   void sendEmailVerification(String email) {
     final user = auth.currentUser;
     if (user != null) {
-        user
+        
     }
   }
 }
