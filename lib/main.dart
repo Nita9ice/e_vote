@@ -1,6 +1,7 @@
 // import 'package:e_vote/screens/register.dart';
 
-
+import 'package:e_vote/providers/candidatelistprovider.dart';
+import 'package:provider/provider.dart';
 import 'package:e_vote/screens/admin/dashboard.dart';
 import 'package:e_vote/screens/forgot_password.dart';
 import 'package:e_vote/screens/splash.dart';
@@ -24,42 +25,39 @@ class EVote extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => Candidatelistprovider()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
 
-      // home: LoginScreen(),
+        // home: LoginScreen(),
 
+        // The first screen to display once the app is launch.
+        initialRoute: '/',
 
-      
+        // Defining the varous screen routes
+        routes: {
+          '/': (context) => SplashScreen(),
+          '/welcome': (context) => WelcomeScreen(),
+          '/login': (context) => LoginScreen(),
+          '/forgot': (context) => ForgotPasswordScreen(),
+          '/signup': (context) => SignupScreen(),
+          '/email': (context) => VerifyEmailScreen(),
+          '/admin': (context) => AdminDashboardScreen(),
+        },
 
-      // The first screen to display once the app is launch.
-      initialRoute: '/',
+        // Theme data for the App
 
-      // Defining the varous screen routes
-      routes: {
-        '/': (context) => SplashScreen(),
-        '/welcome': (context) => WelcomeScreen(),
-        '/login': (context) => LoginScreen(),
-        '/forgot': (context) => ForgotPasswordScreen(),
-        '/signup': (context) =>SignupScreen(),
-       '/email': (context) => VerifyEmailScreen(),
-       '/admin': (context) => AdminDashboardScreen()
-       
-      },
+        // this is the default theme based on the device theme
+        themeMode: ThemeMode.system,
 
-    
-
-      
-
-// Theme data for the App
-
-      // this is the default theme based on the device theme
-      themeMode: ThemeMode.system,
-
-      // light theme
-      theme: AppTheme.lightTheme,
-      // dark theme
-      darkTheme: AppTheme.darkTheme,
+        // light theme
+        theme: AppTheme.lightTheme,
+        // dark theme
+        darkTheme: AppTheme.darkTheme,
+      ),
     );
   }
 }
