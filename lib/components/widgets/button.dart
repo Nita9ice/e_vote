@@ -30,7 +30,7 @@ class MyButton extends StatelessWidget {
     this.textColor,
     required this.onPressed,
     this.padding,
-  });
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -89,6 +89,6 @@ class MyButton extends StatelessWidget {
           ),
         ),
       ),
-    );
+    )));
   }
-}
+
