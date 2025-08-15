@@ -1,6 +1,8 @@
 // import 'package:e_vote/screens/register.dart';
 
 
+import 'package:e_vote/screens/drop2.dart';
+import 'package:e_vote/screens/dropdown.dart';
 import 'package:e_vote/screens/splash.dart';
 import 'package:e_vote/screens/login.dart';
 import 'package:e_vote/screens/signup.dart';
@@ -30,8 +32,8 @@ class EVote extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
 
-      // home: RegisterScreen(),
-
+      home:Drop2(),
+/*
       
 
 // The first screen to display once the app is launch.
@@ -46,7 +48,7 @@ class EVote extends StatelessWidget {
         '/signup': (context) =>SignupScreen(),
        
       },
-
+*/
       
 
 // Theme data for the App
