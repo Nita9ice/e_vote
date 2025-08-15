@@ -1,70 +1,68 @@
-
-
+import 'package:e_vote/components/utilities/app_dimension.dart';
 import 'package:flutter/material.dart';
 
 
-class WelcomeScreen extends StatefulWidget {
+class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
 
   @override
-  State<WelcomeScreen> createState() => _WelcomeScreenState();
-}
-
-class _WelcomeScreenState extends State<WelcomeScreen> {
-  
-  @override
-  
-  
-
-  @override
   Widget build(BuildContext context) {
+    final dims = AppDimensions(context);
+
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(image: AssetImage('assets/images/background1.jpg'))
-       
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/background1.jpg'),
+            fit: BoxFit.cover,
+          ),
         ),
         child: Center(
           child: Column(
             children: [
-              SizedBox(height: 400,),
-              // Main text 
-                Text('Welcome Onboard',
+             
+              // Vertical spacing before the main text
+              SizedBox(height: dims.heightPercent(48)),
+
+              // Main text
+              Text(
+                'Welcome Onboard',
                 style: TextStyle(
                   fontFamily: 'Roboto',
-                  fontSize: 36,
+                  fontSize: dims.widthPercent(8), // 36px ≈ 8% of width
                   fontWeight: FontWeight.w700,
-                  color: Color.fromRGBO(255, 255, 255, 1,)
+                  color: const Color.fromRGBO(255, 255, 255, 1),
                 ),
-                ),
-
-                
-
-                IconButton(onPressed: (){
-
-                   // Navigate to login password screen
-                          Navigator.pushNamed(context, '/login');
-                }, icon:Icon(Icons.arrow_circle_right_outlined,
-                size: 100,
-                ), ),
-
-
-              Image.asset('assets/images/logo2.jpg',
-              width: 200
-              
-             
               ),
-              Text('E-Vote')
+              SizedBox(height: dims.heightPercent(1.5)),
+
+              // Button to navigate to login
+              IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/login');
+                },
+                icon: Icon(
+                  Icons.arrow_circle_right_outlined,
+                  size: dims.widthPercent(14), // 60px ≈ 14% of width
+                  color: Colors.white,
+                ),
+              ),
+
+              // Logo image taking remaining height
+              Expanded(
+                child: Container(
+                  alignment: Alignment.topCenter,
+                  child: Image.asset(
+                    'assets/images/logo2.png',
+                    width: double.infinity, // 47% of screen width
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
             ],
           ),
-          
-            
         ),
-
-      )
-    
-      );
-      
-    
+      ),
+    );
   }
 }
