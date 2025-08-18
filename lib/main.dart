@@ -2,6 +2,8 @@
 
 import 'package:e_vote/providers/candidatelistprovider.dart';
 import 'package:provider/provider.dart';
+
+import 'package:e_vote/screens/admin/add_candidate.dart';
 import 'package:e_vote/screens/admin/dashboard.dart';
 import 'package:e_vote/screens/forgot_password.dart';
 
@@ -39,6 +41,10 @@ class EVote extends StatelessWidget {
       home:Drop2(),
 /*
       
+      home: AddCandidateScreen(),
+
+
+      /*
 
         // The first screen to display once the app is launch.
         initialRoute: '/',
@@ -64,6 +70,10 @@ class EVote extends StatelessWidget {
       },
 */
       
+
+    
+
+      */
 
         // Theme data for the App
 
