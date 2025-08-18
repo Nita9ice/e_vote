@@ -1,15 +1,20 @@
 import 'package:e_vote/components/utilities/app_dimension.dart';
+import 'package:e_vote/components/widgets/admin_container.dart';
+
 import 'package:flutter/material.dart';
 
 
 class AdminDashboardScreen extends StatefulWidget {
-  const AdminDashboardScreen({super.key});
+  
+  
+   const AdminDashboardScreen({super.key});
 
   @override
   State<AdminDashboardScreen> createState() => _AdminDashboardScreenState();
 }
 
 class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
+  
   
 
 
@@ -39,13 +44,63 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
           ),
         ),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: dimensions.widthPercent(7.5)), // ~32.25px
+          padding: EdgeInsets.symmetric(horizontal:20), // ~32.25px
           child: Center(
-            child: Column(
-              children: [
-               
-                
-              ],
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                 
+                 SizedBox(height: 81,),
+                 CircleAvatar(
+                  radius: 120,
+                  backgroundImage: AssetImage('assets/images/image1.png'),
+                  backgroundColor: Colors.transparent,
+                 ),
+                  
+                 SizedBox(height: 7,),
+                    
+                 Text('Matthew',
+                 style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontSize: dimensions.widthPercent(8.4), // ~20.21px
+                                fontWeight: FontWeight.w700,
+                                color: const Color.fromRGBO(255, 255, 255, 1),
+                              ),
+                 ),
+                 SizedBox(height: 7,),
+                 Text('admin@admin.com',
+                 style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontSize: dimensions.widthPercent(4.7), // ~20.21px
+                                fontWeight: FontWeight.w400,
+                                color: const Color.fromRGBO(255, 255, 255, 1),
+                              ),
+                 ),
+                 SizedBox(height: 30,),
+                    
+                 Row(
+                  children: [
+                    AdminContainer(containerImage: Image.asset('assets/icons/Vector1.png'), containerText: 'CREATE ELECTION', imageHeight: 47, imageWidth: 70,),
+                    SizedBox(width: 26,),
+                                      AdminContainer(containerImage: Image.asset('assets/icons/Vector2.png'), containerText: 'MY \n ELECTION', imageHeight: 63, imageWidth: 63,)
+                  ],
+                 ),
+                    
+                 SizedBox(height: 30,),
+                    
+                 Row(
+                  children: [
+                    AdminContainer(containerImage: Image.asset('assets/images/logo.jpg'), containerText: 'DELETE \n VOTE', imageHeight: 68, imageWidth: 74,),
+                    SizedBox(width: 26,),
+                                      AdminContainer(containerImage: Image.asset('assets/icons/Vector4.png'), containerText: 'FAQ', imageHeight: 63, imageWidth: 63,)
+                  ],
+                 ),
+                    
+                 
+                   
+
+                ],
+              ),
             ),
           ),
         ),
