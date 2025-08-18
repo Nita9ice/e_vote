@@ -1,7 +1,13 @@
+import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:e_vote/Services/authservices.dart';
+import 'package:e_vote/Services/firestoreservices.dart';
 import 'package:e_vote/components/utilities/app_dimension.dart';
-import 'package:flutter/material.dart';
 import 'package:e_vote/components/widgets/button.dart';
 import 'package:e_vote/components/widgets/text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -14,27 +20,96 @@ class _SignupScreenState extends State<SignupScreen> {
   // Controllers for input fields
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
+
+  // Controller for handling input in the password text field
   final TextEditingController emailController = TextEditingController();
+
+  // Controller for handling input in the password text field
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
 
-  // Password visibility toggles
-  bool obscurePassword = true;
-  bool obscureConfirmPassword = true;
+  // Controller for handling input in the password text field
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
-  // Dropdown role selection
+  // Stores the currently selected role from the dropdown.
   String? selectedRole;
-  final List<String> roles = ['Super User', 'Admin', 'Voters'];
 
+  // List of available roles the user can choose from.
+  final List<String> roles = ['Super User', 'Admin', 'Voters'];
+  //signUp for users and admin
+  Future<bool> signUp() async {
+    print('selectedRole: $selectedRole');
+    try {
+      final auth = Authservices();
+      final firestoreservices = Firestoreservices();
+      final firstName = firstNameController.text.trim();
+      final lastName = lastNameController.text.trim();
+      final email = emailController.text.trim();
+      final password = passwordController.text.trim();
+      final confirmPassword = confirmPasswordController.text.trim();
+      if (password != confirmPassword) {
+        showSnackBar('password do not match');
+      }
+
+      if (firstName.isNotEmpty &&
+          lastName.isNotEmpty &&
+          selectedRole == 'Admin') {
+        await auth.signUp(email, password);
+        await firestoreservices.uploadAdminDetails({
+          firstName,
+          lastName,
+        }, email);
+        await firestoreservices.uploadUserDetails(
+          {firstName, lastName},
+          email,
+          selectedRole.toString(),
+        );
+        return true;
+      } else if (firstName.isNotEmpty &&
+          lastName.isNotEmpty &&
+          selectedRole == 'Voters') {
+        await auth.signUp(email, password);
+        await firestoreservices.uploadUserDetails(
+          {firstName, lastName},
+          email,
+          selectedRole.toString(),
+        );
+        return true;
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+    return false;
+  }
+
+  //show snackbar
+  void showSnackBar(String message) {
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  //disposing to avoid memory leaks
   @override
   void dispose() {
+    super.dispose();
     firstNameController.dispose();
     lastNameController.dispose();
     emailController.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();
-    super.dispose();
   }
+
+  //navigate to login
+  void navigateToLogin() {
+    Navigator.pushNamed(context, '/login');
+  }
+
+  // //signout user after registeration
+  // Future<void> signOut() async {
+  //   final auth = Authservices();
+  //   await auth.signOut();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +120,8 @@ class _SignupScreenState extends State<SignupScreen> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
+          // backgroung image
           image: DecorationImage(
             image: AssetImage('assets/images/background2.jpg'),
             fit: BoxFit.cover,
@@ -54,170 +130,175 @@ class _SignupScreenState extends State<SignupScreen> {
         child: Padding(
           padding: EdgeInsets.all(dimensions.widthPercent(7.5)), // ~32.25px
           child: Center(
-            child: Column(
-              children: [
-                // Space
-                SizedBox(height: dimensions.heightPercent(16.1)), // ~150.05px
-                // Main text
-                Text(
-                  'Welcome Onboard',
-                  style: TextStyle(
-                    fontFamily: 'Roboto',
-                    fontSize: dimensions.widthPercent(8.4), // ~36.12px
-                    fontWeight: FontWeight.w700,
-                    color: const Color.fromRGBO(255, 255, 255, 1),
-                  ),
-                ),
-                // Space
-                SizedBox(height: dimensions.heightPercent(3.3)), // ~30.76px
-                // Text field for first name
-                MyTextField(
-                  controller: firstNameController,
-                  hintText: 'First name:',
-                ),
-                // Space
-                SizedBox(height: dimensions.heightPercent(3.3)), // ~30.76px
-                // Text field for last name
-                MyTextField(
-                  controller: lastNameController,
-                  hintText: 'Last name:',
-                ),
-                // Space
-                SizedBox(height: dimensions.heightPercent(3.3)), // ~30.76px
-                // Text field for email
-                MyTextField(
-                  controller: emailController,
-                  hintText: 'Email:',
-                ),
-                // Space
-                SizedBox(height: dimensions.heightPercent(3.3)), // ~30.76px
-                // Text field for password
-                MyTextField(
-                  controller: passwordController,
-                  hintText: 'Password:',
-                  obscureText: obscurePassword,
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      obscurePassword ? Icons.visibility : Icons.visibility_off,
-                      color: const Color.fromRGBO(0, 0, 0, 1),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  // space
+                  SizedBox(height: 150),
+                  // Main text
+                  Text(
+                    'Welcome Onboard',
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontSize: 36,
+                      fontWeight: FontWeight.w700,
+                      color: Color.fromRGBO(255, 255, 255, 1),
                     ),
-                    onPressed: () {
-                      setState(() {
-                        obscurePassword = !obscurePassword;
-                      });
-                    },
                   ),
-                ),
-                // Space
-                SizedBox(height: dimensions.heightPercent(3.3)), // ~30.76px
-                // Text field for confirm password
-                MyTextField(
-                  controller: confirmPasswordController,
-                  hintText: 'Confirm Password:',
-                  obscureText: obscureConfirmPassword,
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      obscureConfirmPassword ? Icons.visibility : Icons.visibility_off,
-                      color: const Color.fromRGBO(0, 0, 0, 1),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        obscureConfirmPassword = !obscureConfirmPassword;
-                      });
-                    },
+
+                  // space
+                  SizedBox(height: 31),
+
+                  // Text field for user first name
+                  MyTextField(
+                    controller: firstNameController,
+                    hintText: 'First name:',
+                    
                   ),
-                ),
-                // Space
-                SizedBox(height: dimensions.heightPercent(3.2)), // ~29.82px
-                // Dropdown selection
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal: dimensions.widthPercent(2.8)), // ~12.04px
-                      decoration: BoxDecoration(
-                        color: const Color.fromRGBO(255, 255, 255, 1),
-                        borderRadius: BorderRadius.circular(dimensions.widthPercent(4.7)), // ~20.21px
-                        border: Border.all(color: Colors.grey.shade400, width: 1),
-                      ),
-                      child: DropdownButton<String>(
-                        value: selectedRole,
-                        isExpanded: true,
-                        underline: const SizedBox(),
-                        iconSize: 30,
-                        hint: Text(
-                          'Choose a role',
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontSize: dimensions.widthPercent(4.7), // ~20.21px
-                            fontWeight: FontWeight.w400,
-                            color: const Color.fromRGBO(0, 0, 0, 1),
+
+                  // space
+                  SizedBox(height: 31),
+
+                  // Text field for user last name
+                  MyTextField(
+                    controller: lastNameController,
+                    hintText: 'Last name:',
+
+                    
+                  ),
+
+                  // space
+                  SizedBox(height: 31),
+
+                  // Text field for user email
+                  MyTextField(
+                    controller: emailController,
+                    hintText: 'Email:',
+
+                    
+                  ),
+
+                  // space
+                  SizedBox(height: 31),
+
+                  // Text field for user  password
+                  MyTextField(
+                    controller: passwordController,
+                    hintText: 'Password:',
+
+                   
+                  ),
+
+                  // space
+                  SizedBox(height: 31),
+
+                  // Text field for user  confirm password
+                  MyTextField(
+                    controller: confirmPasswordController,
+                    hintText: 'Confirm Password:',
+
+                    
+                  ),
+
+                  SizedBox(height: 31),
+
+                  // drop down selection
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Container  that carries the drop down selection
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 12),
+                        decoration: BoxDecoration(
+                          color: Color.fromRGBO(255, 255, 255, 1),
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            color: Colors.grey.shade400,
+                            width: 1,
                           ),
                         ),
-                        items: roles.map((role) {
-                          return DropdownMenuItem(
-                            value: role,
-                            child: Text(
-                              role,
-                              style: TextStyle(
-                                fontFamily: 'Roboto',
-                                fontSize: dimensions.widthPercent(4.7), // ~20.21px
-                                fontWeight: FontWeight.w400,
-                                color: const Color.fromRGBO(0, 0, 0, 1),
-                              ),
+                        child: DropdownButton<String>(
+                          value: selectedRole,
+                          isExpanded: true,
+                          underline: SizedBox(),
+                          hint: Text(
+                            'Choose a role',
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontSize: 20,
+                              fontWeight: FontWeight.w400,
+                              color: Color.fromRGBO(0, 0, 0, 1),
                             ),
-                          );
-                        }).toList(),
-                        onChanged: (value) {
-                          setState(() {
-                            selectedRole = value!;
-                          });
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-                // Space
-                SizedBox(height: dimensions.heightPercent(3.2)), // ~29.82px
-                // Register button
-                MyButton(
-                  buttonText: 'Register',
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/email');
-                  },
-                ),
-                // Space
-                SizedBox(height: dimensions.heightPercent(1.4)), // ~13.05px
-                // Create account text
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'have an account already?',
-                      style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontSize: dimensions.widthPercent(4.7), // ~20.21px
-                        fontWeight: FontWeight.w400,
-                        color: const Color.fromRGBO(255, 255, 255, 1),
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/login');
-                      },
-                      child: Text(
-                        'Login',
-                        style: TextStyle(
-                          fontFamily: 'Roboto',
-                          fontSize: dimensions.widthPercent(4.7), // ~20.21px
-                          fontWeight: FontWeight.w400,
-                          color: const Color.fromRGBO(255, 255, 255, 1),
+                          ),
+                          items:
+                              roles.map((role) {
+                                return DropdownMenuItem(
+                                  value: role,
+                                  child: Text(role),
+                                );
+                              }).toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              selectedRole = value!;
+                            });
+                          },
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+
+                  SizedBox(height: 20),
+                  // Register button
+                  MyButton(
+                    buttonText: 'Register',
+                    onPressed: () async {
+                      final onsucess = await signUp();
+                      if (onsucess) {
+                        // await signOut();
+                        showSnackBar(
+                          'a verification link has been sent to your email\n please verify and login',
+                        );
+                        Timer(Duration(seconds: 5), () {
+                          return navigateToLogin();
+                        });
+                      }
+                      // print('tapped');
+                      print('tapped');
+                    },
+                  ),
+
+                  SizedBox(height: 13),
+                  // Create account text
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'have an account already?',
+                        style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontSize: 20,
+                          fontWeight: FontWeight.w400,
+                          color: Color.fromRGBO(255, 255, 255, 1),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/login');
+                        },
+                        child: Text(
+                          'Login',
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontSize: 20,
+                            fontWeight: FontWeight.w400,
+                            color: Color.fromRGBO(255, 255, 255, 1),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),

@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 class Authservices {
   final auth = FirebaseAuth.instance;
@@ -13,8 +12,22 @@ class Authservices {
   }
 
   Future<void> signOut() async {
-    await auth.signOut();
+    try {
+      await auth.signOut();
+    } catch (e) {
+      print(e.toString());
+    }
   }
 
   Stream<User?> get authChanges => auth.authStateChanges();
+}
+
+class Emailservices {
+  final auth = FirebaseAuth.instance;
+  void sendEmailVerification(String email) {
+    final user = auth.currentUser;
+    if (user != null) {
+        
+    }
+  }
 }
