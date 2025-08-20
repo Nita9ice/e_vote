@@ -1,16 +1,15 @@
 
-import 'dart:io';
 
 import 'package:e_vote/components/widgets/add_button.dart';
 import 'package:e_vote/components/widgets/auditor_alert_box.dart';
 import 'package:e_vote/components/widgets/back_next.dart';
 import 'package:e_vote/components/widgets/button.dart';
-import 'package:e_vote/components/widgets/textField_create.dart';
+
 import 'package:e_vote/components/widgets/text_field.dart';
 import 'package:e_vote/models/auditor.dart';
 
 
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
 
 class AddAuditorScreen extends StatefulWidget {
@@ -102,85 +101,108 @@ class _AddAuditorScreenState extends State<AddAuditorScreen> {
             fit: BoxFit.cover,
           ),
         ),
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(32),
-            child: Column(
-              children: [
-               const SizedBox(height: 180,),
-                 const Text('Add Auditor',
-                        
-                                style: TextStyle(
+        child: Padding(
+          padding: const EdgeInsets.all(32),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+             SizedBox(height: 100,),
+        
+               Row(
+         children: [
+             
+                  Image.asset(
+                 'assets/images/logo.png',
+                 width: 100,
+               ),
+               const Text('E-voting',
+               
+                              style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700,
+                                color: Color.fromRGBO(255, 255, 255, 1),
+                                // color: Color.fromRGBO(3, 58, 202, 1),
+                                
+                              ),
+               ),
+               
+               ],
+         
+                   ),
+                   SizedBox(height: 20,),
+          
+              Text('Add Auditor',
+              style: TextStyle(
                                   fontFamily: 'Roboto',
                                   fontSize: 32,
                                   fontWeight: FontWeight.w700,
-                                  color: Color.fromRGBO(255, 255, 255, 1),
-                                  // color: Color.fromRGBO(3, 58, 202, 1),
-                                  
-                                ),
-                                ),
-                                SizedBox(height: 80,),
-                // Vertical listview for auditors
-                SizedBox(
-                  height: 200,
-                  
-                  child: auditorList.isEmpty
-                      ? const Center(
-                          child: Text(
-                            'No Auditor added yet',
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              fontSize: 28,
-                              color: Colors.white,
-                            ),
+                                  color: Color.fromRGBO(255, 255, 255, 1),),
+              ),
+          
+          
+              SizedBox(height: 30,),
+              // Vertical listview for auditors
+              SizedBox(
+                height: 200,
+                
+                child: auditorList.isEmpty
+                    ? const Center(
+                        child: Text(
+                          'No Auditor added yet',
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white,
                           ),
-                        )
-                      : ListView.builder(
-                          itemCount: auditorList.length,
-                          itemBuilder: (context, index) {
-                            final auditor = auditorList[index];
-                            return Container(
-                              margin: const EdgeInsets.symmetric(
-                                  vertical: 8, horizontal: 16),
-                              padding: const EdgeInsets.all(16),
-                              decoration: BoxDecoration(
-                                color: Colors.grey[200],
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    '${auditor.firstName} ${auditor.lastName}',
-                                    // '${auditorList.firstName} ${auditorList.lastName}',
-                                    style: const TextStyle(
-                                      fontFamily: 'Roboto',
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 4),
-                                  Text(
-                                    'Email: ${auditor.email}',
-                                    style: const TextStyle(fontSize: 14),
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
                         ),
-                ),
-                SizedBox(height: 20,),
-                AddButton(text: 'Add', onPressed: showAddAuditorDialog),
-                            const SizedBox(height: 100,), 
-
-                            BackNextButton(
-                              text: 'Submit',
-                              onPressed: (){}),
-
-                            
-              ],
-            ),
+                      )
+                    : ListView.builder(
+                        itemCount: auditorList.length,
+                        itemBuilder: (context, index) {
+                          final auditor = auditorList[index];
+                          return Container(
+                            margin: const EdgeInsets.symmetric(
+                                vertical: 8, horizontal: 16),
+                            padding: const EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              color: Colors.grey[200],
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  '${auditor.firstName} ${auditor.lastName}',
+                                  // '${auditorList.firstName} ${auditorList.lastName}',
+                                  style: const TextStyle(
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  'Email: ${auditor.email}',
+                                  style: const TextStyle(fontSize: 14),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+              ),
+              SizedBox(height: 20,),
+              Center(child: AddButton(text: 'Add', onPressed: showAddAuditorDialog)),
+                          const SizedBox(height: 100,), 
+        
+                          BackNextButton(
+                            text: 'Submit',
+                            onPressed: (){}),
+        
+                          
+            ],
           ),
         ),
       ),

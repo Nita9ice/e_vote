@@ -72,6 +72,17 @@ AlertBox1(containerText: 'Declined', containerImage: Image.asset('assets/images/
                       ),
                     ],
                   ),
+
+
+                   
+
+                   // container for select date option
+
+                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(6),
+            border: Border.all(color: Colors.white, width: 1.5),
+            color: Colors.transparent,
                     */
 
 
