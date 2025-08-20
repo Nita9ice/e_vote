@@ -1,10 +1,14 @@
 // import 'package:e_vote/screens/register.dart';
 
 import 'package:e_vote/providers/candidatelistprovider.dart';
+import 'package:e_vote/screens/add_auditor.dart';
+
+import 'package:e_vote/screens/unused_file.dart/create-election.dart';
+import 'package:e_vote/screens/create_election.dart';
 import 'package:provider/provider.dart';
 
-import 'package:e_vote/screens/admin/add_candidate.dart';
-import 'package:e_vote/screens/admin/dashboard.dart';
+import 'package:e_vote/screens/add_candidate.dart';
+import 'package:e_vote/screens/dashboard.dart';
 import 'package:e_vote/screens/forgot_password.dart';
 
 import 'package:e_vote/screens/drop2.dart';
@@ -37,14 +41,13 @@ class EVote extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
 
-        // home: LoginScreen(),
-      home:Drop2(),
+        
+
+      
+      home: AddAuditorScreen(),
+
 /*
       
-      home: AddCandidateScreen(),
-
-
-      /*
 
         // The first screen to display once the app is launch.
         initialRoute: '/',
@@ -57,23 +60,20 @@ class EVote extends StatelessWidget {
           '/forgot': (context) => ForgotPasswordScreen(),
           '/signup': (context) => SignupScreen(),
           '/email': (context) => VerifyEmailScreen(),
-          '/admin': (context) => AdminDashboardScreen(),
+          '/admin': (context) => DashboardScreen(),
+          '/create': (context) => CreatElectionScreen(),
+          '/candidate': (context) => AddCandidateScreen(),
+          // '/candidate': (context) => AddCandidateScreen(),
+          '/auditor': (context) => AddAuditorScreen()
+
         },
-// Defining the varous screen routes
-      routes: {
-        '/': (context) => SplashScreen(),
-        '/welcome': (context) => WelcomeScreen(),
-        '/login': (context) => LoginScreen(),
-       
-        '/signup': (context) =>SignupScreen(),
-       
-      },
-*/
+
+
       
 
-    
+    */
 
-      */
+      
 
         // Theme data for the App
 

@@ -21,8 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
   // Variable to control password visibility
   bool obscurePassword = false;
 
-  String? selectedRole;
-  final List<String> roles = ['Super User', 'Admin', 'Voters'];
+  
 
   @override
   void dispose() {
@@ -83,59 +82,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     controller: emailController,
                     hintText: 'Email:',
                   ),
-                  // Space
-                  SizedBox(height: dimensions.heightPercent(4.5)), // ~41.94px
-              
+                  
                    
               
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: dimensions.widthPercent(2.8)), // ~12.04px
-                        decoration: BoxDecoration(
-                          color: const Color.fromRGBO(255, 255, 255, 1),
-                          borderRadius: BorderRadius.circular(dimensions.widthPercent(4.7)), // ~20.21px
-                          border: Border.all(color: Colors.grey.shade400, width: 1),
-                          
-                        ),
-                        child: DropdownButton<String>(
-                          value: selectedRole,
-                          isExpanded: true,
-                          underline: const SizedBox(),
-                          iconSize: 30,
-                          hint: Text(
-                            'Choose a role',
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              fontSize: dimensions.widthPercent(4.7), // ~20.21px
-                              fontWeight: FontWeight.w400,
-                              color: const Color.fromRGBO(0, 0, 0, 1),
-                            ),
-                          ),
-                          items: roles.map((role) {
-                            return DropdownMenuItem(
-                              value: role,
-                              child: Text(
-                                role,
-                                style: TextStyle(
-                                  fontFamily: 'Roboto',
-                                  fontSize: dimensions.widthPercent(4.7), // ~20.21px
-                                  fontWeight: FontWeight.w400,
-                                  color: const Color.fromRGBO(0, 0, 0, 1),
-                                ),
-                              ),
-                            );
-                          }).toList(),
-                          onChanged: (value) {
-                            setState(() {
-                              selectedRole = value!;
-                            });
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
+                 
               
                    SizedBox(height: dimensions.heightPercent(4.5)), // ~41.94px
                   // Text field for password

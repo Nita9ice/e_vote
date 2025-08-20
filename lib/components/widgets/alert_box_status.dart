@@ -1,7 +1,9 @@
 import 'package:e_vote/components/utilities/app_dimension.dart';
 import 'package:flutter/material.dart';
 
-class AlertBox1 extends StatelessWidget {
+
+// This class is create to determine the status of the user vote, whether it is successful or not
+class AlertBoxStatus extends StatelessWidget {
   final String containerText;
   final Image containerImage;
   final double? imageHeight;
@@ -11,7 +13,7 @@ class AlertBox1 extends StatelessWidget {
   
   
   
-  const AlertBox1({super.key, required this.containerText,  required this.containerImage, this.imageHeight, this.imageWidth, });
+  const AlertBoxStatus({super.key, required this.containerText,  required this.containerImage, this.imageHeight, this.imageWidth, });
 
   @override
   Widget build(BuildContext context) {
