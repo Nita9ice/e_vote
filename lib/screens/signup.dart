@@ -1,12 +1,12 @@
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:e_vote/Services/authservices.dart';
 import 'package:e_vote/Services/firestoreservices.dart';
 import 'package:e_vote/components/utilities/app_dimension.dart';
 import 'package:e_vote/components/widgets/button.dart';
 import 'package:e_vote/components/widgets/text_field.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -31,16 +31,19 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController confirmPasswordController =
       TextEditingController();
 
-  // Stores the currently selected role from the dropdown.
-  String? selectedRole;
+ 
+Future<void> sendEmailverification()async{
+ final emailLink = Emailservices();
+ await emailLink.sendEmailVerification();
+}
 
-  // List of available roles the user can choose from.
-  final List<String> roles = ['Super User', 'Admin', 'Voters'];
+
   //signUp for users and admin
   Future<bool> signUp() async {
-    print('selectedRole: $selectedRole');
+ 
     try {
       final auth = Authservices();
+     
       final firestoreservices = Firestoreservices();
       final firstName = firstNameController.text.trim();
       final lastName = lastNameController.text.trim();
@@ -50,32 +53,19 @@ class _SignupScreenState extends State<SignupScreen> {
       if (password != confirmPassword) {
         showSnackBar('password do not match');
       }
-
-      if (firstName.isNotEmpty &&
+ if (firstName.isNotEmpty &&
           lastName.isNotEmpty &&
-          selectedRole == 'Admin') {
-        await auth.signUp(email, password);
-        await firestoreservices.uploadAdminDetails({
-          firstName,
-          lastName,
-        }, email);
-        await firestoreservices.uploadUserDetails(
-          {firstName, lastName},
-          email,
-          selectedRole.toString(),
-        );
-        return true;
-      } else if (firstName.isNotEmpty &&
-          lastName.isNotEmpty &&
-          selectedRole == 'Voters') {
+        password == confirmPassword) {
         await auth.signUp(email, password);
         await firestoreservices.uploadUserDetails(
           {firstName, lastName},
           email,
-          selectedRole.toString(),
+      
         );
+       
         return true;
       }
+      return false;
     } catch (e) {
       print(e.toString());
     }
@@ -89,7 +79,7 @@ class _SignupScreenState extends State<SignupScreen> {
     ).showSnackBar(SnackBar(content: Text(message)));
   }
 
-  //disposing to avoid memory leaks
+ 
   @override
   void dispose() {
     super.dispose();
@@ -101,15 +91,12 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   //navigate to login
-  void navigateToLogin() {
-    Navigator.pushNamed(context, '/login');
+  void emailVerificationScreen() {
+    Navigator.pushNamed(context, '/email');
   }
 
   // //signout user after registeration
-  // Future<void> signOut() async {
-  //   final auth = Authservices();
-  //   await auth.signOut();
-  // }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -211,12 +198,13 @@ class _SignupScreenState extends State<SignupScreen> {
                     onPressed: () async {
                       final onsucess = await signUp();
                       if (onsucess) {
-                        // await signOut();
+                    await sendEmailverification();
                         showSnackBar(
-                          'a verification link has been sent to your email\n please verify and login',
+                          'A verification link has been sent to your email.\n'
+  'Please check your inbox and spam folder.'
                         );
                         Timer(Duration(seconds: 5), () {
-                          return navigateToLogin();
+                          return emailVerificationScreen();
                         });
                       }
                       // print('tapped');
@@ -241,7 +229,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       TextButton(
                         onPressed: () {
                           Navigator.pushNamed(context, '/login');
-                           Navigator.pushNamed(context, '/admin');
+                      
 
                         },
                         child: Text(

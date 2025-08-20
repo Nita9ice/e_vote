@@ -3,7 +3,7 @@
 import 'package:e_vote/providers/candidatelistprovider.dart';
 import 'package:e_vote/screens/add_auditor.dart';
 
-import 'package:e_vote/screens/unused_file.dart/create-election.dart';
+//import 'package:e_vote/screens/unused_file.dart/create-election.dart';
 import 'package:e_vote/screens/create_election.dart';
 import 'package:provider/provider.dart';
 
@@ -44,9 +44,9 @@ class EVote extends StatelessWidget {
         
 
       
-      home: AddAuditorScreen(),
+     
 
-/*
+
       
 
         // The first screen to display once the app is launch.
@@ -71,7 +71,7 @@ class EVote extends StatelessWidget {
 
       
 
-    */
+  
 
       
 

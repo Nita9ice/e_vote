@@ -91,7 +91,8 @@ class _AddCandidateScreenState extends State<AddCandidateScreen> {
     showDialog(
       context: context,
       builder: (context) {
-        return CandidateAlertBox(
+        return CandidateAlertBox.CandidateAlertBox(
+
           containerText: 'Add a Candidate',
           circularAvatar: _selectedImage != null
               ? kIsWeb
