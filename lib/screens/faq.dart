@@ -20,14 +20,14 @@ class Faq extends StatelessWidget {
               children: [
                 const SizedBox(height: 100),
                 Row(
-                 // crossAxisAlignment: CrossAxisAlignment.,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Image.asset(
                       "assets/images/logo.jpg",
                       width: 82,
                       height: 88,
                     ),
-                    const SizedBox(width: 12),
+                    const SizedBox(width: 2),
                     const Text(
                       "Evote",
                       style: TextStyle(
@@ -44,7 +44,7 @@ class Faq extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Color.fromRGBO(255, 255, 255, 1),
                   ),
                 
                 ),
@@ -53,7 +53,7 @@ class Faq extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Color.fromRGBO(255, 255, 255, 1),
                   ),
                 ),
 
@@ -73,7 +73,7 @@ class Faq extends StatelessWidget {
                     fontFamily: 'Roboto',
                     fontSize: 15,
                     fontWeight: FontWeight.w700,
-                    color: Colors.white,
+                    color: Color.fromRGBO(255, 255, 255, 1),
                   ),
                 ),
               ],

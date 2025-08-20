@@ -1,11 +1,22 @@
 // import 'package:e_vote/screens/register.dart';
 
 import 'package:e_vote/providers/candidatelistprovider.dart';
+import 'package:e_vote/screens/add_auditor.dart';
+
+
+import 'package:e_vote/screens/create_election.dart';
 import 'package:e_vote/screens/candidates.dart';
 import 'package:e_vote/screens/edit_profile.dart';
+import 'package:e_vote/screens/faq.dart';
+import 'package:e_vote/screens/profile_screen.dart';
 import 'package:provider/provider.dart';
-import 'package:e_vote/screens/admin/dashboard.dart';
+
+import 'package:e_vote/screens/add_candidate.dart';
+import 'package:e_vote/screens/dashboard.dart';
 import 'package:e_vote/screens/forgot_password.dart';
+
+import 'package:e_vote/screens/drop2.dart';
+import 'package:e_vote/screens/dropdown.dart';
 import 'package:e_vote/screens/splash.dart';
 import 'package:e_vote/screens/login.dart';
 import 'package:e_vote/screens/signup.dart';
@@ -34,6 +45,14 @@ class EVote extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
 
+        
+
+      
+      home: ProfileScreen(),
+
+/*
+      
+
          home: Candidates(),
 /*
         // The first screen to display once the app is launch.
@@ -47,6 +66,21 @@ class EVote extends StatelessWidget {
           '/forgot': (context) => ForgotPasswordScreen(),
           '/signup': (context) => SignupScreen(),
           '/email': (context) => VerifyEmailScreen(),
+          '/admin': (context) => DashboardScreen(),
+          '/create': (context) => CreatElectionScreen(),
+          '/candidate': (context) => AddCandidateScreen(),
+          // '/candidate': (context) => AddCandidateScreen(),
+          '/auditor': (context) => AddAuditorScreen()
+
+        },
+
+
+      
+
+    */
+
+      
+
           '/admin': (context) => AdminDashboardScreen(),
         },
 */
