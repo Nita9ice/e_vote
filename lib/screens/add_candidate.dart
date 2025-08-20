@@ -150,106 +150,133 @@ class _AddCandidateScreenState extends State<AddCandidateScreen> {
         ),
         child: Padding(
           padding: EdgeInsets.all(dimensions.widthPercent(7.5)), // ~32.25px
-          child: Center(
-            child: Column(
-              // mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(height: 150,),
-            
-                Text('Add Candidate',
-                style: TextStyle(
-                                    fontFamily: 'Roboto',
-                                    fontSize: 32,
-                                    fontWeight: FontWeight.w700,
-                                    color: Color.fromRGBO(255, 255, 255, 1),),
-                ),
-            
-            
-                SizedBox(height: 80,),
-                // Horizontal listview for candidate
-                SizedBox(
-                  height: 200,
-                  child: candidateList.isEmpty
-                      ? Center(
-                          child: Text(
-                            'No candidates added yet',
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              fontSize: 28,
-                              color: Colors.white,
-                            ),
-                          ),
-                        )
-                      : ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: candidateList.length,
-                          itemBuilder: (context, index) {
-                            final candidate = candidateList[index];
-                            return Card(
-                              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                              child: Container(
-                                width: 150,
-                                height: 214,
-                                decoration: BoxDecoration(
-                                  // color: Color.fromRGBO(96, 96, 96, 1),
-                                  borderRadius: BorderRadius.circular(30)
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    candidate.image != null
-                                        ? kIsWeb
-                                            ? Image.memory(
-                                                candidate.image as Uint8List,
-                                                height: 100,
-                                                width: 100,
-                                                fit: BoxFit.cover,
-                                                errorBuilder: (context, error, stackTrace) {
-                                                  return Icon(Icons.error, size: 50);
-                                                },
-                                              )
-                                            : Image.file(
-                                                candidate.image as File,
-                                                height: 100,
-                                                width: 100,
-                                                fit: BoxFit.cover,
-                                                errorBuilder: (context, error, stackTrace) {
-                                                  return Icon(Icons.error, size: 50);
-                                                },
-                                              )
-                                        : Icon(Icons.person, size: 50),
-                                    SizedBox(height: 8),
-                                    Text(
-                                      '${candidate.firstName} ${candidate.lastName}',
-                                      style: TextStyle(
-                                        fontFamily: 'Roboto',
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 14,
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                    Text(
-                                      'Votes: ${candidate.voteCount}',
-                                      style: TextStyle(fontSize: 12),
-                                    ),
-                                  ],
-                                ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 100,),
+          
+               Row(
+                     children: [
+             
+                  Image.asset(
+                 'assets/images/logo.png',
+                 width: 100,
+               ),
+               const Text('E-voting',
+               
+                              style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700,
+                                color: Color.fromRGBO(255, 255, 255, 1),
+                                // color: Color.fromRGBO(3, 58, 202, 1),
+                                
                               ),
-                            );
-                          },
+               ),
+               
+               ],
+                     
+                   ),
+                   SizedBox(height: 20,),
+          
+              Text('Add Candidate',
+              style: TextStyle(
+                                  fontFamily: 'Roboto',
+                                  fontSize: 32,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color.fromRGBO(255, 255, 255, 1),),
+              ),
+          
+          
+              SizedBox(height: 30,),
+              // Horizontal listview for candidate
+              SizedBox(
+                height: 200,
+                child: candidateList.isEmpty
+                    ? Center(
+                        child: Text(
+                          'No candidates added yet',
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.w700,
+                            fontSize: 20,
+                            color: Colors.white,
+                          ),
                         ),
-                ),
-
-                SizedBox(height: 20,),
-
-                AddButton(text: 'Add', onPressed: addCandidateBox),
-                
-Spacer(),
-                BackNextButton(onPressed: (){
-                                        Navigator.pushNamed(context, '/auditor');
-                                      },)
-              ],
-            ),
+                      )
+                    : ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: candidateList.length,
+                        itemBuilder: (context, index) {
+                          final candidate = candidateList[index];
+                          return Card(
+                            margin: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                            child: Container(
+                              width: 150,
+                              height: 214,
+                              decoration: BoxDecoration(
+                                // color: Color.fromRGBO(96, 96, 96, 1),
+                                borderRadius: BorderRadius.circular(30)
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  candidate.image != null
+                                      ? kIsWeb
+                                          ? Image.memory(
+                                              candidate.image as Uint8List,
+                                              height: 100,
+                                              width: 100,
+                                              fit: BoxFit.cover,
+                                              errorBuilder: (context, error, stackTrace) {
+                                                return Icon(Icons.error, size: 50);
+                                              },
+                                            )
+                                          : Image.file(
+                                              candidate.image as File,
+                                              height: 100,
+                                              width: 100,
+                                              fit: BoxFit.cover,
+                                              errorBuilder: (context, error, stackTrace) {
+                                                return Icon(Icons.error, size: 50);
+                                              },
+                                            )
+                                      : Icon(Icons.person, size: 50),
+                                  SizedBox(height: 8),
+                                  Text(
+                                    '${candidate.firstName} ${candidate.lastName}',
+                                    style: TextStyle(
+                                      fontFamily: 'Roboto',
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  Text(
+                                    'Votes: ${candidate.voteCount}',
+                                    style: TextStyle(fontSize: 12),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+              ),
+          
+              SizedBox(height: 20,),
+          
+              Center(child: AddButton(text: 'Add', onPressed: addCandidateBox,
+              
+              ),
+              
+              ),
+              
+          Spacer(),
+              BackNextButton(onPressed: (){
+                                      Navigator.pushNamed(context, '/auditor');
+                                    },)
+            ],
           ),
         ),
       ),

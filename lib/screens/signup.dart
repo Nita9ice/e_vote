@@ -1,12 +1,12 @@
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:e_vote/Services/authservices.dart';
 import 'package:e_vote/Services/firestoreservices.dart';
 import 'package:e_vote/components/utilities/app_dimension.dart';
 import 'package:e_vote/components/widgets/button.dart';
 import 'package:e_vote/components/widgets/text_field.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -38,7 +38,7 @@ class _SignupScreenState extends State<SignupScreen> {
   final List<String> roles = ['Super User', 'Admin', 'Voters'];
   //signUp for users and admin
   Future<bool> signUp() async {
-    print('selectedRole: $selectedRole');
+    // print('selectedRole: $selectedRole');
     try {
       final auth = Authservices();
       final firestoreservices = Firestoreservices();
@@ -77,7 +77,7 @@ class _SignupScreenState extends State<SignupScreen> {
         return true;
       }
     } catch (e) {
-      print(e.toString());
+      // print(e.toString());
     }
     return false;
   }
@@ -220,7 +220,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         });
                       }
                       // print('tapped');
-                      print('tapped');
+                      // print('tapped');
                     },
                   ),
 
