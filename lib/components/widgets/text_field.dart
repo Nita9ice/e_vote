@@ -38,6 +38,7 @@ class MyTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(20), // Inner radius = outer radius - border width
         ),
         child: TextField(
+        
           controller: controller,
           obscureText: obscureText,
           enabled: true,
