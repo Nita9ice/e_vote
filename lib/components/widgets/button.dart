@@ -1,6 +1,8 @@
 import 'package:e_vote/components/utilities/app_dimension.dart';
 import 'package:flutter/material.dart';
 
+
+// This class is the primary button class for our app
 class MyButton extends StatelessWidget {
   // Properties for the button class
   final String buttonText;

@@ -1,19 +1,19 @@
 import 'package:e_vote/components/utilities/app_dimension.dart';
-import 'package:e_vote/components/widgets/admin_container.dart';
+import 'package:e_vote/components/widgets/dashboard_container.dart';
 
 import 'package:flutter/material.dart';
 
 
-class AdminDashboardScreen extends StatefulWidget {
+class DashboardScreen extends StatefulWidget {
   
   
-   const AdminDashboardScreen({super.key});
+   const DashboardScreen({super.key});
 
   @override
-  State<AdminDashboardScreen> createState() => _AdminDashboardScreenState();
+  State<DashboardScreen> createState() => _DashboardScreenState();
 }
 
-class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
+class _DashboardScreenState extends State<DashboardScreen> {
   
   
 
@@ -80,9 +80,14 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                     
                  Row(
                   children: [
-                    AdminContainer(containerImage: Image.asset('assets/icons/Vector1.png'), containerText: 'CREATE ELECTION', imageHeight: 47, imageWidth: 70,),
+                    DashboardContainer(
+                      onPressed: (){
+                        Navigator.pushNamed(context, '/create');
+                      },
+                      containerImage: Image.asset('assets/icons/Vector1.png'), containerText: 'CREATE ELECTION', imageHeight: 47, imageWidth: 70,
+                      ),
                     SizedBox(width: 26,),
-                                      AdminContainer(containerImage: Image.asset('assets/icons/Vector2.png'), containerText: 'MY \n ELECTION', imageHeight: 63, imageWidth: 63,)
+                     DashboardContainer(containerImage: Image.asset('assets/icons/Vector2.png'), containerText: 'MY \n ELECTION', imageHeight: 63, imageWidth: 63,)
                   ],
                  ),
                     
@@ -90,9 +95,9 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                     
                  Row(
                   children: [
-                    AdminContainer(containerImage: Image.asset('assets/images/logo.jpg'), containerText: 'DELETE \n VOTE', imageHeight: 68, imageWidth: 74,),
+                    DashboardContainer(containerImage: Image.asset('assets/images/logo.jpg'), containerText: 'DELETE \n VOTE', imageHeight: 68, imageWidth: 74,),
                     SizedBox(width: 26,),
-                                      AdminContainer(containerImage: Image.asset('assets/icons/Vector4.png'), containerText: 'FAQ', imageHeight: 63, imageWidth: 63,)
+                    DashboardContainer(containerImage: Image.asset('assets/icons/Vector4.png'), containerText: 'FAQ', imageHeight: 63, imageWidth: 63,)
                   ],
                  ),
                     
