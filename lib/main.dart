@@ -3,6 +3,7 @@
 import 'package:e_vote/providers/candidatelistprovider.dart';
 import 'package:e_vote/screens/add_auditor.dart';
 
+//import 'package:e_vote/screens/unused_file.dart/create-election.dart';
 
 import 'package:e_vote/screens/create_election.dart';
 import 'package:e_vote/screens/faq.dart';
@@ -44,6 +45,10 @@ class EVote extends StatelessWidget {
         
 
       
+     
+
+
+      
       home: VerifyEmailScreen(),
 
 
@@ -71,7 +76,7 @@ class EVote extends StatelessWidget {
 
       
 
-    */
+  
 
       
 

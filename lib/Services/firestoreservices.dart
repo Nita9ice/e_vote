@@ -22,7 +22,7 @@ class Firestoreservices {
   Future<void> uploadUserDetails(
     Set<String> name,
     String email,
-    String role,
+   
   ) async {
     final user = auth.currentUser;
     if (user != null) {
@@ -30,19 +30,9 @@ class Firestoreservices {
       _firebaseFirestore
           .collection('users')
           .doc(userId)
-          .set(Userprofile(name: name, email: email, role: role).toMap());
+          .set(Userprofile(name: name, email: email,).toMap());
     }
   }
 
-  // set admin details
-  Future<void> uploadAdminDetails(Set<String> name, String email) async {
-    final user = auth.currentUser;
-    if (user != null) {
-      final userId = user.uid;
-      _firebaseFirestore
-          .collection('tenants')
-          .doc(userId)
-          .set(Adminprofile(name: name, email: email).toMap());
-    }
-  }
+ 
 }

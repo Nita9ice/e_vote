@@ -24,10 +24,24 @@ class Authservices {
 
 class Emailservices {
   final auth = FirebaseAuth.instance;
-  void sendEmailVerification(String email) {
+  Future<void> sendEmailVerification()async {
+    try{
     final user = auth.currentUser;
-    if (user != null) {
-        
+    if (user != null && !user.emailVerified) {
+      await user.sendEmailVerification();
+      print('verification email sent');
+    }else{print('verification link not sent');}}catch(e){print(e.toString());}
+  }
+
+  bool emailVerified(){
+    final user = auth.currentUser;
+    if(user != null){
+    final verified =  user.emailVerified;
+     if(verified){
+      return true;
+     }
+     return false;
     }
+    return false; 
   }
 }
