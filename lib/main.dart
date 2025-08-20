@@ -1,6 +1,8 @@
 // import 'package:e_vote/screens/register.dart';
 
 import 'package:e_vote/providers/candidatelistprovider.dart';
+import 'package:e_vote/screens/candidates.dart';
+import 'package:e_vote/screens/edit_profile.dart';
 import 'package:provider/provider.dart';
 import 'package:e_vote/screens/admin/dashboard.dart';
 import 'package:e_vote/screens/forgot_password.dart';
@@ -32,8 +34,8 @@ class EVote extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
 
-        // home: LoginScreen(),
-
+         home: Candidates(),
+/*
         // The first screen to display once the app is launch.
         initialRoute: '/',
 
@@ -47,7 +49,7 @@ class EVote extends StatelessWidget {
           '/email': (context) => VerifyEmailScreen(),
           '/admin': (context) => AdminDashboardScreen(),
         },
-
+*/
         // Theme data for the App
 
         // this is the default theme based on the device theme
