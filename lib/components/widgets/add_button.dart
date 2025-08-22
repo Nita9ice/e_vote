@@ -11,11 +11,11 @@ class AddButton extends StatelessWidget {
      // Instantiate AppDimensions
     final dimensions = AppDimensions(context);
     return Container(
-                  height: 60,
-                  width: 200,
+                  height: 69,
+                  width: 226,
                   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(dimensions.widthPercent(4.7)),
+                    borderRadius: BorderRadius.circular(20),
                     gradient: const LinearGradient(
                       begin: Alignment.centerLeft,
                       colors: [

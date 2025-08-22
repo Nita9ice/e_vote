@@ -1,4 +1,6 @@
+import 'package:e_vote/components/utilities/date_option.dart';
 import 'package:e_vote/components/widgets/back_next.dart';
+
 import 'package:e_vote/components/widgets/textField_create.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +13,9 @@ class CreatElectionScreen extends StatefulWidget {
 
 class _CreatElectionScreenState extends State<CreatElectionScreen> {
 
+  DateTime? _startDate;
+  DateTime? _endDate;
+
     // Controller for handling input in the email text field
   final TextEditingController titleController = TextEditingController();
 
@@ -21,6 +26,39 @@ class _CreatElectionScreenState extends State<CreatElectionScreen> {
 
   // Controller for handling input in the last name text field
   final TextEditingController lastNameController = TextEditingController();
+
+// function to select start date
+   Future<void> _pickStartDate() async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: _startDate ?? DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+    );
+    if (picked != null && picked != _startDate) {
+      setState(() {
+        _startDate = picked;
+      });
+    }
+  }
+
+
+// function to select start date
+  Future<void> _pickEndDate() async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: _endDate ?? DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+    );
+    if (picked != null && picked != _endDate) {
+      setState(() {
+        _endDate = picked;
+      });
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,26 +76,53 @@ class _CreatElectionScreenState extends State<CreatElectionScreen> {
           child: Padding(
             padding: const EdgeInsets.all(32),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(height: 200,),
+                SizedBox(height: 100,),
+        
+               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+         children: [
+             
+                  Image.asset(
+                 'assets/images/logo.png',
+                 width: 100,
+               ),
+               const Text('E-voting',
+               
+                              style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700,
+                                color: Color.fromRGBO(255, 255, 255, 1),
+                                // color: Color.fromRGBO(3, 58, 202, 1),
+                                
+                              ),
+               ),
+               
+               ],
+         
+                   ),
+                   SizedBox(height: 20,),
                  const Text('Create Election',
                         
                                 style: TextStyle(
                                   fontFamily: 'Roboto',
-                                  fontSize: 48,
+                                  fontSize: 32,
                                   fontWeight: FontWeight.w700,
                                   color: Color.fromRGBO(255, 255, 255, 1),
                                   // color: Color.fromRGBO(3, 58, 202, 1),
                                   
                                 ),
                                 ),
-                                const SizedBox(height: 100,),
+                                const SizedBox(height: 50,),
         
                                 TextField2(text: 'Title',
                                 controller: titleController,
                                 ),
         
-                                const SizedBox(height: 50,),
+                                const SizedBox(height: 30,),
         
                                 Container(
                                   padding: EdgeInsets.all(16),
@@ -96,6 +161,66 @@ class _CreatElectionScreenState extends State<CreatElectionScreen> {
                                     ),
                                   ),
                                 ),
+
+                                SizedBox(height: 50,),
+
+                               Row(
+  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  children: [
+    // Start Date Box
+    GestureDetector(
+      onTap: _pickStartDate ,
+      child: SizedBox(
+        
+        child: Row(
+          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              _startDate == null
+                  ? 'Start Date'
+                  : _startDate.toString().split(' ')[0],
+              style: const TextStyle(
+                fontFamily: 'Roboto',
+                fontSize: 20,
+                fontWeight: FontWeight.w400,
+                color: Color.fromRGBO(96, 96, 96, 1),
+              ),
+            ),
+            const Icon(Icons.arrow_drop_down,color: Color.fromRGBO(96, 96, 96, 1), size: 20),
+          ],
+        ),
+      ),
+    ),
+
+    // const SizedBox(width: 12), // space between boxes
+
+    // End Date Box
+    GestureDetector(
+      onTap: _pickEndDate,
+      child: SizedBox(
+        
+        child: Row(
+          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              _endDate == null
+                  ? 'End Date'
+                  : _endDate.toString().split(' ')[0],
+              style: const TextStyle(
+                fontFamily: 'Roboto',
+                fontSize: 20,
+                fontWeight: FontWeight.w400,
+                color: Color.fromRGBO(96, 96, 96, 1),
+              ),
+            ),
+            const Icon(Icons.arrow_drop_down,color: Color.fromRGBO(96, 96, 96, 1), size: 20),
+          ],
+        ),
+      ),
+    ),
+  ],
+),
+
         
                                 SizedBox(height: 100,),
         

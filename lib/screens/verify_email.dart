@@ -61,26 +61,74 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                       color: const Color.fromRGBO(255, 255, 255, 1),
                     ),
                   ),
-                  SizedBox(height: dimensions.heightPercent(7.5)), // ~69.90px
-                  // Verified button
-                  MyButton(
-                    buttonText: 'Verified',
-                    onPressed: () {},
-                  ),
-                  SizedBox(height: dimensions.heightPercent(2.2)), // ~20.50px
-                  // Resend email button
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Didn\'t receive the email? Resend',
-                      style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontSize: dimensions.widthPercent(4.7), // ~20.21px
-                        fontWeight: FontWeight.w400,
-                        color: const Color.fromRGBO(255, 255, 255, 1),
+                  SizedBox(height: 50), // ~69.90px
+                  
+                  // SizedBox(height: dimensions.heightPercent(2.2)), // ~20.50px
+                  // Resend email 
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Didn\'t receive the email?',
+                        style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontSize: 20,
+                          fontWeight: FontWeight.w400,
+                          color: Color.fromRGBO(255, 255, 255, 1),
+                        ),
                       ),
-                    ),
+                      TextButton(
+                        onPressed: () {
+                          
+                        },
+                        child: Text(
+                          'Resend',
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                            color: Color.fromRGBO(255, 255, 255, 1),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
+
+
+                   
+                  
+                  SizedBox(height: 150,),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Already have an account?',
+                        style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontSize: 20,
+                          fontWeight: FontWeight.w400,
+                          color: Color.fromRGBO(255, 255, 255, 1),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          
+                        },
+                        child: Text(
+                          'Login',
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                            color: Color.fromRGBO(255, 255, 255, 1),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  
                 ],
               ),
             ),
