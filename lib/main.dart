@@ -49,10 +49,10 @@ class EVote extends StatelessWidget {
 
 
       
-      home: VerifyEmailScreen(),
+      // home: VerifyEmailScreen(),
 
 
-      /*
+      
 
         // The first screen to display once the app is launch.
         initialRoute: '/',
