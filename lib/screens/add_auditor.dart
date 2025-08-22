@@ -5,6 +5,8 @@ import 'package:e_vote/components/widgets/back_next.dart';
 import 'package:e_vote/components/widgets/button.dart';
 import 'package:e_vote/components/widgets/text_field.dart';
 import 'package:e_vote/models/auditor.dart';
+
+
 import 'package:e_vote/models/election.dart'; // Import the new model
 import 'package:flutter/material.dart';
 

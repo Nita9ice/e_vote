@@ -20,6 +20,9 @@ class Authservices {
   }
 
   Stream<User?> get authChanges => auth.authStateChanges();
+
+
+  
 }
 
 class Emailservices {
