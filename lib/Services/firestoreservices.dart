@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:e_vote/models/adminprofile.dart';
 import 'package:e_vote/models/userprofile.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';

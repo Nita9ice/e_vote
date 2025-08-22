@@ -9,7 +9,6 @@ import 'package:e_vote/components/widgets/text_field.dart';
 import 'package:e_vote/models/auditor.dart';
 
 
-
 import 'package:flutter/material.dart';
 
 class AddAuditorScreen extends StatefulWidget {
