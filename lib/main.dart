@@ -1,12 +1,12 @@
-// import 'package:e_vote/screens/register.dart';
 
 import 'package:e_vote/providers/candidatelistprovider.dart';
 import 'package:e_vote/screens/add_auditor.dart';
 
-//import 'package:e_vote/screens/unused_file.dart/create-election.dart';
+
 
 import 'package:e_vote/screens/create_election.dart';
 import 'package:e_vote/screens/faq.dart';
+import 'package:e_vote/screens/voter/voter.dart';
 import 'package:provider/provider.dart';
 
 import 'package:e_vote/screens/add_candidate.dart';
@@ -49,10 +49,10 @@ class EVote extends StatelessWidget {
 
 
       
-      // home: VerifyEmailScreen(),
+      home: VoterScreen(),
 
 
-      
+      /*
 
         // The first screen to display once the app is launch.
         initialRoute: '/',
@@ -65,17 +65,18 @@ class EVote extends StatelessWidget {
           '/forgot': (context) => ForgotPasswordScreen(),
           '/signup': (context) => SignupScreen(),
           '/email': (context) => VerifyEmailScreen(),
-          '/admin': (context) => DashboardScreen(),
+          '/dashboard': (context) => DashboardScreen(),
           '/create': (context) => CreatElectionScreen(),
           '/candidate': (context) => AddCandidateScreen(),
           '/faq': (context) => FaqScreen(),
-          '/auditor': (context) => AddAuditorScreen()
+          '/auditor': (context) => AddAuditorScreen(),
+          '/voters': (context) => VoterScreen()
 
         },
 
 
       
-
+*/
   
 
       
