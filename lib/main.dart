@@ -49,7 +49,7 @@ class EVote extends StatelessWidget {
 
 
       
-      home: VoterScreen(),
+      
 
 
       /*
