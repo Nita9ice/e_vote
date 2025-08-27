@@ -266,6 +266,9 @@ void dispose() {
 
 
         BackNextButton(
+          onPressed1: (){
+            Navigator.pop(context);
+          },
                   onPressed: () {
                     final errorMessage = _validateInputs();
                     if (errorMessage != null) {

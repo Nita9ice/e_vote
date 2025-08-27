@@ -7,6 +7,7 @@ import 'package:e_vote/screens/add_auditor.dart';
 
 import 'package:e_vote/screens/create_election.dart';
 import 'package:e_vote/screens/faq.dart';
+import 'package:e_vote/screens/join_vote.dart';
 import 'package:e_vote/screens/voter/voter.dart';
 import 'package:provider/provider.dart';
 import 'package:e_vote/screens/add_candidate.dart';
@@ -41,8 +42,9 @@ class EVote extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
 
+        // home: AddCandidateScreen(),
 
-      
+
 
         // The first screen to display once the app is launch.
 
@@ -59,6 +61,7 @@ class EVote extends StatelessWidget {
             }
             return DashboardScreen();
           } ), // WelcomeScreen(),
+
           '/login': (context) => LoginScreen(),
           '/forgot': (context) => ForgotPasswordScreen(),
           '/signup': (context) => SignupScreen(),
@@ -67,21 +70,21 @@ class EVote extends StatelessWidget {
           '/create': (context) => CreatElectionScreen(),
           '/candidate': (context) => AddCandidateScreen(),
 
-          '/auditor': (context) => AddAuditorScreen()
-        },
-          '/faq': (context) => FaqScreen(),
           '/auditor': (context) => AddAuditorScreen(),
+           '/faq': (context) => FaqScreen(),
+          '/join': (context) => JoinVoteScreen(),
           '/voters': (context) => VoterScreen()
-
         },
+  
+      
+        
 
 
       
-*/
+
   
 
       
-
 
         // Theme data for the App
         // this is the default theme based on the device theme
@@ -96,3 +99,4 @@ class EVote extends StatelessWidget {
     );
   }
 }
+
