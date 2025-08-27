@@ -10,7 +10,7 @@ class CandidateAlertBox extends StatelessWidget {
   final Widget? button2;
   final VoidCallback? onPickImage; // Callback for the plus icon
 
-  const CandidateAlertBox.CandidateAlertBox({
+  const CandidateAlertBox({
     super.key,
     required this.containerText,
     this.circularAvatar,
