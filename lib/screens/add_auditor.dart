@@ -276,6 +276,9 @@ class _AddAuditorScreenState extends State<AddAuditorScreen> {
                 const SizedBox(height: 100),
                 BackNextButton(
                   text: 'Submit',
+                  onPressed1: (){
+                    Navigator.pop(context);
+                  },
                   onPressed: () {
                     // Added: Update Election model
                     // _election.auditors = auditorList;

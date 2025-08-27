@@ -88,15 +88,19 @@ class FaqScreen extends StatelessWidget {
                                            Navigator.pop(context);
                                         },
                                         padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                                        
                                         ),
-                    color: Color.fromRGBO(255, 255, 255, 1),
+                   
                   ),
-                ),
-              ],
+              ]
+            )                ),
+              
+        
             ),
-          ),
-        ),
-      ),
+      
+          
+        
+      )
     );
   }
 }

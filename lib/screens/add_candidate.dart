@@ -192,43 +192,6 @@ class _AddCandidateScreenState extends State<AddCandidateScreen> {
           },
 
        
-        return   CandidateAlertBox(
-          containerText: 'Add a Candidate',
-          circularAvatar: _selectedImage != null
-              ? kIsWeb
-                  ? Image.memory(
-                      _selectedImage as Uint8List,
-                      height: 100,
-                      width: 100,
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) => Image.asset('assets/images/image1.png'),
-                    )
-                  : Image.file(
-                      _selectedImage as File,
-                      height: 100,
-                      width: 100,
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) => Image.asset('assets/images/image1.png'),
-                    )
-              : Image.asset('assets/images/image1.png'),
-          textField1: MyTextField(controller: firstNameController, hintText: 'First Name'),
-          textField2: MyTextField(controller: lastNameController, hintText: 'Last Name'),
-          button: MyButton(
-            buttonText: 'Add',
-            onPressed: () {
-              _addCandidate();
-              Navigator.pop(context);
-            },
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 40),
-          ),
-          button2: MyButton(
-            buttonText: 'Cancel',
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-          ),
-          onPickImage: _pickImage,
         );
       },
     );
@@ -392,7 +355,7 @@ SizedBox(
           },
         ),
 ),
-const SizedBox(height: 20),
+// const SizedBox(height: 20),
 Center(
   child: AddButton(
     text: 'Add',
@@ -403,8 +366,12 @@ Center(
   ),
 ),
 
+
                 const Spacer(),
                 BackNextButton(
+                  onPressed1: (){
+            Navigator.pop(context);
+          },
                   onPressed: () {
                     // Added: Update Election model and pass to next screen
                     _election.candidates = candidateList;
@@ -416,90 +383,7 @@ Center(
                   },
                 ),
             
-            
-                SizedBox(height: 80,),
-                // Horizontal listview for candidate
-                SizedBox(
-                  height: 200,
-                  child: candidateList.isEmpty
-                      ? Center(
-                          child: Text(
-                            'No candidates added yet',
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              fontSize: 28,
-                              color:  Colors.white,
-                            ),
-                          ),
-                        )
-                      : ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: candidateList.length,
-                          itemBuilder: (context, index) {
-                            final candidate = candidateList[index];
-                            return Card(
-                              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                              child: Container(
-                                width: 150,
-                                height: 214,
-                                decoration: BoxDecoration(
-                                  // color: Color.fromRGBO(96, 96, 96, 1),
-                                  borderRadius: BorderRadius.circular(30)
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    candidate.image != null
-                                        ? kIsWeb
-                                            ? Image.memory(
-                                                candidate.image as Uint8List,
-                                                height: 100,
-                                                width: 100,
-                                                fit: BoxFit.cover,
-                                                errorBuilder: (context, error, stackTrace) {
-                                                  return Icon(Icons.error, size: 50);
-                                                },
-                                              )
-                                            : Image.file(
-                                                candidate.image as File,
-                                                height: 100,
-                                                width: 100,
-                                                fit: BoxFit.cover,
-                                                errorBuilder: (context, error, stackTrace) {
-                                                  return Icon(Icons.error, size: 50);
-                                                },
-                                              )
-                                        : Icon(Icons.person, size: 50),
-                                    SizedBox(height: 8),
-                                    Text(
-                                      '${candidate.firstName} ${candidate.lastName}',
-                                      style: TextStyle(
-                                        fontFamily: 'Roboto',
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 14,
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                    Text(
-                                      'Votes: ${candidate.voteCount}',
-                                      style: TextStyle(fontSize: 12),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                ),
-
-                SizedBox(height: 20,),
-
-                AddButton(text: 'Add', onPressed: addCandidateBox),
-                
-Spacer(),
-                BackNextButton(onPressed: (){
-                                        Navigator.pushNamed(context, '/auditor');
-                                      },)
+           
               ],
             ),
           ),
