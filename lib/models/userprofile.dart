@@ -1,17 +1,19 @@
-class Userprofile {
-  Set<String> name;
-  String email;
-  String role;
 
-  Userprofile({required this.name, required this.email, required this.role});
+
+class Userprofile {
+  List<String> name;
+  String email;
+
+
+  Userprofile({required this.name, required this.email, });
   factory Userprofile.fromMap(Map<String, dynamic> map) {
     return Userprofile(
-      name: map['name'],
+      name: List<String>.from(map['name']),
       email: map['email'],
-      role: map['role'],
+   
     );
   }
   Map<String, dynamic> toMap() {
-    return {'name': name, 'email': email, role: role};
+    return {'name': name, 'email': email,};
   }
 }

@@ -4,7 +4,7 @@ class Candidate {
   final String firstName;
   final String lastName;
   final dynamic image; // Use dynamic to support File (native) or Uint8List (web) 
-  final int voteCount;
+   int voteCount;
 
   Candidate({
     required this.firstName,

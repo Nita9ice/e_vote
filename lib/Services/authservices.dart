@@ -20,14 +20,30 @@ class Authservices {
   }
 
   Stream<User?> get authChanges => auth.authStateChanges();
+
+
+  
 }
 
 class Emailservices {
   final auth = FirebaseAuth.instance;
-  void sendEmailVerification(String email) {
+  Future<void> sendEmailVerification()async {
+    try{
     final user = auth.currentUser;
-    if (user != null) {
-        
-    }
+    if (user != null && !user.emailVerified) {
+      await user.sendEmailVerification();
+      print('verification email sent');
+    }else{print('verification link not sent');}}catch(e){print(e.toString());}
   }
+
+Future< bool> emailVerified()async{
+    final user = auth.currentUser;
+    if(user != null && user.emailVerified){
+      await user.reload();
+      return true;
+  }else{
+    return false;
+  }
+
+}
 }
