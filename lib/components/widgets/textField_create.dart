@@ -14,6 +14,7 @@ class TextField2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     

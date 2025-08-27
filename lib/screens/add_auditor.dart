@@ -197,6 +197,8 @@ class _AddAuditorScreenState extends State<AddAuditorScreen> {
                           const SizedBox(height: 100,), 
         
                           BackNextButton(
+                        
+                           
                             text: 'Submit',
                             onPressed: (){}),
         

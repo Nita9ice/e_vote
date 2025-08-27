@@ -1,6 +1,5 @@
 import 'package:e_vote/components/utilities/app_dimension.dart';
 import 'package:flutter/material.dart';
-import 'package:e_vote/components/widgets/button.dart';
 
 
 class VerifyEmailScreen extends StatefulWidget {
@@ -114,7 +113,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                       ),
                       TextButton(
                         onPressed: () {
-                          
+                          Navigator.pushNamed(context, '/login');
                         },
                         child: Text(
                           'Login',

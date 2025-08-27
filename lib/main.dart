@@ -2,6 +2,8 @@
 
 import 'package:e_vote/Services/authservices.dart';
 import 'package:e_vote/providers/candidatelistprovider.dart';
+import 'package:e_vote/providers/create_election_provider.dart';
+import 'package:e_vote/providers/userprofileprovider.dart';
 import 'package:e_vote/screens/add_auditor.dart';
 
 //import 'package:e_vote/screens/unused_file.dart/create-election.dart';
@@ -38,6 +40,8 @@ class EVote extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => Candidatelistprovider()),
+        ChangeNotifierProvider(create: (context)=>Userprofileprovider()),
+        ChangeNotifierProvider(create: (context)=> CreateElectionProvider())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -49,10 +53,10 @@ class EVote extends StatelessWidget {
 
 
       
-      home: VerifyEmailScreen(),
+   
 
 
-      /*
+      
 
         // The first screen to display once the app is launch.
         initialRoute: '/',

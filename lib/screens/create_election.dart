@@ -1,8 +1,11 @@
-import 'package:e_vote/components/utilities/date_option.dart';
+
 import 'package:e_vote/components/widgets/back_next.dart';
 
 import 'package:e_vote/components/widgets/textField_create.dart';
+import 'package:e_vote/models/create_election.dart';
+import 'package:e_vote/providers/create_election_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CreatElectionScreen extends StatefulWidget {
   const CreatElectionScreen({super.key});
@@ -20,7 +23,7 @@ class _CreatElectionScreenState extends State<CreatElectionScreen> {
   final TextEditingController titleController = TextEditingController();
 
   // Controller for handling input in the first name text field
-  final TextEditingController decriptionController= TextEditingController();
+  final TextEditingController descriptionController= TextEditingController();
 
     
 
@@ -57,6 +60,14 @@ class _CreatElectionScreenState extends State<CreatElectionScreen> {
       });
     }
   }
+
+ void addHeading(CreateElection heading){
+  Provider.of<CreateElectionProvider>(context, listen: false).addHeading(heading);
+ }
+
+void deleteHeading(CreateElection heading){
+  Provider.of<CreateElectionProvider>(context, listen: false).deleteHeading(heading);
+}
 
 
   @override
@@ -138,6 +149,7 @@ class _CreatElectionScreenState extends State<CreatElectionScreen> {
                                     )
                                   ),
                                   child: TextField(
+                                    controller: descriptionController,
                                     style: TextStyle(
                                       color: Color.fromRGBO(255, 255, 255, 1),
                                       fontSize: 20,
@@ -224,7 +236,10 @@ class _CreatElectionScreenState extends State<CreatElectionScreen> {
         
                                 SizedBox(height: 100,),
         
-                                BackNextButton(onPressed: (){
+                                BackNextButton(
+                                
+                                onPressed: (){
+                                  addHeading(CreateElection(title: titleController.text.trim() , description: descriptionController.text.trim(), startDate: _startDate??DateTime(DateTime.april), endDate: _endDate?? DateTime(DateTime.august) ));
                                         Navigator.pushNamed(context, '/candidate');
                                       },),
         

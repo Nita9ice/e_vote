@@ -36,15 +36,14 @@ class Emailservices {
     }else{print('verification link not sent');}}catch(e){print(e.toString());}
   }
 
-  bool emailVerified(){
+Future< bool> emailVerified()async{
     final user = auth.currentUser;
-    if(user != null){
-    final verified =  user.emailVerified;
-     if(verified){
+    if(user != null && user.emailVerified){
+      await user.reload();
       return true;
-     }
-     return false;
-    }
-    return false; 
+  }else{
+    return false;
   }
+
+}
 }

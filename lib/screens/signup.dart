@@ -40,11 +40,7 @@ Future<void> sendEmailverification()async{
 
   //signUp for users and admin
   Future<bool> signUp() async {
-<<<<<<< HEAD
-    // print('selectedRole: $selectedRole');
-=======
- 
->>>>>>> 09c2e796852e803a3a9009a173e94c4303cf397e
+
     try {
       final auth = Authservices();
      
@@ -62,7 +58,7 @@ Future<void> sendEmailverification()async{
         password == confirmPassword) {
         await auth.signUp(email, password);
         await firestoreservices.uploadUserDetails(
-          {firstName, lastName},
+          [firstName, lastName],
           email,
       
         );

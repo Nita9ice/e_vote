@@ -91,7 +91,7 @@ class _AddCandidateScreenState extends State<AddCandidateScreen> {
     showDialog(
       context: context,
       builder: (context) {
-        return CandidateAlertBox.CandidateAlertBox(
+        return CandidateAlertBox(
 
           containerText: 'Add a Candidate',
           circularAvatar: _selectedImage != null
@@ -274,7 +274,10 @@ class _AddCandidateScreenState extends State<AddCandidateScreen> {
               ),
               
           Spacer(),
-              BackNextButton(onPressed: (){
+              BackNextButton(
+                
+                
+               onPressed: (){
                                       Navigator.pushNamed(context, '/auditor');
                                     },)
             ],

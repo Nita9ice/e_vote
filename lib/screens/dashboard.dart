@@ -1,8 +1,10 @@
 import 'package:e_vote/components/utilities/app_dimension.dart';
 import 'package:e_vote/components/utilities/drawer.dart';
 import 'package:e_vote/components/widgets/dashboard_container.dart';
+import 'package:e_vote/providers/userprofileprovider.dart';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 
 class DashboardScreen extends StatefulWidget {
@@ -22,6 +24,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
+  
     // Instantiate AppDimensions
     final dimensions = AppDimensions(context);
 
@@ -33,7 +36,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
         iconTheme: IconThemeData(color: Color.fromRGBO(255, 255, 255, 1),),
       ),
       drawer: MyDrawer(),
-      body: Container(
+      body: Consumer<Userprofileprovider>(builder:(context, userprovider, hild ){
+      final user =  userprovider.userProfile;
+        return 
+        Container(
         width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(
@@ -58,7 +64,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   
                  SizedBox(height: 7,),
                     
-                 Text('Matthew',
+                 Text(user?.name.join('  ')??'',
                  style: TextStyle(
                                 fontFamily: 'Roboto',
                                 fontSize: dimensions.widthPercent(8.4), // ~20.21px
@@ -67,7 +73,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               ),
                  ),
                  SizedBox(height: 7,),
-                 Text('admin@admin.com',
+                 Text(user?.email??'',
                  style: TextStyle(
                                 fontFamily: 'Roboto',
                                 fontSize: dimensions.widthPercent(4.7), // ~20.21px
@@ -110,7 +116,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ),
           ),
         ),
-      ),
+      );
+      }) 
     );
   }
 }

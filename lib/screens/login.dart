@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:e_vote/Services/authservices.dart';
 import 'package:e_vote/components/utilities/app_dimension.dart';
+import 'package:e_vote/components/widgets/alert_box_status.dart';
 import 'package:flutter/material.dart';
 import 'package:e_vote/components/widgets/button.dart';
 import 'package:e_vote/components/widgets/text_field.dart';
@@ -21,6 +24,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   // Variable to control password visibility
   bool obscurePassword = false;
+
+
  
  Future<bool>signIn()async{
   try{
@@ -28,16 +33,21 @@ class _LoginScreenState extends State<LoginScreen> {
   final password = passwordController.text.trim();
   final auth = Authservices();
   final emailServices = Emailservices();
-  
- final verified = emailServices.emailVerified();
- if(verified){
+
   await auth.signIn(email, password);
+  
+ final verified =  await emailServices.emailVerified();
+ if(verified){
+
   return true;
  }
  else{
+await auth.signOut();
 showSnackBar('please verify your email');
+return false;
  }
-return false;}catch(e){
+}
+catch(e){
   print(e.toString());
 }
   return false;
@@ -46,6 +56,18 @@ return false;}catch(e){
   void showSnackBar(String message){
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
   }
+Future<void> successMessage()async{
+  showDialog(context: context, builder: (context){
+    return 
+    AlertBoxStatus(containerText: 'Success', containerImage: Image.asset('assets/images/logo.png'));
+    
+  } );
+}
+// navigate to dashboard
+void navigateToDashbord(){
+    Navigator.pushNamed(context, '/admin');
+}
+
 
   @override
   void dispose() {
@@ -161,10 +183,13 @@ return false;}catch(e){
                     onPressed: () async{
                      final onSuccess = await signIn();
                      if(onSuccess){
-                      Navigator.pushNamed(context, '/admin');
-                      print('logged in successfully');
-                     }else{
-                      print('unable to login');
+                     
+                
+                    await successMessage();
+                    await Future.delayed(Duration(seconds: 2));
+                
+                     navigateToDashbord();
+                 
                      }
 
                        
