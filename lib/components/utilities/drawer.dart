@@ -47,7 +47,10 @@ class MyDrawer extends StatelessWidget {
                   icon: Icon(Icons.wallet,color: Colors.white,),),
 
                    SizedBox(height: 30,),
-                 MyListTile(text: 'Profile Setting', onPressed: (){},
+                 MyListTile(text: 'Profile Setting', onPressed: (){
+                  // Navigate to profile
+                      Navigator.pushNamed(context, '/profile');
+                 },
                   icon: Icon(Icons.settings,color: Colors.white,),),
 
                   SizedBox(height: 30,),

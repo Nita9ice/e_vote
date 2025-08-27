@@ -1,13 +1,19 @@
 import 'dart:async';
-
-
 import 'package:e_vote/Services/authservices.dart';
 import 'package:e_vote/Services/firestoreservices.dart';
 import 'package:e_vote/components/utilities/app_dimension.dart';
 import 'package:e_vote/components/widgets/button.dart';
 import 'package:e_vote/components/widgets/text_field.dart';
-
 import 'package:flutter/material.dart';
+
+// Provides an interface for new users to create an account by 
+// entering their details (e.g., name, email, and password).
+// The screen handles form validation, displays feedback, and 
+// connects with the authentication service to complete the 
+// registration process. 
+// Serves as the starting point for users who need to register 
+// before accessing the app’s main features.
+
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -18,78 +24,79 @@ class SignupScreen extends StatefulWidget {
 
 class _SignupScreenState extends State<SignupScreen> {
   // Controllers for input fields
+
+  // Controller for handling input in the first name text field
   final TextEditingController firstNameController = TextEditingController();
+
+  // Controller for handling input in the last name text field
   final TextEditingController lastNameController = TextEditingController();
 
-  // Controller for handling input in the password text field
+  // Controller for handling input in the email text field
   final TextEditingController emailController = TextEditingController();
 
   // Controller for handling input in the password text field
   final TextEditingController passwordController = TextEditingController();
 
-  // Controller for handling input in the password text field
+  // Controller for handling input in the confirm password text field
   final TextEditingController confirmPasswordController =
       TextEditingController();
 
-
-  // Variable to control password visibility
+  // Toggle to show or hide password text
   bool obscurePassword = false;
 
- 
-Future<void> sendEmailverification()async{
- final emailLink = Emailservices();
- await emailLink.sendEmailVerification();
-}
+  // Function to send email verification after registration
+  Future<void> sendEmailverification() async {
+    final emailLink = Emailservices();
+    await emailLink.sendEmailVerification();
+  }
 
-
-  //signUp for users and admin
+  // Signup function with authentication and Firestore integration
   Future<bool> signUp() async {
-
-
- 
     try {
-      final auth = Authservices();
-     
-      final firestoreservices = Firestoreservices();
+      final auth = Authservices(); // Authentication service
+      final firestoreservices = Firestoreservices(); // Firestore service
+
+      // Get values from input fields
       final firstName = firstNameController.text.trim();
       final lastName = lastNameController.text.trim();
       final email = emailController.text.trim();
       final password = passwordController.text.trim();
       final confirmPassword = confirmPasswordController.text.trim();
+
+      // Check if passwords match
       if (password != confirmPassword) {
         showSnackBar('password do not match');
       }
- if (firstName.isNotEmpty &&
+
+      // Check if all required fields are filled and passwords match
+      if (firstName.isNotEmpty &&
           lastName.isNotEmpty &&
-        password == confirmPassword) {
-        await auth.signUp(email, password);
+          password == confirmPassword) {
+        await auth.signUp(email, password); // Register user
         await firestoreservices.uploadUserDetails(
-          {firstName, lastName},
+          {firstName, lastName}, // Upload user details
           email,
-      
         );
-       
         return true;
       }
       return false;
     } catch (e) {
-
-      print(e.toString());
-
+      // Catch error 
+     
     }
     return false;
   }
 
-  //show snackbar
+  // Show a snackbar with a message
   void showSnackBar(String message) {
     ScaffoldMessenger.of(
       context,
     ).showSnackBar(SnackBar(content: Text(message)));
   }
 
- 
   @override
   void dispose() {
+    // Dispose controllers to free memory
     super.dispose();
     firstNameController.dispose();
     lastNameController.dispose();
@@ -98,92 +105,84 @@ Future<void> sendEmailverification()async{
     confirmPasswordController.dispose();
   }
 
-  //navigate to login
+  // Navigate to email verification screen
   void emailVerificationScreen() {
     Navigator.pushNamed(context, '/email');
   }
 
-  // //signout user after registeration
-  
-
   @override
   Widget build(BuildContext context) {
-    // Instantiate AppDimensions
-    final dimensions = AppDimensions(context);
+
+// This is a  variable 'dims' that holds an AppDimensions object,
+// which provides responsive sizing values based on the current context.
+    final dims = AppDimensions(context);
 
     return Scaffold(
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: BoxDecoration(
-          // backgroung image
+        // Background image
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/images/background2.jpg'),
             fit: BoxFit.cover,
           ),
         ),
         child: Padding(
-          padding: EdgeInsets.all(dimensions.widthPercent(7.5)), // ~32.25px
+          padding: EdgeInsets.all(dims.widthPercent(7.5)), // responsive padding
           child: Center(
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  // space
-                  SizedBox(height: 150),
+                  SizedBox(height: dims.heightPercent(20)), // top spacing
+
                   // Main text
                   Text(
                     'Welcome Onboard',
                     style: TextStyle(
                       fontFamily: 'Roboto',
-                      fontSize: 36,
+                      fontSize: dims.fontSizeLarge,
                       fontWeight: FontWeight.w700,
-                      color: Color.fromRGBO(255, 255, 255, 1),
+                      color: const Color.fromRGBO(255, 255, 255, 1),
                     ),
                   ),
 
-                  // space
-                  SizedBox(height: 31),
+                  SizedBox(height: dims.spacingMedium),
 
-                  // Text field for user first name
+                  // First name input field
                   MyTextField(
                     controller: firstNameController,
                     hintText: 'First name:',
-                    
                   ),
 
-                  // space
-                  SizedBox(height: 31),
+                  SizedBox(height: dims.spacingMedium),
 
-                  // Text field for user last name
+                  // Last name input field
                   MyTextField(
                     controller: lastNameController,
                     hintText: 'Last name:',
-
-                    
                   ),
 
-                  // space
-                  SizedBox(height: 31),
+                  SizedBox(height: dims.spacingMedium),
 
-                  // Text field for user email
+                  // Email input field
                   MyTextField(
                     controller: emailController,
                     hintText: 'Email:',
-
-                    
                   ),
 
-                  // space
-                  SizedBox(height: 31),
+                  SizedBox(height: dims.spacingMedium),
 
-                  // Text field for user  password
+                  // Password input field with toggle visibility
                   MyTextField(
                     controller: passwordController,
                     hintText: 'Password:',
                     obscureText: !obscurePassword,
                     suffixIcon: IconButton(
                       icon: Icon(
-                        obscurePassword ? Icons.visibility_off : Icons.visibility,
+                        obscurePassword
+                            ? Icons.visibility_off
+                            : Icons.visibility,
                         color: const Color.fromRGBO(0, 0, 0, 1),
                       ),
                       onPressed: () {
@@ -192,21 +191,20 @@ Future<void> sendEmailverification()async{
                         });
                       },
                     ),
-
-                   
                   ),
 
-                  // space
-                  SizedBox(height: 31),
+                  SizedBox(height: dims.spacingMedium),
 
-                  // Text field for user  confirm password
+                  // Confirm password input field
                   MyTextField(
                     controller: confirmPasswordController,
                     hintText: 'Confirm Password:',
                     obscureText: !obscurePassword,
                     suffixIcon: IconButton(
                       icon: Icon(
-                        obscurePassword ? Icons.visibility_off : Icons.visibility,
+                        obscurePassword
+                            ? Icons.visibility_off
+                            : Icons.visibility,
                         color: const Color.fromRGBO(0, 0, 0, 1),
                       ),
                       onPressed: () {
@@ -215,36 +213,32 @@ Future<void> sendEmailverification()async{
                         });
                       },
                     ),
-
-                    
                   ),
 
-                  SizedBox(height: 31),
+                  SizedBox(height: dims.spacingMedium),
 
-                  
-
-                  SizedBox(height: 20),
                   // Register button
                   MyButton(
                     buttonText: 'Register',
                     onPressed: () async {
                       final onsucess = await signUp();
                       if (onsucess) {
-                    await sendEmailverification();
+                        await sendEmailverification();
                         showSnackBar(
                           'A verification link has been sent to your email.\n'
-  'Please check your inbox and spam folder.'
+                          'Please check your inbox and spam folder.',
                         );
-                        Timer(Duration(seconds: 5), () {
+                        // Navigate to verification screen after 5 seconds
+                        Timer(const Duration(seconds: 5), () {
                           return emailVerificationScreen();
                         });
                       }
-
                     },
                   ),
 
-                  SizedBox(height: 13),
-                  // Create account text
+                  SizedBox(height: dims.spacingSmall),
+
+                  // Row for users who already have an account
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -252,25 +246,24 @@ Future<void> sendEmailverification()async{
                         'Have an account already?',
                         style: TextStyle(
                           fontFamily: 'Roboto',
-                          fontSize: 20,
+                          fontSize: dims.fontSizeSmall,
                           fontWeight: FontWeight.w400,
-                          color: Color.fromRGBO(255, 255, 255, 1),
+                          color: const Color.fromRGBO(255, 255, 255, 1),
                         ),
                       ),
                       TextButton(
                         onPressed: () {
-                          // Navigator.pushNamed(context, '/login');
-                          Navigator.pushNamed(context, '/dashboard');
-                      
-
+                          // Navigate to login
+                          // Navigator.pushNamed(context, '/dashboard');
+                          Navigator.pushNamed(context, '/login');
                         },
                         child: Text(
                           'Login',
                           style: TextStyle(
                             fontFamily: 'Roboto',
-                            fontSize: 20,
+                            fontSize: dims.fontSizeSmall,
                             fontWeight: FontWeight.w400,
-                            color: Color.fromRGBO(255, 255, 255, 1),
+                            color: const Color.fromRGBO(255, 255, 255, 1),
                           ),
                         ),
                       ),
