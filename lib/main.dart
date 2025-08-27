@@ -11,8 +11,7 @@ import 'package:e_vote/screens/add_candidate.dart';
 import 'package:e_vote/screens/dashboard.dart';
 import 'package:e_vote/screens/forgot_password.dart';
 
-import 'package:e_vote/screens/drop2.dart';
-import 'package:e_vote/screens/dropdown.dart';
+
 import 'package:e_vote/screens/splash.dart';
 import 'package:e_vote/screens/login.dart';
 import 'package:e_vote/screens/signup.dart';
