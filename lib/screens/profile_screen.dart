@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:e_vote/components/utilities/app_dimension.dart';
+
+// ProfileScreen displays the user's personal information (profile picture, name, role)
+// and provides quick navigation options such as editing profile, checking notifications,
+// and changing the password. 
+// The layout is responsive using AppDimensions for consistent scaling.
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Create an AppDimensions object for responsive sizing
+    final dims = AppDimensions(context);
+
     return Scaffold(
       body: Container(
+        // Full-screen background image
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage("assets/images/background2.jpg"),
@@ -14,89 +24,167 @@ class ProfileScreen extends StatelessWidget {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(19.0),
+          // Uniform padding around the content
+          padding: EdgeInsets.all(dims.widthPercent(6)), // instead of 24
           child: SafeArea(
             child: Column(
               children: [
+                SizedBox(height: dims.heightPercent(5)), // Top spacing
+
+                // Back button aligned to the top-left corner
                 Align(
                   alignment: Alignment.topLeft,
                   child: IconButton(
-                    icon: const Icon(Icons.arrow_back, color: Color.fromRGBO(255, 255, 255, 1)),
-                    onPressed: () => {},
+                    icon: Icon(
+                      Icons.arrow_back,
+                      size: dims.widthPercent(10), // Responsive size
+                      color: const Color.fromRGBO(255, 255, 255, 1),
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context); // Navigate back
+                    },
                   ),
                 ),
-          
-                const SizedBox(height: 101),
-          
-                const Text(
+
+                SizedBox(height: dims.heightPercent(9)), // Spacing before title
+
+                // Page title
+                Text(
                   "Profile",
                   style: TextStyle(
                     fontFamily: 'Roboto',
-                    fontSize: 28,
+                    fontSize: dims.fontSizeLarge,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
-                ), 
-          
-                const SizedBox(height: 20),
-          
-                const CircleAvatar(
-                  radius: 100,
-                  backgroundImage: AssetImage("assets/images/Ellipse 4.jpg"),
                 ),
-          
-                const SizedBox(height: 9),
-                const Text(
+
+                SizedBox(height: dims.heightPercent(2.5)),
+
+                // User profile image
+                CircleAvatar(
+                  radius: dims.widthPercent(25),
+                  backgroundImage:
+                      const AssetImage("assets/images/Ellipse 4.jpg"),
+                ),
+
+                SizedBox(height: dims.heightPercent(1.2)),
+
+                // User name
+                Text(
                   "Jane Benjamin",
                   style: TextStyle(
                     fontFamily: 'Roboto',
-                    fontSize: 24,
+                    fontSize: dims.fontSizeMedium,
                     fontWeight: FontWeight.w700,
-                    color: Color.fromRGBO(255, 255, 255, 1),
+                    color: const Color.fromRGBO(255, 255, 255, 1),
                   ),
                 ),
-          
-                const Text(
+
+                // User role/position
+                Text(
                   "Auditor",
                   style: TextStyle(
                     fontFamily: "Roboto",
-                    fontSize: 16,
-                    fontWeight:FontWeight.w400,
-                    color: Color.fromRGBO(255, 255, 255, 1),
+                    fontSize: dims.fontSizeSmall,
+                    fontWeight: FontWeight.w400,
+                    color: const Color.fromRGBO(255, 255, 255, 1),
                   ),
                 ),
-          
-                const SizedBox(height: 96),
-          
+
+                SizedBox(height: dims.heightPercent(12)),
+
+                // ===== Option Row: Edit Profile =====
                 Row(
-                  children: const [
-                    Icon(Icons.edit, color: Color.fromRGBO(132, 166, 255, 1)),
-                    SizedBox(width: 20,),
-                    Text("Edit Profile", style: TextStyle(color: Color.fromRGBO(255, 255, 255, 1), fontSize: 16,fontFamily: "Roboto",fontWeight:FontWeight.w600,)),
-                    Spacer(),
-                    Icon(Icons.arrow_forward_ios, color: Color.fromRGBO(255, 255, 255, 1)),
+                  children: [
+                    const Icon(
+                      Icons.edit,
+                      color: Color.fromRGBO(132, 166, 255, 1),
+                    ),
+                    SizedBox(width: dims.widthPercent(5)),
+                    Text(
+                      "Edit Profile",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: dims.fontSizeSmall,
+                        fontFamily: "Roboto",
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const Spacer(),
+                    IconButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/edit'); // Navigate to edit profile
+                      },
+                      icon: const Icon(
+                        Icons.arrow_forward_ios,
+                        color: Colors.white,
+                      ),
+                    ),
                   ],
                 ),
-                const SizedBox(height: 62),
+
+                SizedBox(height: dims.heightPercent(4)),
+
+                // ===== Option Row: Notifications =====
                 Row(
-                  children: const [
-                    Icon(Icons.notification_important,  color: Color.fromRGBO(132, 166, 255, 1)),
-                    SizedBox(width: 20,),
-                    Text("Notificatiuon", style: TextStyle(color: Color.fromRGBO(255, 255, 255, 1), fontSize: 16,fontFamily: "Roboto",fontWeight:FontWeight.w600,)),
-                    Spacer(),
-                    Icon(Icons.arrow_forward_ios, color: Color.fromRGBO(255, 255, 255, 1)),
+                  children: [
+                    const Icon(
+                      Icons.notification_important,
+                      color: Color.fromRGBO(132, 166, 255, 1),
+                    ),
+                    SizedBox(width: dims.widthPercent(5)),
+                    Text(
+                      "Notification",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: dims.fontSizeSmall,
+                        fontFamily: "Roboto",
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const Spacer(),
+                    IconButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/notification'); // Navigate to notifications
+                      },
+                      icon: const Icon(
+                        Icons.arrow_forward_ios,
+                        color: Colors.white,
+                      ),
+                    ),
                   ],
                 ),
-                const SizedBox(height: 62),
+
+                SizedBox(height: dims.heightPercent(4)),
+
+                // ===== Option Row: Change Password =====
                 Row(
-                  children: const [
-                    Icon(Icons.lock,  color: Color.fromRGBO(132, 166, 255, 1)),
-                    SizedBox(width: 20,),
-                    Text("Change Password", 
-                    style: TextStyle
-                    (color: Color.fromRGBO(255, 255, 255, 1), fontSize: 16,fontFamily: "Roboto",fontWeight:FontWeight.w600,)),
-                    Spacer(),
-                    Icon(Icons.arrow_forward_ios, color: Color.fromRGBO(255, 255, 255, 1)),
+                  children: [
+                    const Icon(
+                      Icons.lock,
+                      color: Color.fromRGBO(132, 166, 255, 1),
+                    ),
+                    SizedBox(width: dims.widthPercent(5)),
+                    Text(
+                      "Change Password",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: dims.fontSizeSmall,
+                        fontFamily: "Roboto",
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const Spacer(),
+                    IconButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/change'); // Navigate to change password
+                      },
+                      icon: const Icon(
+                        Icons.arrow_forward_ios,
+                        color: Colors.white,
+                      ),
+                    ),
                   ],
                 ),
               ],
