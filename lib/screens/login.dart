@@ -1,3 +1,4 @@
+import 'package:e_vote/Services/authservices.dart';
 import 'package:e_vote/components/utilities/app_dimension.dart';
 import 'package:flutter/material.dart';
 import 'package:e_vote/components/widgets/button.dart';
@@ -20,8 +21,31 @@ class _LoginScreenState extends State<LoginScreen> {
 
   // Variable to control password visibility
   bool obscurePassword = false;
-
+ 
+ Future<bool>signIn()async{
+  try{
+  final email = emailController.text.trim();
+  final password = passwordController.text.trim();
+  final auth = Authservices();
+  final emailServices = Emailservices();
   
+ final verified = emailServices.emailVerified();
+ if(verified){
+  await auth.signIn(email, password);
+  return true;
+ }
+ else{
+showSnackBar('please verify your email');
+ }
+return false;}catch(e){
+  print(e.toString());
+}
+  return false;
+ }
+  
+  void showSnackBar(String message){
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+  }
 
   @override
   void dispose() {
@@ -90,12 +114,13 @@ class _LoginScreenState extends State<LoginScreen> {
                    SizedBox(height: dimensions.heightPercent(4.5)), // ~41.94px
                   // Text field for password
                   MyTextField(
+                
                     controller: passwordController,
                     hintText: 'Password:',
-                    obscureText: obscurePassword,
+                    obscureText: !obscurePassword,
                     suffixIcon: IconButton(
                       icon: Icon(
-                        obscurePassword ? Icons.visibility : Icons.visibility_off,
+                        obscurePassword ? Icons.visibility_off : Icons.visibility,
                         color: const Color.fromRGBO(0, 0, 0, 1),
                       ),
                       onPressed: () {
@@ -133,8 +158,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   // Login button
                   MyButton(
                     buttonText: 'Login',
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/home');
+                    onPressed: () async{
+                     final onSuccess = await signIn();
+                     if(onSuccess){
+                      Navigator.pushNamed(context, '/admin');
+                      print('logged in successfully');
+                     }else{
+                      print('unable to login');
+                     }
+
+                       
                     },
                   ),
                   // Space

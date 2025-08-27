@@ -1,4 +1,5 @@
 import 'package:e_vote/components/utilities/app_dimension.dart';
+import 'package:e_vote/components/utilities/drawer.dart';
 import 'package:e_vote/components/widgets/dashboard_container.dart';
 import 'package:flutter/material.dart';
 
@@ -23,6 +24,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           color: Color.fromRGBO(255, 255, 255, 1),
         ),
       ),
+      drawer: MyDrawer(),
 
       // ✅ Drawer without background image
       drawer: Drawer(
@@ -163,6 +165,26 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         imageHeight: 47,
                         imageWidth: 70,
                       ),
+                    SizedBox(width: 26,),
+                     DashboardContainer(containerImage: Image.asset('assets/icons/Vector2.png'), containerText: 'MY \n ELECTION', imageHeight: 63, imageWidth: 63,)
+                  ],
+                 ),
+                    
+                 SizedBox(height: 30,),
+                    
+                 Row(
+                  children: [
+                    DashboardContainer(containerImage: Image.asset('assets/images/logo.png'), containerText: 'DELETE \n VOTE', imageHeight: 68, imageWidth: 74,),
+                    SizedBox(width: 26,),
+                    DashboardContainer(containerImage: Image.asset('assets/icons/Vector4.png'), containerText: 'FAQ', imageHeight: 63, imageWidth: 63, onPressed: (){
+                      Navigator.pushNamed(context, '/faq');
+                    },)
+                  ],
+                 ),
+                    
+                 
+                   
+
                       const SizedBox(width: 26),
                       DashboardContainer(
                         containerImage:

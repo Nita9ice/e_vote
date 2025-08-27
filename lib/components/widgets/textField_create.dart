@@ -7,13 +7,13 @@ class TextField2 extends StatelessWidget {
   final String? text1;
   final String? text2;
   final TextEditingController controller;
-  final TextEditingController? controller1;
-  final TextEditingController? controller2;
-  const TextField2({super.key, required this.text, required this.controller, this.text1, this.text2, this.controller1, this.controller2});
+  
+  const TextField2({super.key, required this.text, required this.controller, this.text1, this.text2,});
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     
@@ -29,6 +29,12 @@ class TextField2 extends StatelessWidget {
                                         color:Color.fromRGBO(255, 255, 255, 1), ),
                                       borderRadius: BorderRadius.circular(10)
                                     ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        width: 2,
+                                        color:Color.fromRGBO(255, 255, 255, 1), ),
+                                      borderRadius: BorderRadius.circular(10)
+                                    ) ,
                                     hintText: text,
                                     
                                     

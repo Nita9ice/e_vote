@@ -1,7 +1,8 @@
+import 'package:e_vote/components/widgets/button.dart';
 import 'package:flutter/material.dart';
 
-class Faq extends StatelessWidget {
-  const Faq({super.key});
+class FaqScreen extends StatelessWidget {
+  const FaqScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +24,11 @@ class Faq extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Image.asset(
-                      "assets/images/logo.jpg",
+                      "assets/images/logo.png",
                       width: 82,
                       height: 88,
                     ),
+                    // const SizedBox(width: 12),
                     const SizedBox(width: 2),
                     const Text(
                       "Evote",
@@ -39,6 +41,7 @@ class Faq extends StatelessWidget {
                     ),
                   ],
                 ),
+                SizedBox(height: 20,),
                 const Text(
                   "Frequently Asked  Questions(FAQ)",
                   style: TextStyle(
@@ -61,6 +64,7 @@ class Faq extends StatelessWidget {
                 const SizedBox(height: 30),
 
                 const Text(
+                  textAlign: TextAlign.justify,
                   """1 - How to use E-VOTING? E-VOTING is an Internet voting app where you can run transparent and secure elections. To cast your vote in a given election, you need to have its unique voting link.
 
 
@@ -73,6 +77,18 @@ class Faq extends StatelessWidget {
                     fontFamily: 'Roboto',
                     fontSize: 15,
                     fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                  ),
+                ),
+
+                SizedBox(height: 20,),
+
+                Center(
+                  child: MyButton(buttonText: 'Back', onPressed: (){
+                                           Navigator.pop(context);
+                                        },
+                                        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                                        ),
                     color: Color.fromRGBO(255, 255, 255, 1),
                   ),
                 ),
