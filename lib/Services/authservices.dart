@@ -32,7 +32,7 @@ class Emailservices {
     final user = auth.currentUser;
     if (user != null && !user.emailVerified) {
       await user.sendEmailVerification();
-      print('verification email sent');
+      
     }else{print('verification link not sent');}}catch(e){print(e.toString());}
   }
 
