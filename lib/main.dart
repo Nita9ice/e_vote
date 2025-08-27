@@ -40,23 +40,23 @@ class EVote extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-  home:DashboardScreen() ,
-        // The first screen to display once the app is launch.
-        // initialRoute: '/',
-        // // Defining the varous screen routes
-        // routes: {
-        //   '/': (context) => SplashScreen(),
-        //   '/welcome': (context) => WelcomeScreen(),
-        //   '/login': (context) => LoginScreen(),
-        //   '/forgot': (context) => ForgotPasswordScreen(),
-        //   '/signup': (context) => SignupScreen(),
-        //   '/email': (context) => VerifyEmailScreen(),
-        //   '/admin': (context) => DashboardScreen(),
-        //   '/create': (context) => CreatElectionScreen(),
-        //   '/candidate': (context) => AddCandidateScreen(),
-        //   // '/candidate': (context) => AddCandidateScreen(),
-        //   '/auditor': (context) => AddAuditorScreen()
-        // },
+  //home:DashboardScreen() ,
+     //   The first screen to display once the app is launch.
+        initialRoute: '/',
+        // Defining the varous screen routes
+        routes: {
+          '/': (context) => SplashScreen(),
+          '/welcome': (context) => WelcomeScreen(),
+          '/login': (context) => LoginScreen(),
+          '/forgot': (context) => ForgotPasswordScreen(),
+          '/signup': (context) => SignupScreen(),
+          '/email': (context) => VerifyEmailScreen(),
+          '/admin': (context) => DashboardScreen(),
+          '/create': (context) => CreatElectionScreen(),
+          '/candidate': (context) => AddCandidateScreen(),
+          // '/candidate': (context) => AddCandidateScreen(),
+          '/auditor': (context) => AddAuditorScreen()
+        },
         // Theme data for the App
 
         // this is the default theme based on the device theme
