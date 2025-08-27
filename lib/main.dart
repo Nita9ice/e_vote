@@ -42,17 +42,6 @@ class EVote extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
 
-        
-
-      
-     
-
-
-      
-      home: VoterScreen(),
-
-
-      /*
 
         // The first screen to display once the app is launch.
         initialRoute: '/',
@@ -84,7 +73,7 @@ class EVote extends StatelessWidget {
 
 
       
-*/
+
   
 
       
