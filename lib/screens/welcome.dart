@@ -22,7 +22,7 @@ class WelcomeScreen extends StatelessWidget {
             children: [
              
               // Vertical spacing before the main text
-              SizedBox(height: dims.heightPercent(48)),
+              SizedBox(height: 400),
 
               // Main text
               Text(
@@ -34,7 +34,7 @@ class WelcomeScreen extends StatelessWidget {
                   color: const Color.fromRGBO(255, 255, 255, 1),
                 ),
               ),
-              SizedBox(height: dims.heightPercent(1.5)),
+              // SizedBox(height: dims.heightPercent(1.5)),
 
               // Button to navigate to login
               IconButton(
@@ -51,11 +51,13 @@ class WelcomeScreen extends StatelessWidget {
               // Logo image taking remaining height
               Expanded(
                 child: Container(
-                  alignment: Alignment.topCenter,
-                  child: Image.asset(
-                    'assets/images/logo2.png',
-                    width: double.infinity, // 47% of screen width
-                    fit: BoxFit.contain,
+                  alignment: Alignment.centerRight,
+                  child: Center(
+                    child: Image.asset(
+                      'assets/images/logo2.png',
+                      width: double.infinity, // 47% of screen width
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),

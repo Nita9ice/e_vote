@@ -1,6 +1,6 @@
 // lib/components/widgets/text_field.dart
 import 'package:flutter/material.dart';
-
+import '';
 // This class is used as text field during login and sign up 
 
 class MyTextField extends StatelessWidget {
@@ -38,6 +38,7 @@ class MyTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(20), // Inner radius = outer radius - border width
         ),
         child: TextField(
+        
           controller: controller,
           obscureText: obscureText,
           enabled: true,

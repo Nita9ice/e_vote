@@ -33,7 +33,7 @@ class AuditorAlertBox extends StatelessWidget {
             SizedBox(child: lastName),
             SizedBox(height: 12),
             SizedBox(child: email),
-            SizedBox(height: 25),
+            SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
