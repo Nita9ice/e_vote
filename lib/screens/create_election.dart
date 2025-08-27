@@ -2,8 +2,13 @@
 import 'package:e_vote/components/widgets/back_next.dart';
 
 import 'package:e_vote/components/widgets/textField_create.dart';
+
+import 'package:e_vote/models/create_election.dart';
+import 'package:e_vote/providers/create_election_provider.dart';
+
 import 'package:e_vote/models/election.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CreatElectionScreen extends StatefulWidget {
   const CreatElectionScreen({super.key});
@@ -88,6 +93,16 @@ class _CreatElectionScreenState extends State<CreatElectionScreen> {
     }
     return null; // No errors
   }
+
+
+ void addHeading(CreateElection heading){
+  Provider.of<CreateElectionProvider>(context, listen: false).addHeading(heading);
+ }
+
+void deleteHeading(CreateElection heading){
+  Provider.of<CreateElectionProvider>(context, listen: false).deleteHeading(heading);
+}
+
 
 @override
 void dispose() {
@@ -262,11 +277,13 @@ void dispose() {
         
                                 SizedBox(height: 100,),
         
+
                                 
 
 
         BackNextButton(
           onPressed1: (){
+                 addHeading(CreateElection(title: titleController.text.trim() , description: descriptionController.text.trim(), startDate: _startDate??DateTime(DateTime.april), endDate: _endDate?? DateTime(DateTime.august) ));
             Navigator.pop(context);
           },
                   onPressed: () {
@@ -296,6 +313,7 @@ void dispose() {
                     );
                   },
                 ),
+
                                   
               ],
             ),

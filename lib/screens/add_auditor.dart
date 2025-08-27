@@ -286,6 +286,7 @@ class _AddAuditorScreenState extends State<AddAuditorScreen> {
                       return AlertBoxStatus(containerText: 'Successful', containerImage: Image.asset('assets/images/logo.png', 
                       color: Colors.black,
                       ),
+
                       onPressed: (){
                         Navigator.pushNamed(context,'/dashboard',);
                         // Navigator.pushNamed(context,'/voters',);
@@ -297,6 +298,7 @@ class _AddAuditorScreenState extends State<AddAuditorScreen> {
 
               ],
             ),
+
           ),
         ),
       ),

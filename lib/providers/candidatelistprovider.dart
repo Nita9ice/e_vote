@@ -14,4 +14,5 @@ class Candidatelistprovider extends ChangeNotifier {
     _votingSectionList.remove(candidate);
     notifyListeners();
   }
+
 }

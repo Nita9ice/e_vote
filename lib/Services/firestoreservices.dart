@@ -19,7 +19,7 @@ class Firestoreservices {
 
   //set voters details
   Future<void> uploadUserDetails(
-    Set<String> name,
+    List<String> name,
     String email,
    
   ) async {
