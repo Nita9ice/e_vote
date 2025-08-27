@@ -176,7 +176,7 @@ class _AddCandidateScreenState extends State<AddCandidateScreen> {
                             style: TextStyle(
                               fontFamily: 'Roboto',
                               fontSize: 28,
-                              color: Colors.white,
+                              color:  Colors.white,
                             ),
                           ),
                         )

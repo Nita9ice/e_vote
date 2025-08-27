@@ -13,13 +13,13 @@ class BackNextButton extends StatelessWidget {
                                     children: [
                                       MyButton(buttonText: 'Back', onPressed: (){
                                          Navigator.pop(context);
-                                      },
-                                      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                                      ),
+                         },
+                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+               ),
                                       MyButton(buttonText:text?? 'Next', onPressed: onPressed,
                                       padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                                      ),
-                                    ],
-                                  );
-  }
+     ),
+  ],
+ );
+ }
 }

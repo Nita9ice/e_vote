@@ -63,6 +63,11 @@ class _DropdownState extends State<Dropdown> {
        title: Text('Profile Settings',style: TextStyle(color:Colors.white),),
        onTap: () {},
             ),
+                     ListTile(
+       leading: Icon(Icons.lock,color: Colors.white,),
+       title: Text('Faqs',style: TextStyle(color:Colors.white),),
+       onTap: () {},
+            ),
                 ListTile(
        leading: Icon(Icons.logout,color: Colors.white,),
        title: Text('Logout',style: TextStyle(color:Colors.white),),
