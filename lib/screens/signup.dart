@@ -52,6 +52,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
   // Signup function with authentication and Firestore integration
   Future<bool> signUp() async {
+
     try {
       final auth = Authservices(); // Authentication service
       final firestoreservices = Firestoreservices(); // Firestore service
@@ -74,7 +75,9 @@ class _SignupScreenState extends State<SignupScreen> {
           password == confirmPassword) {
         await auth.signUp(email, password); // Register user
         await firestoreservices.uploadUserDetails(
-          {firstName, lastName}, // Upload user details
+
+          [firstName, lastName],
+
           email,
         );
         return true;

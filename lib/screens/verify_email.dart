@@ -123,7 +123,9 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                       ),
                       TextButton(
                         onPressed: () {
+
                           // Navigate to login screen
+
                           Navigator.pushNamed(context, '/login');
                         },
                         child: Text(

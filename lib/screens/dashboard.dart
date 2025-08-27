@@ -1,7 +1,12 @@
 import 'package:e_vote/components/utilities/app_dimension.dart';
 import 'package:e_vote/components/utilities/drawer.dart';
 import 'package:e_vote/components/widgets/dashboard_container.dart';
+
+import 'package:e_vote/providers/userprofileprovider.dart';
+
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -13,6 +18,7 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
+  
     // Instantiate AppDimensions
     final dimensions = AppDimensions(context);
 
@@ -26,8 +32,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
       ),
       drawer: MyDrawer(),
 
+      body: Consumer<Userprofileprovider>(builder:(context, userprovider, hild ){
+      final user =  userprovider.userProfile;
+        return 
+        Container(
+
+
       
-      body: Container(
+    
+
         width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(
@@ -42,45 +55,45 @@ class _DashboardScreenState extends State<DashboardScreen> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  const SizedBox(height: 81),
-                  const CircleAvatar(
-                    radius: 120,
-                    backgroundImage: AssetImage('assets/images/image1.png'),
-                    backgroundColor: Colors.transparent,
-                  ),
-                  const SizedBox(height: 7),
-                  Text(
-                    'Matthew',
-                    style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontSize: dimensions.widthPercent(8.4),
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white,
-                    ),
-                  ),
-                  const SizedBox(height: 7),
-                  Text(
-                    'admin@admin.com',
-                    style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontSize: dimensions.widthPercent(4.7),
-                      fontWeight: FontWeight.w400,
-                      color: Colors.white,
-                    ),
-                  ),
-                  const SizedBox(height: 30),
 
-                  Row(
-                    children: [
-                      DashboardContainer(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/create');
-                        },
-                        containerImage:
-                            Image.asset('assets/icons/Vector1.png'),
-                        containerText: 'CREATE ELECTION',
-                        imageHeight: 47,
-                        imageWidth: 70,
+                 
+                 SizedBox(height: 81,),
+                 CircleAvatar(
+                  radius: 120,
+                  backgroundImage: AssetImage('assets/images/image1.png'),
+                  backgroundColor: Colors.transparent,
+                 ),
+                  
+                 SizedBox(height: 7,),
+                    
+                 Text(user?.name.join('  ')??'',
+                 style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontSize: dimensions.widthPercent(8.4), // ~20.21px
+                                fontWeight: FontWeight.w700,
+                                color: const Color.fromRGBO(255, 255, 255, 1),
+                              ),
+                 ),
+                 SizedBox(height: 7,),
+                 Text(user?.email??'',
+                 style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontSize: dimensions.widthPercent(4.7), // ~20.21px
+                                fontWeight: FontWeight.w400,
+                                color: const Color.fromRGBO(255, 255, 255, 1),
+                              ),
+                 ),
+                 SizedBox(height: 30,),
+                    
+                 Row(
+                  children: [
+                    DashboardContainer(
+                      onPressed: (){
+                        Navigator.pushNamed(context, '/create');
+                      },
+                      containerImage: Image.asset('assets/icons/Vector1.png'), containerText: 'CREATE ELECTION', imageHeight: 47, imageWidth: 70,
+
+                
                       ),
                     SizedBox(width: 26,),
                      DashboardContainer(containerImage: Image.asset('assets/icons/Vector2.png'), containerText: 'MY \n ELECTION', imageHeight: 63, imageWidth: 63,)
@@ -119,8 +132,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
             ),
           ),
-        );
+
+        ),
+      );
+      }) 
+    );
+
       
     
+
   }
 }

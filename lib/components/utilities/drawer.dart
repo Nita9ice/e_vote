@@ -1,8 +1,14 @@
+import 'package:e_vote/Services/authservices.dart';
 import 'package:e_vote/components/widgets/list_tile.dart';
 import 'package:flutter/material.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
+
+  Future<void> signOut()async{
+    final auth = Authservices();
+    await auth.signOut();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +64,10 @@ class MyDrawer extends StatelessWidget {
                   icon: Icon(Icons.rotate_left_rounded,color: Colors.white,),),
 
                    SizedBox(height: 30,),
-                 MyListTile(text: 'Logout', onPressed: (){},
+                 MyListTile(text: 'Logout', onPressed: ()async{
+                 await signOut();
+                 Navigator.pushNamed(context, '/login');
+                 },
                   icon: Icon(Icons.logout,color: Colors.white,),)
          ]
         ),
