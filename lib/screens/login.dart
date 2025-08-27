@@ -59,7 +59,9 @@ catch(e){
 Future<void> successMessage()async{
   showDialog(context: context, builder: (context){
     return 
-    AlertBoxStatus(containerText: 'Success', containerImage: Image.asset('assets/images/logo.png'));
+    AlertBoxStatus(
+      onPressed: (){},
+      containerText: 'Success', containerImage: Image.asset('assets/images/logo.png'));
     
   } );
 }
