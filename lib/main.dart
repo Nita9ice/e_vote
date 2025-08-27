@@ -41,19 +41,11 @@ class EVote extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
 
-        
-
-      
-     
-
-
-      
-
-
 
       
 
         // The first screen to display once the app is launch.
+
         initialRoute: '/',
         // Defining the varous screen routes
         routes: {
@@ -74,6 +66,9 @@ class EVote extends StatelessWidget {
           '/dashboard': (context) => DashboardScreen(),
           '/create': (context) => CreatElectionScreen(),
           '/candidate': (context) => AddCandidateScreen(),
+
+          '/auditor': (context) => AddAuditorScreen()
+        },
           '/faq': (context) => FaqScreen(),
           '/auditor': (context) => AddAuditorScreen(),
           '/voters': (context) => VoterScreen()
@@ -86,6 +81,7 @@ class EVote extends StatelessWidget {
   
 
       
+
 
         // Theme data for the App
         // this is the default theme based on the device theme

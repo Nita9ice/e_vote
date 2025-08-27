@@ -262,6 +262,7 @@ class _AddAuditorScreenState extends State<AddAuditorScreen> {
                           },
                         ),
                 ),
+
                 const SizedBox(height: 20),
                 Center(
                   child: AddButton(
@@ -290,6 +291,7 @@ class _AddAuditorScreenState extends State<AddAuditorScreen> {
                     });
                   },
                 ),
+
               ],
             ),
           ),
