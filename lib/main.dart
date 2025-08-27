@@ -9,7 +9,6 @@ import 'package:e_vote/screens/create_election.dart';
 import 'package:e_vote/screens/faq.dart';
 import 'package:e_vote/screens/voter/voter.dart';
 import 'package:provider/provider.dart';
-
 import 'package:e_vote/screens/add_candidate.dart';
 import 'package:e_vote/screens/dashboard.dart';
 import 'package:e_vote/screens/forgot_password.dart';
@@ -44,8 +43,8 @@ class EVote extends StatelessWidget {
 
 
         // The first screen to display once the app is launch.
-        initialRoute: '/',
 
+        initialRoute: '/',
         // Defining the varous screen routes
         routes: {
           '/': (context) => SplashScreen(),
@@ -65,6 +64,9 @@ class EVote extends StatelessWidget {
           '/dashboard': (context) => DashboardScreen(),
           '/create': (context) => CreatElectionScreen(),
           '/candidate': (context) => AddCandidateScreen(),
+
+          '/auditor': (context) => AddAuditorScreen()
+        },
           '/faq': (context) => FaqScreen(),
           '/auditor': (context) => AddAuditorScreen(),
           '/voters': (context) => VoterScreen()
@@ -79,12 +81,12 @@ class EVote extends StatelessWidget {
       
 
         // Theme data for the App
-
         // this is the default theme based on the device theme
         themeMode: ThemeMode.system,
 
         // light theme
         theme: AppTheme.lightTheme,
+
         // dark theme
         darkTheme: AppTheme.darkTheme,
       ),
