@@ -45,6 +45,7 @@ Future<void> sendEmailverification()async{
   //signUp for users and admin
   Future<bool> signUp() async {
 
+
  
     try {
       final auth = Authservices();
@@ -72,7 +73,9 @@ Future<void> sendEmailverification()async{
       }
       return false;
     } catch (e) {
+
       print(e.toString());
+
     }
     return false;
   }
@@ -236,7 +239,7 @@ Future<void> sendEmailverification()async{
                           return emailVerificationScreen();
                         });
                       }
-                      
+
                     },
                   ),
 

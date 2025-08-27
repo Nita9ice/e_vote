@@ -49,10 +49,10 @@ class EVote extends StatelessWidget {
 
 
       
+
+
+
       
-
-
-      /*
 
         // The first screen to display once the app is launch.
         initialRoute: '/',

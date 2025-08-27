@@ -143,6 +143,7 @@ class _AddCandidateScreenState extends State<AddCandidateScreen> {
     showDialog(
       context: context,
       builder: (context) {
+
         return StatefulBuilder( // Improved: Use StatefulBuilder to update dialog UI without closing
           builder: (context, setDialogState) {
             return CandidateAlertBox(
@@ -188,6 +189,8 @@ class _AddCandidateScreenState extends State<AddCandidateScreen> {
               },
             );
           },
+=======
+       
         );
       },
     );
