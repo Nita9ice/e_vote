@@ -2,8 +2,11 @@
 import 'package:e_vote/components/widgets/back_next.dart';
 
 import 'package:e_vote/components/widgets/textField_create.dart';
+
 import 'package:e_vote/models/create_election.dart';
 import 'package:e_vote/providers/create_election_provider.dart';
+
+import 'package:e_vote/models/election.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -27,8 +30,15 @@ class _CreatElectionScreenState extends State<CreatElectionScreen> {
 
     
 
-  // Controller for handling input in the last name text field
-  final TextEditingController lastNameController = TextEditingController();
+// Added: Function for date validation
+  void _validateDates() {
+    if (_startDate != null && _endDate != null && _endDate!.isBefore(_startDate!)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('End date must be after start date')),
+      );
+    }
+  }
+  
 
 // function to select start date
    Future<void> _pickStartDate() async {
@@ -42,6 +52,7 @@ class _CreatElectionScreenState extends State<CreatElectionScreen> {
       setState(() {
         _startDate = picked;
       });
+      _validateDates();
     }
   }
 
@@ -58,8 +69,31 @@ class _CreatElectionScreenState extends State<CreatElectionScreen> {
       setState(() {
         _endDate = picked;
       });
+      _validateDates();
     }
   }
+
+
+  // Added: Function to validate inputs and provide specific feedback
+  String? _validateInputs() {
+    if (titleController.text.trim().isEmpty) {
+      return 'Please enter a title';
+    }
+    if (descriptionController.text.trim().isEmpty) {
+      return 'Please enter a description';
+    }
+    if (_startDate == null) {
+      return 'Please select a start date';
+    }
+    if (_endDate == null) {
+      return 'Please select an end date';
+    }
+    if (_endDate!.isBefore(_startDate!)) {
+      return 'End date must be after start date';
+    }
+    return null; // No errors
+  }
+
 
  void addHeading(CreateElection heading){
   Provider.of<CreateElectionProvider>(context, listen: false).addHeading(heading);
@@ -70,6 +104,13 @@ void deleteHeading(CreateElection heading){
 }
 
 
+@override
+void dispose() {
+      super.dispose();
+    titleController.dispose();
+    descriptionController.dispose();
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -236,13 +277,43 @@ void deleteHeading(CreateElection heading){
         
                                 SizedBox(height: 100,),
         
-                                BackNextButton(
+
                                 
-                                onPressed: (){
-                                  addHeading(CreateElection(title: titleController.text.trim() , description: descriptionController.text.trim(), startDate: _startDate??DateTime(DateTime.april), endDate: _endDate?? DateTime(DateTime.august) ));
-                                        Navigator.pushNamed(context, '/candidate');
-                                      },),
-        
+
+
+        BackNextButton(
+          onPressed1: (){
+                 addHeading(CreateElection(title: titleController.text.trim() , description: descriptionController.text.trim(), startDate: _startDate??DateTime(DateTime.april), endDate: _endDate?? DateTime(DateTime.august) ));
+            Navigator.pop(context);
+          },
+                  onPressed: () {
+                    final errorMessage = _validateInputs();
+                    if (errorMessage != null) {
+
+                      
+                      
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text(errorMessage)),
+                      );
+                      return;
+
+                      
+                    }
+                    // Added: Create Election model and pass to next screen
+                    final election = Election(
+                      title: titleController.text,
+                      description: descriptionController.text,
+                      startDate: _startDate,
+                      endDate: _endDate,
+                    );
+                    Navigator.pushNamed(
+                      context,
+                      '/candidate',
+                      arguments: election, // Pass the model
+                    );
+                  },
+                ),
+
                                   
               ],
             ),

@@ -51,7 +51,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                   SizedBox(height: dimensions.heightPercent(10.7)), // ~99.64px
                   // Sub text
                   Text(
-                    'A verification link has been sent to your email.\nPlease check your inbox and click the link.',
+                    'A verification link has been sent to your email.\nPlease check your inbox/spam and click the link.',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: 'Roboto',
@@ -103,7 +103,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Already have an account?',
+                        'Please login to your account',
                         style: TextStyle(
                           fontFamily: 'Roboto',
                           fontSize: 20,

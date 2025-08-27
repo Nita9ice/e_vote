@@ -1,4 +1,3 @@
-// import 'package:e_vote/screens/register.dart';
 
 import 'package:e_vote/Services/authservices.dart';
 import 'package:e_vote/providers/candidatelistprovider.dart';
@@ -6,12 +5,13 @@ import 'package:e_vote/providers/create_election_provider.dart';
 import 'package:e_vote/providers/userprofileprovider.dart';
 import 'package:e_vote/screens/add_auditor.dart';
 
-//import 'package:e_vote/screens/unused_file.dart/create-election.dart';
+
 
 import 'package:e_vote/screens/create_election.dart';
 import 'package:e_vote/screens/faq.dart';
+import 'package:e_vote/screens/join_vote.dart';
+import 'package:e_vote/screens/voter/voter.dart';
 import 'package:provider/provider.dart';
-
 import 'package:e_vote/screens/add_candidate.dart';
 import 'package:e_vote/screens/dashboard.dart';
 import 'package:e_vote/screens/forgot_password.dart';
@@ -46,21 +46,14 @@ class EVote extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
 
-        
-
-      
-     
+        // home: AddCandidateScreen(),
 
 
-      
-   
 
-
-      
 
         // The first screen to display once the app is launch.
-        initialRoute: '/',
 
+        initialRoute: '/',
         // Defining the varous screen routes
         routes: {
           '/': (context) => SplashScreen(),
@@ -73,17 +66,23 @@ class EVote extends StatelessWidget {
             }
             return DashboardScreen();
           } ), // WelcomeScreen(),
+
           '/login': (context) => LoginScreen(),
           '/forgot': (context) => ForgotPasswordScreen(),
           '/signup': (context) => SignupScreen(),
           '/email': (context) => VerifyEmailScreen(),
-          '/admin': (context) => DashboardScreen(),
+          '/dashboard': (context) => DashboardScreen(),
           '/create': (context) => CreatElectionScreen(),
           '/candidate': (context) => AddCandidateScreen(),
-          '/faq': (context) => FaqScreen(),
-          '/auditor': (context) => AddAuditorScreen()
 
+          '/auditor': (context) => AddAuditorScreen(),
+           '/faq': (context) => FaqScreen(),
+          '/join': (context) => JoinVoteScreen(),
+          '/voters': (context) => VoterScreen()
         },
+  
+      
+        
 
 
       
@@ -93,15 +92,16 @@ class EVote extends StatelessWidget {
       
 
         // Theme data for the App
-
         // this is the default theme based on the device theme
         themeMode: ThemeMode.system,
 
         // light theme
         theme: AppTheme.lightTheme,
+
         // dark theme
         darkTheme: AppTheme.darkTheme,
       ),
     );
   }
 }
+

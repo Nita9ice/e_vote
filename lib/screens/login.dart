@@ -139,10 +139,10 @@ void navigateToDashbord(){
                 
                     controller: passwordController,
                     hintText: 'Password:',
-                    obscureText: obscurePassword,
+                    obscureText: !obscurePassword,
                     suffixIcon: IconButton(
                       icon: Icon(
-                        obscurePassword ? Icons.visibility : Icons.visibility_off,
+                        obscurePassword ? Icons.visibility_off : Icons.visibility,
                         color: const Color.fromRGBO(0, 0, 0, 1),
                       ),
                       onPressed: () {
