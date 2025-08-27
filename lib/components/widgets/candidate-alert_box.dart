@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 
-class CandidateAlertBox extends StatelessWidget {
+class CandidateAlertBox extends StatefulWidget {
   final String containerText;
   final Widget? circularAvatar;
   final Widget? textField1;
@@ -21,6 +21,11 @@ class CandidateAlertBox extends StatelessWidget {
     this.onPickImage,
   });
 
+  @override
+  State<CandidateAlertBox> createState() => _CandidateAlertBoxState();
+}
+
+class _CandidateAlertBoxState extends State<CandidateAlertBox> {
   @override
   Widget build(BuildContext context) {
     // Instantiate AppDimensions
@@ -52,15 +57,15 @@ class CandidateAlertBox extends StatelessWidget {
                 CircleAvatar(
                   radius: 80,
                   backgroundColor: Colors.transparent,
-                  child: circularAvatar,
+                  child: widget.circularAvatar,
                 ),
-                if (onPickImage != null)
+                if (widget.onPickImage != null)
                   Positioned(
                     bottom: -5, // Adjust to place icon closely beside avatar
                     child: IconButton(
                       
                       iconSize: 32,
-                      onPressed: onPickImage,
+                      onPressed: widget.onPickImage,
                       icon: Icon(
                         Icons.add_circle,
                         color: Color.fromRGBO(3, 58, 202, 1),
@@ -71,16 +76,16 @@ class CandidateAlertBox extends StatelessWidget {
               ],
             ),
             SizedBox(height: 8),
-            SizedBox(child: textField1),
+            SizedBox(child: widget.textField1),
             SizedBox(height: 8),
-            SizedBox(child: textField2),
+            SizedBox(child: widget.textField2),
             SizedBox(height: 25),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                SizedBox(child: button),
+                SizedBox(child: widget.button),
                 SizedBox(width: 5),
-                SizedBox(child: button2),
+                SizedBox(child: widget.button2),
               ],
             ),
           ],

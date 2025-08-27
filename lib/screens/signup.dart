@@ -31,6 +31,10 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController confirmPasswordController =
       TextEditingController();
 
+
+  // Variable to control password visibility
+  bool obscurePassword = false;
+
  
 Future<void> sendEmailverification()async{
  final emailLink = Emailservices();
@@ -40,6 +44,8 @@ Future<void> sendEmailverification()async{
 
   //signUp for users and admin
   Future<bool> signUp() async {
+
+
  
     try {
       final auth = Authservices();
@@ -67,6 +73,9 @@ Future<void> sendEmailverification()async{
       }
       return false;
     } catch (e) {
+
+      print(e.toString());
+
     }
     return false;
   }
@@ -171,6 +180,18 @@ Future<void> sendEmailverification()async{
                   MyTextField(
                     controller: passwordController,
                     hintText: 'Password:',
+                    obscureText: !obscurePassword,
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        obscurePassword ? Icons.visibility_off : Icons.visibility,
+                        color: const Color.fromRGBO(0, 0, 0, 1),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          obscurePassword = !obscurePassword;
+                        });
+                      },
+                    ),
 
                    
                   ),
@@ -182,6 +203,18 @@ Future<void> sendEmailverification()async{
                   MyTextField(
                     controller: confirmPasswordController,
                     hintText: 'Confirm Password:',
+                    obscureText: !obscurePassword,
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        obscurePassword ? Icons.visibility_off : Icons.visibility,
+                        color: const Color.fromRGBO(0, 0, 0, 1),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          obscurePassword = !obscurePassword;
+                        });
+                      },
+                    ),
 
                     
                   ),
@@ -206,6 +239,7 @@ Future<void> sendEmailverification()async{
                           return emailVerificationScreen();
                         });
                       }
+
                     },
                   ),
 
@@ -215,7 +249,7 @@ Future<void> sendEmailverification()async{
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'have an account already?',
+                        'Have an account already?',
                         style: TextStyle(
                           fontFamily: 'Roboto',
                           fontSize: 20,
@@ -225,7 +259,8 @@ Future<void> sendEmailverification()async{
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, '/login');
+                          // Navigator.pushNamed(context, '/login');
+                          Navigator.pushNamed(context, '/dashboard');
                       
 
                         },
