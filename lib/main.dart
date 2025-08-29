@@ -12,6 +12,7 @@ import 'package:e_vote/screens/create_election.dart';
 import 'package:e_vote/screens/edit_profile.dart';
 import 'package:e_vote/screens/faq.dart';
 import 'package:e_vote/screens/join_vote.dart';
+import 'package:e_vote/screens/my_election.dart';
 import 'package:e_vote/screens/profile_screen.dart';
 import 'package:e_vote/screens/voter/voter.dart';
 import 'package:provider/provider.dart';
@@ -83,7 +84,8 @@ class EVote extends StatelessWidget {
            '/faq': (context) => FaqScreen(),
           '/join': (context) => JoinVoteScreen(),
           '/voters': (context) => VoterScreen(),
-           '/change': (context) => ChangePassword()
+           '/change': (context) => ChangePassword(),
+           '/election': (context) => ElectionList()
         },
   
       

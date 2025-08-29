@@ -97,7 +97,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 
                       ),
                     SizedBox(width: 26,),
-                     DashboardContainer(containerImage: Image.asset('assets/icons/Vector2.png'), containerText: 'MY \n ELECTION', imageHeight: 63, imageWidth: 63,)
+                     DashboardContainer(
+                      onPressed: (){
+                        Navigator.pushNamed(context, '/election');
+                      },
+                      containerImage: Image.asset('assets/icons/Vector2.png'), containerText: 'MY \n ELECTION', imageHeight: 63, imageWidth: 63,)
                   ],
                  ),
                     
@@ -118,13 +122,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ),
                   ],
                  ),
-                    
-                 
-                   
-
-                      
-
-                 
                     ],
                   ),
                  
