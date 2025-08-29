@@ -101,8 +101,8 @@ class _VoterScreenState extends State<VoterScreen> {
                                                    ),
                 // Candidate list with checkboxes
                   Expanded(
-                    child: _election!.candidates.isEmpty
-                        ? const Center(
+                    child: _election?.candidates == null? 
+                        const Center(
                             child: Text(
                               'No candidates available',
                               style: TextStyle(
@@ -114,9 +114,9 @@ class _VoterScreenState extends State<VoterScreen> {
                             ),
                           )
                         : ListView.builder(
-                            itemCount: _election?.candidates.length,
+                            itemCount: _election?.candidates?.length,
                             itemBuilder: (context, index) {
-                              final candidate = _election?.candidates[index];
+                              final candidate = _election?.candidates?[index];
                               return Card(
                                 color: Colors.white.withAlpha(100),
                                 margin: const EdgeInsets.symmetric(vertical: 8),

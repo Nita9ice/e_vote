@@ -1,11 +1,14 @@
 import 'package:e_vote/components/widgets/button.dart';
 
+
+
 import 'package:flutter/material.dart';
 
 class BackNextButton extends StatefulWidget {
   final String? text;
   final VoidCallback onPressed;
   final VoidCallback onPressed1;
+
 
   const BackNextButton({
     super.key,
@@ -14,13 +17,15 @@ class BackNextButton extends StatefulWidget {
     required this.onPressed1,
   });
 
+
   @override
   State<BackNextButton> createState() => _BackNextButtonState();
-}
+
 
 class _BackNextButtonState extends State<BackNextButton> {
   @override
   Widget build(BuildContext context) {
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -38,3 +43,4 @@ class _BackNextButtonState extends State<BackNextButton> {
     );
   }
 }
+

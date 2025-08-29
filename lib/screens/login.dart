@@ -58,11 +58,13 @@ catch(e){
 Future<void> successMessage()async{
   showDialog(context: context, builder: (context){
     return 
+
     Image.asset('assets/images/logo.png');
     /*
     AlertBoxStatus(
       onPressed: (){},
       containerText: 'Success', containerImage: Image.asset('assets/images/logo.png'));
+
     
     */
   } );
@@ -70,6 +72,7 @@ Future<void> successMessage()async{
 // navigate to dashboard
 void navigateToDashbord(){
     Navigator.pushNamed(context, '/dashboard');
+
 }
 
 
@@ -190,8 +193,10 @@ void navigateToDashbord(){
                      
                 
                     await successMessage();
+
                     await Future.delayed(Duration(seconds: 1));
                 
+
                      navigateToDashbord();
                  
                      }
