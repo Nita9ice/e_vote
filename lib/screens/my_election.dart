@@ -39,7 +39,7 @@ if(user == null){
         final election = elections[index]; 
         return
 
-        Container(child: Column(children: [Text(election.description),],),);
+        Container(child: Column(children: [Text(election.candidates?.map((e)=>e.firstName).toString()?? ''),],),);
 
 
 
