@@ -19,6 +19,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     // Instantiate AppDimensions
     final dimensions = AppDimensions(context);
 
+    
     return SafeArea(
       child: Scaffold(
         extendBodyBehindAppBar: true,
@@ -138,4 +139,5 @@ class _DashboardScreenState extends State<DashboardScreen> {
     
 
   }
+
 }

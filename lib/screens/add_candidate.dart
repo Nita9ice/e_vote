@@ -4,14 +4,16 @@ import 'package:e_vote/components/utilities/app_dimension.dart';
 import 'package:e_vote/components/widgets/back_next.dart';
 import 'package:e_vote/components/widgets/add_button.dart';
 
+import 'package:e_vote/components/widgets/candidate-alert_box.dart';
+
 import 'package:e_vote/components/widgets/button.dart';
 import 'package:e_vote/components/widgets/candidate_alert_box.dart';
 import 'package:e_vote/components/widgets/text_field.dart';
-import 'package:e_vote/models/election.dart'; 
+import 'package:e_vote/models/election.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:e_vote/models/candidate.dart'; 
+import 'package:e_vote/models/candidate.dart';
 
 class AddCandidateScreen extends StatefulWidget {
   const AddCandidateScreen({super.key});
@@ -37,14 +39,13 @@ class _AddCandidateScreenState extends State<AddCandidateScreen> {
 
   // Added: Receive Election model
   late Election _election;
-
   @override
   void initState() {
     super.initState();
     // Added: Get Election from arguments
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _election = ModalRoute.of(context)!.settings.arguments as Election;
-      setState(() {}); // If needed to refresh
+     
+      setState(() { _election = ModalRoute.of(context)!.settings.arguments as Election;}); // If needed to refresh
     });
   }
 
@@ -64,7 +65,10 @@ class _AddCandidateScreenState extends State<AddCandidateScreen> {
       );
       if (result != null) {
         // Added: Basic size check (e.g., <5MB)
-        final size = kIsWeb ? result.files.single.bytes!.length : await File(result.files.single.path!).length();
+        final size =
+            kIsWeb
+                ? result.files.single.bytes!.length
+                : await File(result.files.single.path!).length();
         if (size > 5 * 1024 * 1024) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Image too large (max 5MB)')),
@@ -78,9 +82,9 @@ class _AddCandidateScreenState extends State<AddCandidateScreen> {
         }
       }
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error picking image: $e')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Error picking image: $e')));
     }
   }
 
@@ -106,7 +110,9 @@ class _AddCandidateScreenState extends State<AddCandidateScreen> {
       _clearForm();
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please fill all fields and select an image')),
+        const SnackBar(
+          content: Text('Please fill all fields and select an image'),
+        ),
       );
     }
   }
@@ -144,40 +150,51 @@ class _AddCandidateScreenState extends State<AddCandidateScreen> {
     showDialog(
       context: context,
       builder: (context) {
-
-
-
-
-        return StatefulBuilder( // Improved: Use StatefulBuilder to update dialog UI without closing
+        return StatefulBuilder(
+          // Improved: Use StatefulBuilder to update dialog UI without closing
           builder: (context, setDialogState) {
             return CandidateAlertBox(
               containerText: _isEditing ? 'Edit Candidate' : 'Add a Candidate',
-              circularAvatar: _selectedImage != null
-                  ? kIsWeb
-                      ? Image.memory(
-                          _selectedImage as Uint8List,
-                          height: 100,
-                          width: 100,
-                          fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) => Image.asset('assets/images/image1.png'),
-                        )
-                      : Image.file(
-                          _selectedImage as File,
-                          height: 100,
-                          width: 100,
-                          fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) => Image.asset('assets/images/image1.png'),
-                        )
-                  : Image.asset('assets/images/image1.png'),
-              textField1: MyTextField(controller: firstNameController, hintText: 'First Name'),
-              textField2: MyTextField(controller: lastNameController, hintText: 'Last Name'),
+              circularAvatar:
+                  _selectedImage != null
+                      ? kIsWeb
+                          ? Image.memory(
+                            _selectedImage as Uint8List,
+                            height: 100,
+                            width: 100,
+                            fit: BoxFit.cover,
+                            errorBuilder:
+                                (context, error, stackTrace) =>
+                                    Image.asset('assets/images/image1.png'),
+                          )
+                          : Image.file(
+                            _selectedImage as File,
+                            height: 100,
+                            width: 100,
+                            fit: BoxFit.cover,
+                            errorBuilder:
+                                (context, error, stackTrace) =>
+                                    Image.asset('assets/images/image1.png'),
+                          )
+                      : Image.asset('assets/images/image1.png'),
+              textField1: MyTextField(
+                controller: firstNameController,
+                hintText: 'First Name',
+              ),
+              textField2: MyTextField(
+                controller: lastNameController,
+                hintText: 'Last Name',
+              ),
               button: MyButton(
                 buttonText: _isEditing ? 'Edit' : 'Add',
                 onPressed: () {
                   _saveCandidate();
                   Navigator.pop(context);
                 },
-                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 40),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 10,
+                  horizontal: 40,
+                ),
               ),
               button2: MyButton(
                 buttonText: 'Cancel',
@@ -185,16 +202,19 @@ class _AddCandidateScreenState extends State<AddCandidateScreen> {
                   _clearForm();
                   Navigator.pop(context);
                 },
-                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 10,
+                  horizontal: 20,
+                ),
               ),
               onPickImage: () async {
                 await _pickImage();
-                setDialogState(() {}); // Improved: Refresh dialog to show new image
+                setDialogState(
+                  () {},
+                ); // Improved: Refresh dialog to show new image
               },
             );
           },
-
-       
         );
       },
     );
@@ -225,10 +245,7 @@ class _AddCandidateScreenState extends State<AddCandidateScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset(
-                      'assets/images/logo.png',
-                      width: 100,
-                    ),
+                    Image.asset('assets/images/logo.png', width: 100),
                     const Text(
                       'E-voting',
                       style: TextStyle(
@@ -251,108 +268,154 @@ class _AddCandidateScreenState extends State<AddCandidateScreen> {
                   ),
                 ),
                 const SizedBox(height: 30),
-                
+
                 // Horizontal listview for candidates (added edit/delete icons)
-SizedBox(
-  height: 250,
-  child: candidateList.isEmpty
-      ? const Center(
-          child: Text(
-            'No candidates added yet',
-            style: TextStyle(
-              fontFamily: 'Roboto',
-              fontWeight: FontWeight.w700,
-              fontSize: 20,
-              color: Colors.white,
-            ),
-          ),
-        )
-      : ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: candidateList.length,
-          itemBuilder: (context, index) {
-            final candidate = candidateList[index];
-            return Card(
-              margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(
-                  minHeight: 220,
-                  // maxHeight: 300,
-                  minWidth: 160, // prevents card from collapsing too small
-                  // maxWidth: 250, // prevents card from being too wide
-                ),
-                child: IntrinsicHeight(
-                  child: Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min, // content defines height
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const SizedBox(height: 10),
-
-                        CircleAvatar(
-                          radius: 50,
-                          backgroundImage: candidate.image != null
-                              ? (kIsWeb
-                                  ? MemoryImage(candidate.image as Uint8List)
-                                  : FileImage(candidate.image as File))
-                              : null,
-                          child: candidate.image == null
-                              ? const Icon(Icons.person, size: 50)
-                              : null,
-                        ),
-
-                        const SizedBox(height: 8),
-                        Flexible(
-                          child: Text(
-                            
-                            '${candidate.firstName} ${candidate.lastName}',
-                            
-                            style: const TextStyle(
-                              fontFamily: 'Roboto',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
+                SizedBox(
+                  height: 250,
+                  child:
+                      candidateList.isEmpty
+                          ? const Center(
+                            child: Text(
+                              'No candidates added yet',
+                              style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontWeight: FontWeight.w700,
+                                fontSize: 20,
+                                color: Colors.white,
+                              ),
                             ),
-                            textAlign: TextAlign.center,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 2, // avoids overflow if name is long
+                          )
+                          : ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: candidateList.length,
+                            itemBuilder: (context, index) {
+                              final candidate = candidateList[index];
+                              return Card(
+                                margin: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                  vertical: 4,
+                                ),
+                                child: ConstrainedBox(
+                                  constraints: const BoxConstraints(
+                                    minHeight: 220,
+                                    // maxHeight: 300,
+                                    minWidth:
+                                        160, // prevents card from collapsing too small
+                                    // maxWidth: 250, // prevents card from being too wide
+                                  ),
+                                  child: IntrinsicHeight(
+                                    child: Container(
+                                      padding: const EdgeInsets.all(12),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
+                                      child: Column(
+                                        mainAxisSize:
+                                            MainAxisSize
+                                                .min, // content defines height
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          const SizedBox(height: 10),
+
+                                          CircleAvatar(
+                                            radius: 50,
+                                            backgroundImage:
+                                                candidate.image != null
+                                                    ? (kIsWeb
+                                                        ? MemoryImage(
+                                                          candidate.image
+                                                              as Uint8List,
+                                                        )
+                                                        : FileImage(
+                                                          candidate.image
+                                                              as File,
+                                                        ))
+                                                    : null,
+                                            child:
+                                                candidate.image == null
+                                                    ? const Icon(
+                                                      Icons.person,
+                                                      size: 50,
+                                                    )
+                                                    : null,
+                                          ),
+
+                                          const SizedBox(height: 8),
+                                          Flexible(
+                                            child: Text(
+                                              '${candidate.firstName} ${candidate.lastName}',
+
+                                              style: const TextStyle(
+                                                fontFamily: 'Roboto',
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20,
+                                              ),
+                                              textAlign: TextAlign.center,
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines:
+                                                  2, // avoids overflow if name is long
+                                            ),
+                                          ),
+                                          Text(
+                                            'Votes: ${candidate.voteCount}',
+                                            style: const TextStyle(
+                                              fontSize: 14,
+                                            ),
+                                          ),
+
+                                          const SizedBox(height: 10),
+
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              IconButton(
+                                                icon: const Icon(
+                                                  Icons.edit,
+                                                  size: 30,
+                                                  color: Color.fromRGBO(
+                                                    3,
+                                                    58,
+                                                    202,
+                                                    1,
+                                                  ),
+                                                ),
+                                                onPressed:
+                                                    () => _editCandidate(index),
+                                              ),
+                                              IconButton(
+                                                icon: const Icon(
+                                                  Icons.delete,
+                                                  size: 30,
+                                                  color: Colors.black,
+                                                ),
+                                                onPressed:
+                                                    () =>
+                                                        _deleteCandidate(index),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
                           ),
-                        ),
-                        Text(
-                          'Votes: ${candidate.voteCount}',
-                          style: const TextStyle(fontSize: 14),
-                        ),
-
-                        const SizedBox(height: 10),
-
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            IconButton(
-                              icon: const Icon(
-                                Icons.edit,
-                                size: 30,
-                                color: Color.fromRGBO(3, 58, 202, 1),
-                              ),
-                              onPressed: () => _editCandidate(index),
-                            ),
-                            IconButton(
-                              icon: const Icon(
-                                Icons.delete,
-                                size: 30,
-                                color: Colors.black,
-                              ),
-                              onPressed: () => _deleteCandidate(index),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                ),
+                // const SizedBox(height: 20),
+                Center(
+                  child: AddButton(
+                    text: 'Add',
+                    onPressed: () {
+                      _clearForm(); // Ensure form is clear for new add
+                      addCandidateBox();
+                    },
                   ),
                 ),
+
               ),
 
             );
@@ -371,26 +434,32 @@ Center(
 ),
 
 
+
                 const Spacer(),
+                //BackNextButton
                 BackNextButton(
-                  onPressed1: (){
-            Navigator.pop(context);
-          },
+                  onPressed1: () {
+                    Navigator.pop(context);
+                  },
                   onPressed: () {
                     // Added: Update Election model and pass to next screen
-                    _election.candidates = candidateList;
+                    //_election.candidates = candidateList;
                     Navigator.pushNamed(
                       context,
                       '/auditor',
-                      arguments: _election,
+                      arguments: Election(
+                        title: _election.title,
+                        description: _election.description,
+                        startDate: _election.startDate,
+                        endDate: _election.endDate,
+                        candidates: candidateList,
+              
+                      ),
                     );
                   },
                 ),
-            
-           
               ],
             ),
-
           ),
         ),
       ),
