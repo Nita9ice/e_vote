@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_vote/models/candidate.dart';
 import 'package:e_vote/models/auditor.dart';
 
@@ -13,10 +14,10 @@ class Election {
     return Election(
       title: map['title'],
       description: map['description'],
-      startDate: map['StartDate'],
-      endDate: map['endDate'],
-      candidates: List<Candidate>.from(map['candidtate']),
-      auditors: List<Auditor>.from(map['auditore']),
+      startDate: map['startDate'] is Timestamp?(map['startDate']as Timestamp).toDate():null,
+      endDate: map['endDate'] is Timestamp?(map['endDate'] as Timestamp).toDate(): null,
+      candidates: (map['candidate'] as List<dynamic>?)?.map((e)=>Candidate.fromMap(e)).toList()?? [],
+      auditors: (map['auditors'] as List<dynamic>?)?.map((e)=>Auditor.fromMap(e)).toList()??[]
     );
   }
 
@@ -33,8 +34,8 @@ class Election {
     return {
       'title': title,
       'description': description,
-      'startDate': startDate?.toIso8601String(),
-      'endDate': endDate?.toIso8601String(),
+      'startDate': startDate,
+      'endDate': endDate,
       'candidate': candidates?.map((e)=>e.toMap()).toList(),
       'auditors': auditors?.map((e)=>e.toMap()).toList(),
     };

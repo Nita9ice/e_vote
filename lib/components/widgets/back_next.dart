@@ -16,10 +16,11 @@ class BackNextButton extends StatefulWidget {
     this.text,
     required this.onPressed1,
   });
-
-
-  @override
+    @override
   State<BackNextButton> createState() => _BackNextButtonState();
+
+}
+
 
 
 class _BackNextButtonState extends State<BackNextButton> {
@@ -43,4 +44,5 @@ class _BackNextButtonState extends State<BackNextButton> {
     );
   }
 }
+
 
