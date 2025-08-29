@@ -2,8 +2,8 @@ import 'package:e_vote/components/utilities/app_dimension.dart';
 import 'package:flutter/material.dart';
 
 // This code  displays the welcome screen of the app
-class ElectionList extends StatelessWidget {
-  const ElectionList({super.key});
+class AuditScreen extends StatelessWidget {
+  const AuditScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

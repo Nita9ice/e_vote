@@ -93,22 +93,23 @@ class _ChangePasswordState extends State<ChangePassword> {
                       },
                     ),
                 ),
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Text('Must be at least 8 characters',
-                  style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontSize: dims.fontSizeSmall,
-                      // fontWeight: FontWeight.bold,
-                      color: const Color.fromRGBO(255, 255, 255, 1),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 60),
+                // Align(
+                //   alignment: Alignment.topLeft,
+                //   child: Text('Must be at least 8 characters',
+                //   style: TextStyle(
+                //       fontFamily: 'Roboto',
+                //       fontSize: dims.fontSizeSmall,
+                //       // fontWeight: FontWeight.bold,
+                //       color: const Color.fromRGBO(255, 255, 255, 1),
+                //     ),
+                //   ),
+                // ),
+                const SizedBox(height: 30),
 
                 MyTextField(
                   controller: confirmPasswordController,
                   hintText: "Confirm Password",
+                  
                   obscureText: !obscurePassword,
                     suffixIcon: IconButton(
                       icon: Icon(
@@ -122,17 +123,17 @@ class _ChangePasswordState extends State<ChangePassword> {
                       },
                     ),
                 ),
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Text('Both passwords must match',
-                  style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontSize: dims.fontSizeSmall,
-                      // fontWeight: FontWeight.bold,
-                     color: const Color.fromRGBO(255, 255, 255, 1),
-                    ),
-                  ),
-                ),
+                // Align(
+                //   alignment: Alignment.topLeft,
+                //   child: Text('Both passwords must match',
+                //   style: TextStyle(
+                //       fontFamily: 'Roboto',
+                //       fontSize: dims.fontSizeSmall,
+                //       // fontWeight: FontWeight.bold,
+                //      color: const Color.fromRGBO(120, 120, 120, 1),
+                //     ),
+                //   ),
+                // ),
                 const SizedBox(height: 80),
 
                 // Spacer(),  
