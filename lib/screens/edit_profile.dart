@@ -1,3 +1,5 @@
+import 'package:e_vote/components/utilities/app_dimension.dart';
+import 'package:e_vote/components/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:e_vote/components/widgets/text_field.dart';
 
@@ -12,6 +14,8 @@ class EditProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Create an AppDimensions object for responsive sizing
+    final dims = AppDimensions(context);
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -26,7 +30,23 @@ class EditProfile extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(height: 133),
+                 SizedBox(height: dims.heightPercent(5)), // Top spacing
+
+                // Back button aligned to the top-left corner
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.arrow_back,
+                      size: dims.widthPercent(10), // Responsive size
+                      color: const Color.fromRGBO(255, 255, 255, 1),
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context); // Navigate back
+                    },
+                  ),
+                ),
+                const SizedBox(height: 100),
 
                 Row( 
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -37,13 +57,13 @@ class EditProfile extends StatelessWidget {
                     color: const Color.fromRGBO(255, 255, 255, 1),                   
                     tooltip: 'Back',
                     ),*/   
-                    const Text(
+                    Text(
                       "Edit Profile",
-                      style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromRGBO(255, 255, 255, 1),
+                  style: TextStyle(
+                    fontFamily: 'Roboto',
+                    fontSize: dims.fontSizeLarge,
+                    fontWeight: FontWeight.bold,
+                    color: const Color.fromRGBO(255, 255, 255, 1),
                       ),
                     ),
                   ],
@@ -53,72 +73,28 @@ class EditProfile extends StatelessWidget {
 
                 MyTextField(
                   controller: nameController,
-                  hintText: "Full Name",
+                  hintText: "First Name",
                 ),
                 const SizedBox(height: 40),
 
                 MyTextField(
                   controller: usernameController,
-                  hintText: "Username",
+                  hintText: "Last Name",
                 ),
                 const SizedBox(height: 40),
 
-                MyTextField(
-                  controller: genderController,
-                  hintText: "Gender",
-                ),
-                const SizedBox(height: 40),
+                
 
-                MyTextField(
-                  controller: phoneController,
-                  hintText: "Phone Number",
-                ),
-                const SizedBox(height: 40),
-
+                
                 MyTextField(
                   controller: emailController,
                   hintText: "Email",
                 ),
-                const SizedBox(height: 60),
+                // const SizedBox(height: 100),
 
-                Container(
-                  width: 307,
-                  height: 56,
-                  decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                      colors: [
-                        Color.fromRGBO(3, 58, 135, 1),
-                        Color.fromRGBO(132, 166, 255, 1), 
-                      ],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: Colors.white, // White outline
-                      width: 2,
-                    ),
-                  ),
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.transparent, // Transparent for gradient
-                        shadowColor: Colors.transparent,     // Remove button shadow
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                                      ),
-                    child: const Text(
-                      "Save",
-                      style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
+                Spacer(),
+
+                MyButton(buttonText: 'Save', onPressed: (){}),
 
               ],
             ),

@@ -118,7 +118,7 @@ class _VoterScreenState extends State<VoterScreen> {
                             itemBuilder: (context, index) {
                               final candidate = _election?.candidates[index];
                               return Card(
-                                color: Colors.white.withOpacity(0.85),
+                                color: Colors.white.withAlpha(100),
                                 margin: const EdgeInsets.symmetric(vertical: 8),
                                 child: Padding(
                                   padding: const EdgeInsets.all(12),
