@@ -4,12 +4,16 @@ import 'package:e_vote/providers/electionprovider.dart';
 
 import 'package:e_vote/providers/userprofileprovider.dart';
 import 'package:e_vote/screens/add_auditor.dart';
+import 'package:e_vote/screens/change_password.dart';
 
 
 
 import 'package:e_vote/screens/create_election.dart';
+import 'package:e_vote/screens/edit_profile.dart';
 import 'package:e_vote/screens/faq.dart';
 import 'package:e_vote/screens/join_vote.dart';
+import 'package:e_vote/screens/my_election.dart';
+import 'package:e_vote/screens/profile_screen.dart';
 import 'package:e_vote/screens/voter/voter.dart';
 import 'package:provider/provider.dart';
 import 'package:e_vote/screens/add_candidate.dart';
@@ -74,11 +78,14 @@ class EVote extends StatelessWidget {
           '/dashboard': (context) => DashboardScreen(),
           '/create': (context) => CreatElectionScreen(),
           '/candidate': (context) => AddCandidateScreen(),
-
+          '/profile': (context) => ProfileScreen(),
+          '/edit': (context) => EditProfile(),
           '/auditor': (context) => AddAuditorScreen(),
            '/faq': (context) => FaqScreen(),
           '/join': (context) => JoinVoteScreen(),
-          '/voters': (context) => VoterScreen()
+          '/voters': (context) => VoterScreen(),
+           '/change': (context) => ChangePassword(),
+           '/election': (context) => ElectionList()
         },
   
       

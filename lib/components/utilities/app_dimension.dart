@@ -39,6 +39,7 @@ class AppDimensions {
   double get fontSizeSmall => widthPercent(4); // ~16px
   double get fontSizeMedium => widthPercent(5); // ~20px
   double get fontSizeLarge => widthPercent(9); // ~36px
+  double get fontSizeXLarge => widthPercent(12); // ~48px
 
   // Border radius
   double get borderRadius => widthPercent(5); // ~20px

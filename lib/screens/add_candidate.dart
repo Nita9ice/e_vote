@@ -3,8 +3,11 @@ import 'dart:typed_data';
 import 'package:e_vote/components/utilities/app_dimension.dart';
 import 'package:e_vote/components/widgets/back_next.dart';
 import 'package:e_vote/components/widgets/add_button.dart';
+
 import 'package:e_vote/components/widgets/candidate-alert_box.dart';
+
 import 'package:e_vote/components/widgets/button.dart';
+import 'package:e_vote/components/widgets/candidate_alert_box.dart';
 import 'package:e_vote/components/widgets/text_field.dart';
 import 'package:e_vote/models/election.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -412,6 +415,25 @@ class _AddCandidateScreenState extends State<AddCandidateScreen> {
                     },
                   ),
                 ),
+
+              ),
+
+            );
+          },
+        ),
+),
+const SizedBox(height: 20),
+Center(
+  child: AddButton(
+    text: 'Add',
+    onPressed: () {
+      _clearForm(); // Ensure form is clear for new add
+      addCandidateBox();
+    },
+  ),
+),
+
+
 
                 const Spacer(),
                 //BackNextButton
