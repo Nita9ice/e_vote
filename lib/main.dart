@@ -1,7 +1,7 @@
 
 import 'package:e_vote/Services/authservices.dart';
-import 'package:e_vote/providers/candidatelistprovider.dart';
-import 'package:e_vote/providers/create_election_provider.dart';
+import 'package:e_vote/providers/electionprovider.dart';
+
 import 'package:e_vote/providers/userprofileprovider.dart';
 import 'package:e_vote/screens/add_auditor.dart';
 
@@ -39,9 +39,9 @@ class EVote extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => Candidatelistprovider()),
+        ChangeNotifierProvider(create: (context) => Electionprovider()),
         ChangeNotifierProvider(create: (context)=>Userprofileprovider()),
-        ChangeNotifierProvider(create: (context)=> CreateElectionProvider())
+     
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -1,5 +1,6 @@
 
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:e_vote/Services/firestoreservices.dart';
 import 'package:e_vote/components/widgets/add_button.dart';
 import 'package:e_vote/components/widgets/alert_box_status.dart';
 import 'package:e_vote/components/widgets/auditor_alert_box.dart';
@@ -7,10 +8,13 @@ import 'package:e_vote/components/widgets/back_next.dart';
 import 'package:e_vote/components/widgets/button.dart';
 import 'package:e_vote/components/widgets/text_field.dart';
 import 'package:e_vote/models/auditor.dart';
-
+import 'package:e_vote/models/candidate.dart';
 
 import 'package:e_vote/models/election.dart'; // Import the new model
+import 'package:e_vote/providers/electionprovider.dart';
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AddAuditorScreen extends StatefulWidget {
   const AddAuditorScreen({super.key});
@@ -35,13 +39,21 @@ class _AddAuditorScreenState extends State<AddAuditorScreen> {
   // Added: Receive Election model
   late Election _election;
 
+  void addElection(Election data) {
+    Provider.of<Electionprovider>(context, listen: false).addElection(data);
+  }
+
+
+
+
+
   @override
   void initState() {
     super.initState();
     // Added: Get Election from arguments
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _election = ModalRoute.of(context)!.settings.arguments as Election;
-      setState(() {}); // If needed to refresh
+     
+      setState(() { _election = ModalRoute.of(context)!.settings.arguments as Election;}); // If needed to refresh
     });
   }
 
@@ -57,9 +69,9 @@ class _AddAuditorScreenState extends State<AddAuditorScreen> {
         lastNameController.text.isNotEmpty &&
         emailController.text.isNotEmpty) {
       if (!_isValidEmail(emailController.text)) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Invalid email format')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('Invalid email format')));
         return;
       }
       final auditor = Auditor(
@@ -77,9 +89,9 @@ class _AddAuditorScreenState extends State<AddAuditorScreen> {
       // Clear inputs
       _clearForm();
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please fill all fields')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Please fill all fields')));
     }
   }
 
@@ -115,27 +127,34 @@ class _AddAuditorScreenState extends State<AddAuditorScreen> {
   void showAddAuditorDialog() {
     showDialog(
       context: context,
-      builder: (context) => AuditorAlertBox(
-        firstName: MyTextField(hintText: 'First Name', controller: firstNameController),
-        lastName: MyTextField(hintText: 'Last Name', controller: lastNameController),
-        email: MyTextField(hintText: 'Email', controller: emailController),
-        button: MyButton(
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 40),
-          buttonText: _isEditing ? 'Edit' : 'Add',
-          onPressed: () {
-            _saveAuditor();
-            Navigator.of(context).pop(); // Close dialog
-          },
-        ),
-        button2: MyButton(
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-          buttonText: 'Cancel',
-          onPressed: () {
-            _clearForm();
-            Navigator.of(context).pop();
-          },
-        ),
-      ),
+      builder:
+          (context) => AuditorAlertBox(
+            firstName: MyTextField(
+              hintText: 'First Name',
+              controller: firstNameController,
+            ),
+            lastName: MyTextField(
+              hintText: 'Last Name',
+              controller: lastNameController,
+            ),
+            email: MyTextField(hintText: 'Email', controller: emailController),
+            button: MyButton(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 40),
+              buttonText: _isEditing ? 'Edit' : 'Add',
+              onPressed: () {
+                _saveAuditor();
+                Navigator.of(context).pop(); // Close dialog
+              },
+            ),
+            button2: MyButton(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              buttonText: 'Cancel',
+              onPressed: () {
+                _clearForm();
+                Navigator.of(context).pop();
+              },
+            ),
+          ),
     );
   }
 
@@ -163,10 +182,7 @@ class _AddAuditorScreenState extends State<AddAuditorScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset(
-                      'assets/images/logo.png',
-                      width: 100,
-                    ),
+                    Image.asset('assets/images/logo.png', width: 100),
                     const Text(
                       'E-voting',
                       style: TextStyle(
@@ -192,75 +208,91 @@ class _AddAuditorScreenState extends State<AddAuditorScreen> {
                 // Vertical listview for auditors (added edit/delete icons)
                 SizedBox(
                   height: 200,
-                  child: auditorList.isEmpty
-                      ? const Center(
-                          child: Text(
-                            'No Auditor added yet',
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.white,
-                            ),
-                          ),
-                        )
-                      : ListView.builder(
-                          itemCount: auditorList.length,
-                          itemBuilder: (context, index) {
-                            final auditor = auditorList[index];
-                            return Container(
-                              margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                              padding: const EdgeInsets.all(16),
-                              decoration: BoxDecoration(
-                                color: Colors.grey[200],
-                                borderRadius: BorderRadius.circular(10),
+                  child:
+                      auditorList.isEmpty
+                          ? const Center(
+                            child: Text(
+                              'No Auditor added yet',
+                              style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.white,
                               ),
-                              child: Stack( // Added: Stack for overlay icons
-                                children: [
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        '${auditor.firstName} ${auditor.lastName}',
-                                        style: const TextStyle(
-                                          fontFamily: 'Roboto',
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                      const SizedBox(height: 4),
-                                      Text(
-                                        'Email: ${auditor.email}',
-                                        style: const TextStyle(fontSize: 14),
-                                      ),
-                                    ],
-                                  ),
-                                  Positioned(
-                                    top: 0,
-                                    right: 0,
-                                    child: Row(
+                            ),
+                          )
+                          : ListView.builder(
+                            itemCount: auditorList.length,
+                            itemBuilder: (context, index) {
+                              final auditor = auditorList[index];
+                              return Container(
+                                margin: const EdgeInsets.symmetric(
+                                  vertical: 8,
+                                  horizontal: 16,
+                                ),
+                                padding: const EdgeInsets.all(16),
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[200],
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Stack(
+                                  // Added: Stack for overlay icons
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        IconButton(
-                                          icon: const Icon(Icons.edit, size: 30,
-                                          color: Color.fromRGBO(3, 58, 202, 1),
-
+                                        Text(
+                                          '${auditor.firstName} ${auditor.lastName}',
+                                          style: const TextStyle(
+                                            fontFamily: 'Roboto',
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16,
                                           ),
-                                          onPressed: () => _editAuditor(index),
                                         ),
-                                        IconButton(
-                                          icon: const Icon(Icons.delete, size: 30,
-                                          color: Colors.black,
-                                          ),
-                                          onPressed: () => _deleteAuditor(index),
+                                        const SizedBox(height: 4),
+                                        Text(
+                                          'Email: ${auditor.email}',
+                                          style: const TextStyle(fontSize: 14),
                                         ),
                                       ],
                                     ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                        ),
+                                    Positioned(
+                                      top: 0,
+                                      right: 0,
+                                      child: Row(
+                                        children: [
+                                          IconButton(
+                                            icon: const Icon(
+                                              Icons.edit,
+                                              size: 30,
+                                              color: Color.fromRGBO(
+                                                3,
+                                                58,
+                                                202,
+                                                1,
+                                              ),
+                                            ),
+                                            onPressed:
+                                                () => _editAuditor(index),
+                                          ),
+                                          IconButton(
+                                            icon: const Icon(
+                                              Icons.delete,
+                                              size: 30,
+                                              color: Colors.black,
+                                            ),
+                                            onPressed:
+                                                () => _deleteAuditor(index),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
                 ),
 
                 const SizedBox(height: 20),
@@ -276,29 +308,52 @@ class _AddAuditorScreenState extends State<AddAuditorScreen> {
                 const SizedBox(height: 100),
                 BackNextButton(
                   text: 'Submit',
-                  onPressed1: (){
-                    Navigator.pop(context);
+                  onPressed1: () {
+                 
+                
+                      Navigator.pop(context);
                   },
-                  onPressed: () {
+                  onPressed: ()  {
+
+                       addElection(
+                      Election(
+                        title: _election.title,
+                        description: _election.description,
+                        startDate: _election.startDate,
+                        endDate: _election.endDate,
+                        candidates: _election.candidates,
+                        auditors: auditorList
+                      ),
+                    );
+
+          
                     // Added: Update Election model
                     // _election.auditors = auditorList;
-                    showDialog(context: context, builder: (context){
-                      return AlertBoxStatus(containerText: 'Successful', containerImage: Image.asset('assets/images/logo.png', 
-                      color: Colors.black,
-                      ),
 
-                      onPressed: (){
-                        Navigator.pushNamed(context,'/dashboard',);
-                        // Navigator.pushNamed(context,'/voters',);
+             
+               showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertBoxStatus(
+                          containerText: 'Successful',
+                          containerImage: Image.asset(
+                            'assets/images/logo.png',
+                            color: Colors.black,
+                          ),
+
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/dashboard');
+                            // Navigator.pushNamed(context,'/voters',);
+                          },
+                          imageHeight: 120,
+                          imageWidth: 120,
+                        );
                       },
-                       imageHeight: 120, imageWidth: 120,);
-                    });
+                    );
                   },
                 ),
-
               ],
             ),
-
           ),
         ),
       ),
