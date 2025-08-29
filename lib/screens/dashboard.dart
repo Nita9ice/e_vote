@@ -27,6 +27,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         iconTheme: const IconThemeData(
+          size: 40,
           color: Color.fromRGBO(255, 255, 255, 1),
         ),
       ),
@@ -130,8 +131,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   
             ),
               ),
-            ),
-          ),
+          
+      
 
         ),
       );

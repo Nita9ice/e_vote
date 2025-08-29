@@ -1,5 +1,7 @@
+import 'package:e_vote/providers/userprofileprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:e_vote/components/utilities/app_dimension.dart';
+import 'package:provider/provider.dart';
 
 // ProfileScreen displays the user's personal information (profile picture, name, role)
 // and provides quick navigation options such as editing profile, checking notifications,
@@ -15,7 +17,10 @@ class ProfileScreen extends StatelessWidget {
     final dims = AppDimensions(context);
 
     return Scaffold(
-      body: Container(
+     body: Consumer<Userprofileprovider>(builder:(context, userprovider, hild ){
+      final user =  userprovider.userProfile;
+        return  
+      Container(
         // Full-screen background image
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -25,7 +30,7 @@ class ProfileScreen extends StatelessWidget {
         ),
         child: Padding(
           // Uniform padding around the content
-          padding: EdgeInsets.all(dims.widthPercent(6)), // instead of 24
+          padding: EdgeInsets.all(dims.widthPercent(4)), // instead of 24
           child: SafeArea(
             child: Column(
               children: [
@@ -63,7 +68,7 @@ class ProfileScreen extends StatelessWidget {
 
                 // User profile image
                 CircleAvatar(
-                  radius: dims.widthPercent(25),
+                  radius: dims.widthPercent(20),
                   backgroundImage:
                       const AssetImage("assets/images/Ellipse 4.jpg"),
                 ),
@@ -72,27 +77,27 @@ class ProfileScreen extends StatelessWidget {
 
                 // User name
                 Text(
-                  "Jane Benjamin",
+                  user?.name.join('  ')??'',
                   style: TextStyle(
                     fontFamily: 'Roboto',
-                    fontSize: dims.fontSizeMedium,
-                    fontWeight: FontWeight.w700,
-                    color: const Color.fromRGBO(255, 255, 255, 1),
+                                fontSize: dims.widthPercent(7), // ~20.21px
+                                fontWeight: FontWeight.w700,
+                                color: const Color.fromRGBO(255, 255, 255, 1),
                   ),
                 ),
 
                 // User role/position
                 Text(
-                  "Auditor",
+                  user?.email??'',
                   style: TextStyle(
-                    fontFamily: "Roboto",
-                    fontSize: dims.fontSizeSmall,
-                    fontWeight: FontWeight.w400,
-                    color: const Color.fromRGBO(255, 255, 255, 1),
+                    fontFamily: 'Roboto',
+                                fontSize: dims.widthPercent(4), // ~20.21px
+                                fontWeight: FontWeight.w400,
+                                color: const Color.fromRGBO(255, 255, 255, 1),
                   ),
                 ),
 
-                SizedBox(height: dims.heightPercent(12)),
+                SizedBox(height: dims.heightPercent(6)),
 
                 // ===== Option Row: Edit Profile =====
                 Row(
@@ -191,6 +196,7 @@ class ProfileScreen extends StatelessWidget {
             ),
           ),
         ),
+      );}
       ),
     );
   }

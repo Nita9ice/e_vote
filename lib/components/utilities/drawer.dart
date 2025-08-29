@@ -60,7 +60,10 @@ class MyDrawer extends StatelessWidget {
                   icon: Icon(Icons.settings,color: Colors.white,),),
 
                   SizedBox(height: 30,),
-                 MyListTile(text: 'Change Password', onPressed: (){},
+                 MyListTile(text: 'FAQ', onPressed: (){
+                  // Navigate to profile
+                      Navigator.pushNamed(context, '/faq');
+                 },
                   icon: Icon(Icons.rotate_left_rounded,color: Colors.white,),),
 
                    SizedBox(height: 30,),
