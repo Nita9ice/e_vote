@@ -26,13 +26,16 @@ class MyTextField extends StatelessWidget {
   // Optional widget displayed at the end of the text field (e.g., eye icon)
   final Widget? suffixIcon;
 
+  // Optional (to display a helper text in the text field)
+  final String? helperText;
+
   // Constructor for initializing the properties
   const MyTextField({
     super.key,
     required this.controller,
     required this.hintText,
     this.obscureText = false,
-    this.suffixIcon,
+    this.suffixIcon, this.helperText,
   });
 
   @override
@@ -72,6 +75,7 @@ class MyTextField extends StatelessWidget {
             color: const Color.fromRGBO(0, 0, 0, 1), 
           ),
           decoration: InputDecoration(
+            helperText: helperText,
             hintText: hintText, // Display hint text inside the field
             hintStyle: TextStyle(
               fontFamily: 'Roboto',

@@ -1,17 +1,29 @@
+
 import 'package:e_vote/Services/firestoreservices.dart';
 import 'package:e_vote/components/utilities/app_dimension.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
+
+import 'package:e_vote/components/utilities/app_dimension.dart';
+import 'package:e_vote/models/candidate.dart';
+
 import 'package:flutter/material.dart';
 
 // This code  displays the welcome screen of the app
-class ElectionList extends StatelessWidget {
+class ElectionList extends StatefulWidget {
   const ElectionList({super.key});
 
   
  
 
 
+  @override
+  State<ElectionList> createState() => _ElectionListState();
+}
+
+class _ElectionListState extends State<ElectionList> {
+  // List of candidates (now part of Election model, but managed locally until submit)
+  List<Candidate> candidateList = [];
   @override
   Widget build(BuildContext context) {
 
@@ -26,22 +38,8 @@ if(user == null){
 }
 
     return Scaffold(
-      body: StreamBuilder(stream: Firestoreservices().getElectionStream(user.uid), builder: (context, snapshot){
-      if(snapshot.connectionState == ConnectionState.waiting){
-        return CircularProgressIndicator.adaptive();
-      }
-      if(snapshot.hasError){
-        return Text('error loading data ${snapshot.error}');
-      }
-      final elections = snapshot.data?? [];
-      if(elections.isEmpty){
-        return Text('No data found');
-      }
-      return ListView.builder(itemCount: elections.length,itemBuilder: (context, index){
-        final election = elections[index]; 
-        return
 
-       Container(
+      body: Container(
 
         // Background image
         decoration: const BoxDecoration(
@@ -69,21 +67,133 @@ if(user == null){
                     },
                   ),
                 ),
-                const SizedBox(height: 100),
+                const SizedBox(height: 50),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset('assets/images/logo.png', width: 100),
+                    const Text(
+                      'E-voting',
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                        color: Color.fromRGBO(255, 255, 255, 1),
+                      ),
+                    ),
+                  ],
+                ),
+
+const SizedBox(height: 100),
+                Card(
+                            color: Colors.grey[200],
+                            margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                            child: Padding(
+                              padding: const EdgeInsets.all(12),
+                              child: Column(
+                                children: [
+                                  Row(
+                                                                      children: [
+                                   Text(
+                                     // Election Title
+                                     'SUG Election Uniben',
+                                     style: const TextStyle(
+                                       fontSize: 20,
+                                       fontWeight: FontWeight.w700,
+                                     ),
+                                   ),
+                                  
+                                  
+                                   const Spacer(),
+                                                      IconButton(
+                                                        onPressed: () {
+                                                          Navigator.pushNamed(context, '/board'); // Navigate to election board screen
+                                                        },
+                                                        icon: const Icon(
+                                                          Icons.arrow_forward_ios,
+                                                          color: Color.fromRGBO(0, 0, 0, 1),
+                                                        ),
+                                                      ),
+                                  
+                                   
+                                                                      ],
+                                                                    ),
+                                ],
+                              ),
+                            ),
+                          ),
+
+
+                Expanded(
+                      child: ListView.builder(
+                        itemCount: candidateList.length,
+                        itemBuilder: (context, index) {
+                          final candidate = candidateList[index];
+                          return  Card(
+                            color: Colors.grey[200],
+                            margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                            child: Padding(
+                              padding: const EdgeInsets.all(12),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                // crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: Image.asset(
+                                      // candidate image
+                                      '',
+                                      width: 80,
+                                      height: 80,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                  
+                                  Row(
+                                    children: [
+                                      Text(
+                                        // name of candidate
+                                        '',
+                                        style: const TextStyle(
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
+
+
+                                      const Spacer(),
+                    IconButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/edit'); // Navigate to edit profile
+                      },
+                      icon: const Icon(
+                        Icons.arrow_forward_ios,
+                        color: Colors.white,
+                      ),
+                    ),
+
+                                      
+                                    ],
+                                  ),
+
+                                  
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+             
 
              
+
              
             ],
           ),
-        ));
-      
+        ),
+      ),
 
-
-
-      });
-
-
-      }) , 
     );
   }
 }
