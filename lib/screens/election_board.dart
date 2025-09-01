@@ -80,7 +80,7 @@ class _ElectionBoardState extends State<ElectionBoard> {
                   child: const Text(
                   
                     // This should carry the title of the election
-                    'SUG Election',
+                    '',
                   
                     style: TextStyle(
                       fontFamily: 'Roboto',
@@ -109,7 +109,7 @@ class _ElectionBoardState extends State<ElectionBoard> {
                   ),
                   child: Text(
                     // This should carry the description of the election
-                   ' hjksklk oisaohdiud iueddsjd chudednjcd cduhihud',
+                   '',
                     style: TextStyle(
                       color: Color.fromRGBO(255, 255, 255, 1),
                       fontSize: 20,
