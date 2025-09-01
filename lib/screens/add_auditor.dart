@@ -1,6 +1,5 @@
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:e_vote/Services/firestoreservices.dart';
+
 import 'package:e_vote/components/widgets/add_button.dart';
 import 'package:e_vote/components/widgets/alert_box_status.dart';
 import 'package:e_vote/components/widgets/auditor_alert_box.dart';
@@ -8,7 +7,6 @@ import 'package:e_vote/components/widgets/back_next.dart';
 import 'package:e_vote/components/widgets/button.dart';
 import 'package:e_vote/components/widgets/text_field.dart';
 import 'package:e_vote/models/auditor.dart';
-import 'package:e_vote/models/candidate.dart';
 
 import 'package:e_vote/models/election.dart'; // Import the new model
 import 'package:e_vote/providers/electionprovider.dart';
