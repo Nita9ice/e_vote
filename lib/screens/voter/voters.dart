@@ -39,7 +39,7 @@ class _VoterScreenState extends State<VoterScreen> {
 
     // Simulate saving vote by incrementing voteCount
     setState(() {
-      election.candidates[_selectedCandidateIndex!].voteCount += 1;
+      election.candidates?[_selectedCandidateIndex!].voteCount += 1;
     });
 
     // print(

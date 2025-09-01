@@ -11,6 +11,7 @@ import 'package:e_vote/screens/change_password.dart';
 
 import 'package:e_vote/screens/create_election.dart';
 import 'package:e_vote/screens/edit_profile.dart';
+import 'package:e_vote/screens/election_board.dart';
 import 'package:e_vote/screens/faq.dart';
 import 'package:e_vote/screens/cast_vote.dart';
 import 'package:e_vote/screens/my_election.dart';
@@ -87,7 +88,8 @@ class EVote extends StatelessWidget {
           '/voters': (context) => VoterScreen(),
            '/change': (context) => ChangePassword(),
            '/election': (context) => ElectionList(),
-           '/audit': (context) => AuditScreen()
+           '/audit': (context) => AuditScreen(),
+           '/board': (context) => ElectionBoard()
         },
   
       
