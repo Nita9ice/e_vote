@@ -1,6 +1,7 @@
 import 'package:e_vote/components/widgets/button.dart';
+import 'package:e_vote/models/ids.dart';
 import 'package:flutter/material.dart';
-import 'package:e_vote/components/widgets/text_field.dart'; 
+import 'package:e_vote/components/widgets/text_field.dart';
 
 class CastVote extends StatefulWidget {
   const CastVote({super.key});
@@ -19,7 +20,9 @@ class _CastVoteState extends State<CastVote> {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/images/background2.jpg"), // background image
+            image: AssetImage(
+              "assets/images/background2.jpg",
+            ), // background image
             fit: BoxFit.cover,
           ),
         ),
@@ -28,22 +31,19 @@ class _CastVoteState extends State<CastVote> {
             padding: const EdgeInsets.all(24),
             child: Column(
               // mainAxisAlignment: MainAxisAlignment.center,
-                  // crossAxisAlignment: CrossAxisAlignment.center,
+              // crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const SizedBox(height: 40),
                 Align(
-                      alignment: Alignment.topLeft,
-                      child: IconButton(
-                        icon: Icon(Icons.arrow_back,
-                         color: Colors.white,
-                         size: 40,
-                        ),
-                        onPressed: (){
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ),
-                    const SizedBox(height: 200),
+                  alignment: Alignment.topLeft,
+                  child: IconButton(
+                    icon: Icon(Icons.arrow_back, color: Colors.white, size: 40),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ),
+                const SizedBox(height: 200),
                 const Text(
                   "Cast Vote",
                   style: TextStyle(
@@ -54,22 +54,32 @@ class _CastVoteState extends State<CastVote> {
                   ),
                 ),
                 const SizedBox(height: 40),
-                                
+
                 MyTextField(
                   controller: emailController,
-                  hintText: "Enter your email",
+                  hintText: "Enter userId",
                 ),
                 const SizedBox(height: 20),
-                                
+
                 MyTextField(
                   controller: linkController,
-                  hintText: "Enter vote link",
+                  hintText: "Enter electionId",
                 ),
                 const SizedBox(height: 40),
-                                
-                MyButton(buttonText: 'Submit', onPressed: (){
-                  Navigator.pushNamed(context, '/voters');  
-                }),
+
+                MyButton(
+                  buttonText: 'Submit',
+                  onPressed: () {
+                    Navigator.pushNamed(
+                      context,
+                      '/voters',
+                      arguments: Ids(
+                        userId: emailController.text.trim(),
+                        electionId: linkController.text.trim(),
+                      ),
+                    );
+                  },
+                ),
               ],
             ),
           ),
