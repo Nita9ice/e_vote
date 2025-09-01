@@ -32,30 +32,50 @@ class Firestoreservices {
     }
   }
 
-  Future<void> electionToFireStore (
+  Future<void> electionToFireStore(
     String title,
     String description,
     DateTime? startDate,
     DateTime? endDate,
     List<Candidate>? candidate,
     List<Auditor>? auditors,
-  ) async{
+  ) async {
     final user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       final userId = user.uid;
-   await   _firebaseFirestore
+      await _firebaseFirestore
           .collection('users')
           .doc(userId)
-          .collection('Elections').add(  Election(
+          .collection('Elections')
+          .add(
+            Election(
               title: title,
               description: description,
               startDate: startDate,
               endDate: endDate,
               candidates: candidate,
               auditors: auditors,
-            ).toMap());
-          
-          
+            ).toMap(),
+          );
     }
   }
-}
+
+  Stream<List<Election>> getElectionStream(String userId) {
+   
+    return  _firebaseFirestore
+          .collection('users')
+          .doc(userId)
+          .collection('Elections')
+          .snapshots()
+          .map((snapShot) {
+            return snapShot.docs.map((doc) {
+              final data = doc.data();
+              return Election.fromMap(data);
+            }).toList();
+          });
+     
+          
+    }
+  
+  }
+

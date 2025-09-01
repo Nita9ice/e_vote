@@ -1,10 +1,20 @@
+
+import 'package:e_vote/Services/firestoreservices.dart';
+
+import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:e_vote/components/utilities/app_dimension.dart';
 import 'package:e_vote/models/candidate.dart';
+
 import 'package:flutter/material.dart';
 
 // This code  displays the welcome screen of the app
 class ElectionList extends StatefulWidget {
   const ElectionList({super.key});
+
+  
+ 
+
 
   @override
   State<ElectionList> createState() => _ElectionListState();
@@ -18,10 +28,15 @@ class _ElectionListState extends State<ElectionList> {
 
 // This is a  variable 'dims' that holds an AppDimensions object,
 // which provides responsive sizing values based on the current context.
-final dims = AppDimensions(context);
+//final dims = AppDimensions(context);
+final user = FirebaseAuth.instance.currentUser;
 
+if(user == null){
+  return Text('user not logged in');
+}
 
     return Scaffold(
+
       body: Container(
 
         // Background image
@@ -176,6 +191,7 @@ const SizedBox(height: 100),
           ),
         ),
       ),
+
     );
   }
 }
