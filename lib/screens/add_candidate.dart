@@ -3,8 +3,8 @@ import 'dart:typed_data';
 import 'package:e_vote/components/utilities/app_dimension.dart';
 import 'package:e_vote/components/widgets/back_next.dart';
 import 'package:e_vote/components/widgets/add_button.dart';
-import 'package:e_vote/components/widgets/candidate-alert_box.dart'; 
 import 'package:e_vote/components/widgets/button.dart';
+import 'package:e_vote/components/widgets/candidate_alert_box.dart';
 import 'package:e_vote/components/widgets/text_field.dart';
 import 'package:e_vote/models/election.dart'; 
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -377,11 +377,18 @@ Center(
           },
                   onPressed: () {
                     // Added: Update Election model and pass to next screen
-                    _election.candidates = candidateList;
+                  //  _election.candidates = candidateList;
                     Navigator.pushNamed(
                       context,
                       '/auditor',
-                      arguments: _election,
+                      arguments:  Election(
+                        title: _election.title,
+                        description: _election.description,
+                        startDate: _election.startDate,
+                        endDate: _election.endDate,
+                        candidates: candidateList,
+              
+                      ),
                     );
                   },
                 ),

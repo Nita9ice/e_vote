@@ -2,14 +2,14 @@ import 'package:e_vote/components/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:e_vote/components/widgets/text_field.dart'; 
 
-class JoinVoteScreen extends StatefulWidget {
-  const JoinVoteScreen({super.key});
+class CastVote extends StatefulWidget {
+  const CastVote({super.key});
 
   @override
-  State<JoinVoteScreen> createState() => _JoinVoteScreenState();
+  State<CastVote> createState() => _CastVoteState();
 }
 
-class _JoinVoteScreenState extends State<JoinVoteScreen> {
+class _CastVoteState extends State<CastVote> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController linkController = TextEditingController();
 
@@ -45,7 +45,7 @@ class _JoinVoteScreenState extends State<JoinVoteScreen> {
                     ),
                     const SizedBox(height: 200),
                 const Text(
-                  "Join Vote",
+                  "Cast Vote",
                   style: TextStyle(
                     fontFamily: "Roboto",
                     fontSize: 28,
@@ -67,7 +67,9 @@ class _JoinVoteScreenState extends State<JoinVoteScreen> {
                 ),
                 const SizedBox(height: 40),
                                 
-                MyButton(buttonText: 'Submit', onPressed: (){}),
+                MyButton(buttonText: 'Submit', onPressed: (){
+                  Navigator.pushNamed(context, '/voters');  
+                }),
               ],
             ),
           ),

@@ -2,7 +2,9 @@ import 'dart:async';
 import 'package:e_vote/components/utilities/app_dimension.dart';
 import 'package:flutter/material.dart';
 
-
+// Splash screen displayed when the app starts.
+// Shows the app logo and title, then automatically navigates
+// to the welcome screen after a short delay.
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -14,46 +16,50 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // Navigate to welcome screen after 3 seconds
+    // Timer that navigates to the welcome screen after 3 seconds
     Timer(const Duration(seconds: 3), () {
       Navigator.pushReplacementNamed(context, '/welcome');
     });
   }
 
   @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    // Instantiate AppDimensions
-    final dimensions = AppDimensions(context);
+    
+// This is a  variable 'dims' that holds an AppDimensions object,
+// which provides responsive sizing values based on the current context.
+    final dims = AppDimensions(context);
 
     return Scaffold(
       body: Container(
+        // Background image for the splash screen
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/images/background1.jpg'),
-            fit: BoxFit.cover,
+            fit: BoxFit.cover, // Cover the entire screen
           ),
         ),
         child: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center, // Vertically center all children
             children: [
-              SizedBox(height: dimensions.heightPercent(36)), // ~335.52px
+               SizedBox(height: dims.heightPercent(10)),
+              // App logo
               Image.asset(
                 'assets/images/logo.png',
-                width: dimensions.widthPercent(78.6), // ~337.98px
-                height: dimensions.heightPercent(33.3), // ~310.36px
+                
               ),
+
+              // Responsive gap between logo and text
+              SizedBox(height: dims.spacingSmall),
+
+              // App title text
               Text(
                 'E-Vote',
                 style: TextStyle(
                   fontFamily: 'Roboto',
-                  fontSize: dimensions.widthPercent(11.2), // ~48.16px
-                  fontWeight: FontWeight.w700,
-                  color: const Color.fromRGBO(255, 255, 255, 1),
+                  fontSize: dims.fontSizeXLarge, // XLarge responsive font
+                  fontWeight: FontWeight.w700,   
+                  color: const Color.fromRGBO(255, 255, 255, 1), 
                 ),
               ),
             ],

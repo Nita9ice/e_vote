@@ -1,16 +1,11 @@
 import 'dart:async';
-
 import 'package:e_vote/Services/authservices.dart';
 import 'package:e_vote/components/utilities/app_dimension.dart';
-import 'package:e_vote/components/widgets/alert_box_status.dart';
 import 'package:flutter/material.dart';
 import 'package:e_vote/components/widgets/button.dart';
 import 'package:e_vote/components/widgets/text_field.dart';
-
-
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
-
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
@@ -23,10 +18,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController passwordController = TextEditingController();
 
   // Variable to control password visibility
-  bool obscurePassword = false;
-
-
- 
+  bool obscurePassword = false; 
  Future<bool>signIn()async{
   try{
   final email = emailController.text.trim();
@@ -38,7 +30,6 @@ class _LoginScreenState extends State<LoginScreen> {
   
  final verified =  await emailServices.emailVerified();
  if(verified){
-
   return true;
  }
  else{
@@ -59,15 +50,24 @@ catch(e){
 Future<void> successMessage()async{
   showDialog(context: context, builder: (context){
     return 
+
+    Image.asset('assets/images/logo.png');
+    /*
+    AlertBoxStatus(
+      onPressed: (){},
+      containerText: 'Success', containerImage: Image.asset('assets/images/logo.png'));
+
     AlertBoxStatus(
       onPressed: (){},
       containerText: 'Success', containerImage: Image.asset('assets/images/logo.png'));
     
+    */
   } );
 }
 // navigate to dashboard
 void navigateToDashbord(){
-    Navigator.pushNamed(context, '/admin');
+    Navigator.pushNamed(context, '/dashboard');
+
 }
 
 
@@ -188,8 +188,10 @@ void navigateToDashbord(){
                      
                 
                     await successMessage();
-                    await Future.delayed(Duration(seconds: 2));
+
+                    await Future.delayed(Duration(seconds: 1));
                 
+
                      navigateToDashbord();
                  
                      }

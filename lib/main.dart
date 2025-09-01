@@ -1,16 +1,22 @@
 
 import 'package:e_vote/Services/authservices.dart';
-import 'package:e_vote/providers/candidatelistprovider.dart';
-import 'package:e_vote/providers/create_election_provider.dart';
+import 'package:e_vote/providers/electionprovider.dart';
+
 import 'package:e_vote/providers/userprofileprovider.dart';
 import 'package:e_vote/screens/add_auditor.dart';
+import 'package:e_vote/screens/auditors/audit.dart';
+import 'package:e_vote/screens/change_password.dart';
 
 
 
 import 'package:e_vote/screens/create_election.dart';
+import 'package:e_vote/screens/edit_profile.dart';
+import 'package:e_vote/screens/election_board.dart';
 import 'package:e_vote/screens/faq.dart';
-import 'package:e_vote/screens/join_vote.dart';
-import 'package:e_vote/screens/voter/voter.dart';
+import 'package:e_vote/screens/cast_vote.dart';
+import 'package:e_vote/screens/my_election.dart';
+import 'package:e_vote/screens/profile_screen.dart';
+import 'package:e_vote/screens/voter/voters.dart';
 import 'package:provider/provider.dart';
 import 'package:e_vote/screens/add_candidate.dart';
 import 'package:e_vote/screens/dashboard.dart';
@@ -39,14 +45,14 @@ class EVote extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => Candidatelistprovider()),
+        ChangeNotifierProvider(create: (context) => Electionprovider()),
         ChangeNotifierProvider(create: (context)=>Userprofileprovider()),
-        ChangeNotifierProvider(create: (context)=> CreateElectionProvider())
+     
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
 
-        // home: AddCandidateScreen(),
+        // home: VoterScreen(),
 
 
 
@@ -74,11 +80,16 @@ class EVote extends StatelessWidget {
           '/dashboard': (context) => DashboardScreen(),
           '/create': (context) => CreatElectionScreen(),
           '/candidate': (context) => AddCandidateScreen(),
-
+          '/profile': (context) => ProfileScreen(),
+          '/edit': (context) => EditProfile(),
           '/auditor': (context) => AddAuditorScreen(),
            '/faq': (context) => FaqScreen(),
-          '/join': (context) => JoinVoteScreen(),
-          '/voters': (context) => VoterScreen()
+          '/join': (context) => CastVote(),
+          '/voters': (context) => VoterScreen(),
+           '/change': (context) => ChangePassword(),
+           '/election': (context) => ElectionList(),
+           '/audit': (context) => AuditScreen(),
+           '/board': (context) => ElectionBoard()
         },
   
       
