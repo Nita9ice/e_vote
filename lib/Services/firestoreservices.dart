@@ -61,21 +61,50 @@ class Firestoreservices {
   }
 
   Stream<List<Election>> getElectionStream(String userId) {
-   
-    return  _firebaseFirestore
-          .collection('users')
-          .doc(userId)
-          .collection('Elections')
-          .snapshots()
-          .map((snapShot) {
-            return snapShot.docs.map((doc) {
-              final data = doc.data();
-              return Election.fromMap(data);
-            }).toList();
-          });
-     
-          
-    }
-  
+    return _firebaseFirestore
+        .collection('users')
+        .doc(userId)
+        .collection('Elections')
+        .snapshots()
+        .map((snapShot) {
+          return snapShot.docs.map((doc) {
+            final data = doc.data();
+            return Election.fromMap(data);
+          }).toList();
+        });
   }
 
+  Future<Election?> electionPoll(String userId, String electionId) async {
+    final docRef = _firebaseFirestore
+        .collection('users')
+        .doc(userId)
+        .collection('Elections')
+        .doc(electionId);
+    final docSnapshot = await docRef.get();
+    if (docSnapshot.exists) {
+      return Election.fromMap(docSnapshot.data() as Map<String, dynamic>);
+    } else {
+      return null;
+    }
+  }
+
+  Future<void> incrementVote(String userId, String electionId, int? candidateIndex) async {
+  final docRef =  _firebaseFirestore
+        .collection('users')
+        .doc(userId)
+        .collection('Elections')
+        .doc(electionId);
+
+        final doc = await docRef.get();
+        if(doc.exists){
+         final data = doc.data();
+         final candidates = data?['candidate'] as List<dynamic>;
+         candidates[candidateIndex??0]['voteCount'] +=1;
+
+         await docRef.update({'candidate': candidates});
+
+
+        }
+        
+  }
+}

@@ -42,8 +42,8 @@ class _AddCandidateScreenState extends State<AddCandidateScreen> {
     super.initState();
     // Added: Get Election from arguments
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _election = ModalRoute.of(context)!.settings.arguments as Election;
-      setState(() {}); // If needed to refresh
+     
+      setState(() { _election = ModalRoute.of(context)!.settings.arguments as Election;}); // If needed to refresh
     });
   }
 

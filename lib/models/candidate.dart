@@ -29,12 +29,12 @@ class Candidate {
     return {
       'firstName': firstName,
       'lastName': lastName,
-      'candidateImage':
-          image is Uint8List
-              ? base64Encode(image)
-              : image is File
-              ? image
-              : null, // Store file path for serialization
+      'candidateImage':base64Encode(image),
+          // image is Uint8List
+          //     ? base64Encode(image)
+          //     : image is File
+          //     ? image
+          //     : null, // Store file path for serialization
       'voteCount': voteCount,
     };
   }
