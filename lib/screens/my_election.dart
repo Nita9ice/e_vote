@@ -23,8 +23,12 @@ class ElectionList extends StatefulWidget {
 class _ElectionListState extends State<ElectionList> {
   // List of candidates (now part of Election model, but managed locally until submit)
   List<Candidate> candidateList = [];
+
+  
   @override
   Widget build(BuildContext context) {
+    // Instantiate AppDimensions
+    final dimensions = AppDimensions(context);
 
 // This is a  variable 'dims' that holds an AppDimensions object,
 // which provides responsive sizing values based on the current context.
@@ -49,7 +53,7 @@ if(user == null){
         child: Center(
           child: Column(
             children: [
-             SizedBox(height: dims.heightPercent(5)), // Top spacing
+             SizedBox(height: dimensions.heightPercent(5)), // Top spacing
 
                 // Back button aligned to the top-left corner
                 Align(
@@ -57,7 +61,7 @@ if(user == null){
                   child: IconButton(
                     icon: Icon(
                       Icons.arrow_back,
-                      size: dims.widthPercent(10), // Responsive size
+                      size: dimensions.widthPercent(10), // Responsive size
                       color: const Color.fromRGBO(255, 255, 255, 1),
                     ),
                     onPressed: () {
