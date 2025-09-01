@@ -1,4 +1,5 @@
 import 'package:e_vote/Services/firestoreservices.dart';
+import 'package:e_vote/components/utilities/app_dimension.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ class ElectionList extends StatelessWidget {
 // which provides responsive sizing values based on the current context.
 //final dims = AppDimensions(context);
 final user = FirebaseAuth.instance.currentUser;
+final dims = AppDimensions(context);
 
 if(user == null){
   return Text('user not logged in');
@@ -39,7 +41,42 @@ if(user == null){
         final election = elections[index]; 
         return
 
-        Container(child: Column(children: [Text(election.candidates?.map((e)=>e.firstName).toString()?? ''),],),);
+       Container(
+
+        // Background image
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/background2.jpg'),
+            fit: BoxFit.cover, // Cover entire screen with background image
+          ),
+        ),
+        child: Center(
+          child: Column(
+            children: [
+             SizedBox(height: dims.heightPercent(5)), // Top spacing
+
+                // Back button aligned to the top-left corner
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.arrow_back,
+                      size: dims.widthPercent(10), // Responsive size
+                      color: const Color.fromRGBO(255, 255, 255, 1),
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context); // Navigate back
+                    },
+                  ),
+                ),
+                const SizedBox(height: 100),
+
+             
+             
+            ],
+          ),
+        ));
+      
 
 
 
