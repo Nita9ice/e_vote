@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_vote/Services/firestoreservices.dart';
 import 'package:e_vote/models/election.dart';
 import 'package:flutter/material.dart';
@@ -17,20 +18,13 @@ try{
       electionData.endDate,
       electionData.candidates,
       electionData.auditors,
-    );}catch(e){
+    );
+    
+    
+    }catch(e){
       print(e.toString());
     }
-   print(
-      electionList.map(
-        (e) => {
-          e.title,
-          e.description,
-          e.startDate,
-          e.endDate,
-          e.candidates?.map((can) => {can.firstName, can.lastName}),
-          e.auditors?.map((au) => {au.firstName, au.lastName, au.email}),
-        },
-      ),
-    );
+  
+
   }
 }
