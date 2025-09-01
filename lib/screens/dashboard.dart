@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:e_vote/components/utilities/app_dimension.dart';
 import 'package:e_vote/components/utilities/drawer.dart';
 import 'package:e_vote/components/widgets/dashboard_container.dart';
 import 'package:e_vote/providers/userprofileprovider.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,11 +17,53 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
+  // Store selected image (File for native, Uint8List for web)
+  dynamic selectedImage;
+
   @override
   Widget build(BuildContext context) {
   
     // Instantiate AppDimensions
     final dimensions = AppDimensions(context);
+
+    
+
+     // Function to pick an image file (with basic error handling)
+  Future<void> pickImage() async {
+  try {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.image,
+      allowMultiple: false,
+    );
+
+    if (result != null) {
+      final size = kIsWeb
+          ? result.files.single.bytes!.length
+          : await File(result.files.single.path!).length();
+
+      if (size > 5 * 1024 * 1024) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Image too large (max 5MB)')),
+        );
+        return;
+      }
+
+      
+      setState(() {
+        if (kIsWeb) {
+          selectedImage = result.files.single.bytes; // Uint8List
+        } else {
+          selectedImage = File(result.files.single.path!); // File
+        }
+      });
+    }
+  } catch (e) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Error picking image: $e')),
+    );
+  }
+}
+
 
     
     return SafeArea(
@@ -53,11 +99,32 @@ class _DashboardScreenState extends State<DashboardScreen> {
       
                    
                    SizedBox(height: 81,),
-                   CircleAvatar(
-                    radius: 120,
-                    backgroundImage: AssetImage('assets/images/image1.png'),
-                    backgroundColor: Colors.transparent,
+                   Stack(
+                     children: [
+                      CircleAvatar(
+                      radius: 120,
+                      backgroundImage: selectedImage != null
+                      ? (kIsWeb
+                               ? MemoryImage(selectedImage as Uint8List)
+                               : FileImage(selectedImage as File)) as ImageProvider
+                           : AssetImage('assets/images/image1.png'),
+                      backgroundColor: Colors.transparent,
+                     ),
+                      Positioned(
+                    bottom: 15,
+                    right: 15,
+                    child: IconButton(onPressed: pickImage, icon: Icon(Icons.add_a_photo_rounded,
+                    color: Colors.white,
+                    size: 30,
+                    )),
+                    )
+                     ]
+                      
                    ),
+
+                  
+
+                  
                     
                    SizedBox(height: 7,),
                       
