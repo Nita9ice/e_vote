@@ -169,9 +169,9 @@ late Election _election;
                                       child: ConstrainedBox(
                         constraints: const BoxConstraints(
                           minHeight: 220,
-                          // maxHeight: 300,
+                          
                           minWidth: 160, // prevents card from collapsing too small
-                          // maxWidth: 250, // prevents card from being too wide
+                         
                         ),
                         child: Container(
                           padding: const EdgeInsets.all(12),
@@ -222,7 +222,7 @@ late Election _election;
                                 ),
                               ),
                                           
-                              // const SizedBox(height: 10),
+                             
                                           
                            
                            
