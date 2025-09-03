@@ -1,5 +1,6 @@
 import 'package:e_vote/Services/firestoreservices.dart';
 import 'package:e_vote/components/utilities/app_dimension.dart';
+import 'package:e_vote/components/widgets/alert_box_status.dart';
 import 'package:e_vote/components/widgets/button.dart';
 import 'package:e_vote/models/candidate.dart';
 import 'package:e_vote/models/election.dart';
@@ -275,10 +276,20 @@ Future< bool> submitVote() async{
                       ),
                     ),
 
-                    MyButton(buttonText: 'Sumbit', onPressed:()async{
-                   await submitVote();
-                   
-                    }),
+                    MyButton(
+  buttonText: 'Submit',
+  onPressed: () async {
+    await submitVote();
+
+    
+
+   
+
+   
+    
+  },
+)
+                
                   ],
                 ),
               ),

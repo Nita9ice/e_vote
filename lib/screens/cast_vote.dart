@@ -100,10 +100,13 @@ class _CastVoteState extends State<CastVote> {
                       Navigator.pushNamed(
                         context,
                         '/voters',
+                        
                         arguments: Ids(
                           userId: userIdController.text.trim(),
+                          
                           electionId: eLctionIdController.text.trim(),
                         ),
+                        
                       );
                     },
                   ),

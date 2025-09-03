@@ -44,6 +44,9 @@ void didChangeDependencies() {
 
   @override
   Widget build(BuildContext context) {
+    // Debug prints
+  print("Election ID: ${_election.ids?.electionId}");
+  print("User ID: ${_election.ids?.userId}");
     
     return SafeArea(
       child: Scaffold(
