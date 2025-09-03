@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:e_vote/Services/firestoreservices.dart';
 import 'package:e_vote/models/election.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +11,7 @@ Future<void> addElection(Election electionData) async {
     notifyListeners();
 try{
     final fireStore = Firestoreservices();
+    
    await fireStore.electionToFireStore(
       electionData.title,
       electionData.description,
@@ -24,7 +25,7 @@ try{
     }catch(e){
       print(e.toString());
     }
-  
+
 
   }
 }
