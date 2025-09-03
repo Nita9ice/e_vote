@@ -25,7 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
   bool obscurePassword = false;
 
 
- 
+ // function to sign in users to the app
  Future<bool>signIn()async{
   try{
   final email = emailController.text.trim();
@@ -47,7 +47,7 @@ return false;
  }
 }
 catch(e){
-  print(e.toString());
+  // print(e.toString());
 }
   return false;
  }
@@ -60,13 +60,7 @@ Future<void> successMessage()async{
     return 
 
     Image.asset('assets/images/logo.png');
-    /*
-    AlertBoxStatus(
-      onPressed: (){},
-      containerText: 'Success', containerImage: Image.asset('assets/images/logo.png'));
-
     
-    */
   } );
 }
 // navigate to dashboard
@@ -88,143 +82,89 @@ void navigateToDashbord(){
     // Instantiate AppDimensions
     final dimensions = AppDimensions(context);
 
-    return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/background2.jpg'),
-            fit: BoxFit.cover,
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
+          width: double.infinity,
+          height: double.infinity,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/background2.jpg'),
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
-        child: Padding(
-          padding: EdgeInsets.all(dimensions.widthPercent(7.5)), // ~32.25px
-          child: Center(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  // Space
-                  SizedBox(height: dimensions.heightPercent(26)), // ~242.32px
-                  // Main text
-                  Text(
-                    'Welcome Back',
-                    style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontSize: dimensions.widthPercent(8.4), // ~36.12px
-                      fontWeight: FontWeight.w700,
-                      color: const Color.fromRGBO(255, 255, 255, 1),
-                    ),
-                  ),
-                  // Space
-                  SizedBox(height: dimensions.heightPercent(2.4)), // ~22.37px
-                  // Sub text
-                  Text(
-                    'Login',
-                    style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontSize: dimensions.widthPercent(8.4), // ~36.12px
-                      fontWeight: FontWeight.w700,
-                      color: const Color.fromRGBO(255, 255, 255, 1),
-                    ),
-                  ),
-                  // Space
-                  SizedBox(height: dimensions.heightPercent(4.3)), // ~40.08px
-                  // Text field for user
-                  MyTextField(
-                    controller: emailController,
-                    hintText: 'Email:',
-                  ),
-                  
-                   
-              
-                 
-              
-                   SizedBox(height: dimensions.heightPercent(4.5)), // ~41.94px
-                  // Text field for password
-                  MyTextField(
-                
-                    controller: passwordController,
-                    hintText: 'Password:',
-                    obscureText: !obscurePassword,
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        obscurePassword ? Icons.visibility_off : Icons.visibility,
-                        color: const Color.fromRGBO(0, 0, 0, 1),
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          obscurePassword = !obscurePassword;
-                        });
-                      },
-                    ),
-                  ),
-                  // Space
-                  SizedBox(height: dimensions.heightPercent(1.5)), // ~13.98px
-                  // Forgot password
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/forgot');
-                      },
-                      child: Text(
-                        'Forgot Password?',
-                        style: TextStyle(
-                          fontFamily: 'Roboto',
-                          fontSize: dimensions.widthPercent(4.7), // ~20.21px
-                          fontWeight: FontWeight.w400,
-                          color: const Color.fromRGBO(255, 255, 255, 1),
-                        ),
+          child: Padding(
+            padding: EdgeInsets.all(dimensions.widthPercent(5)), 
+            child: Center(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    // Space
+                    SizedBox(height: dimensions.heightPercent(26)), 
+                    // Main text
+                    Text(
+                      'Welcome Back',
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontSize: dimensions.widthPercent(8.4), 
+                        fontWeight: FontWeight.w700,
+                        color: const Color.fromRGBO(255, 255, 255, 1),
                       ),
                     ),
-                  ),
-              
-                                  // Space
-                
-                  // Space
-                  SizedBox(height: dimensions.heightPercent(6.6)), // ~61.51px
-                  // Login button
-                  MyButton(
-                    buttonText: 'Login',
-                    onPressed: () async{
-                     final onSuccess = await signIn();
-                     if(onSuccess){
+                    // Space
+                    SizedBox(height: dimensions.heightPercent(2.4)), 
+                    // Sub text
+                    Text(
+                      'Login',
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontSize: dimensions.widthPercent(8.4), 
+                        fontWeight: FontWeight.w700,
+                        color: const Color.fromRGBO(255, 255, 255, 1),
+                      ),
+                    ),
+                    // Space
+                    SizedBox(height: dimensions.heightPercent(4.3)), 
+                    // Text field for user
+                    MyTextField(
+                      controller: emailController,
+                      hintText: 'Email:',
+                    ),
+                    
                      
                 
-                    await successMessage();
-
-                    await Future.delayed(Duration(seconds: 1));
+                   
                 
-
-                     navigateToDashbord();
-                 
-                     }
-
-                       
-                    },
-                  ),
-                  // Space
-                  SizedBox(height: dimensions.heightPercent(0.9)), // ~8.39px
-                  // Create account text
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Don\'t have an account?',
-                        style: TextStyle(
-                          fontFamily: 'Roboto',
-                          fontSize: dimensions.widthPercent(4.7), // ~20.21px
-                          fontWeight: FontWeight.w400,
-                          color: const Color.fromRGBO(255, 255, 255, 1),
+                     SizedBox(height: dimensions.heightPercent(3)), 
+                    // Text field for password
+                    MyTextField(
+                  
+                      controller: passwordController,
+                      hintText: 'Password:',
+                      obscureText: !obscurePassword,
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          obscurePassword ? Icons.visibility_off : Icons.visibility,
+                          color: const Color.fromRGBO(0, 0, 0, 1),
                         ),
-                      ),
-                      TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, '/signup');
+                          setState(() {
+                            obscurePassword = !obscurePassword;
+                          });
+                        },
+                      ),
+                    ),
+                    // Space
+                    SizedBox(height: dimensions.heightPercent(1.5)), // ~13.98px
+                    // Forgot password
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/forgot');
                         },
                         child: Text(
-                          'Sign up',
+                          'Forgot Password?',
                           style: TextStyle(
                             fontFamily: 'Roboto',
                             fontSize: dimensions.widthPercent(4.7), // ~20.21px
@@ -233,9 +173,65 @@ void navigateToDashbord(){
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                ],
+                    ),
+                
+                                    // Space
+                  
+                    // Space
+                    SizedBox(height: dimensions.heightPercent(6.6)), // ~61.51px
+                    // Login button
+                    MyButton(
+                      buttonText: 'Login',
+                      onPressed: () async{
+                       final onSuccess = await signIn();
+                       if(onSuccess){
+                       
+                  
+                      await successMessage();
+      
+                      await Future.delayed(Duration(seconds: 1));
+                  
+      
+                       navigateToDashbord();
+                   
+                       }
+      
+                         
+                      },
+                    ),
+                    // Space
+                    SizedBox(height: dimensions.heightPercent(0.9)), 
+                    // Create account text
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Don\'t have an account?',
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontSize: dimensions.widthPercent(4.7), 
+                            fontWeight: FontWeight.w400,
+                            color: const Color.fromRGBO(255, 255, 255, 1),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/signup');
+                          },
+                          child: Text(
+                            'Sign up',
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontSize: dimensions.widthPercent(4.7), 
+                              fontWeight: FontWeight.w400,
+                              color: const Color.fromRGBO(255, 255, 255, 1),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

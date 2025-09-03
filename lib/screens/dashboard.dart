@@ -30,6 +30,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
      // Function to pick an image file (with basic error handling)
   Future<void> pickImage() async {
+    
   try {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.image,
@@ -42,6 +43,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           : await File(result.files.single.path!).length();
 
       if (size > 5 * 1024 * 1024) {
+        
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Image too large (max 5MB)')),
         );
@@ -58,6 +60,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       });
     }
   } catch (e) {
+    
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text('Error picking image: $e')),
     );

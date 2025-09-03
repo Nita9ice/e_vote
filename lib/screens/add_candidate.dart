@@ -65,6 +65,7 @@ class _AddCandidateScreenState extends State<AddCandidateScreen> {
         // Added: Basic size check (e.g., <5MB)
         final size = kIsWeb ? result.files.single.bytes!.length : await File(result.files.single.path!).length();
         if (size > 5 * 1024 * 1024) {
+           if (!mounted) return;
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Image too large (max 5MB)')),
           );
@@ -77,6 +78,7 @@ class _AddCandidateScreenState extends State<AddCandidateScreen> {
         }
       }
     } catch (e) {
+       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error picking image: $e')),
       );

@@ -16,43 +16,41 @@ class ProfileScreen extends StatelessWidget {
     // Create an AppDimensions object for responsive sizing
     final dims = AppDimensions(context);
 
-    return Scaffold(
-     body: Consumer<Userprofileprovider>(builder:(context, userprovider, hild ){
-      final user =  userprovider.userProfile;
-        return  
-      Container(
-        // Full-screen background image
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/background2.jpg"),
-            fit: BoxFit.cover,
+    return SafeArea(
+      child: Scaffold(
+         // Extends the body behind the app bar for seamless background
+        extendBodyBehindAppBar: true,
+
+        // Transparent AppBar with custom icon styling
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          iconTheme: const IconThemeData(
+            size: 40,
+            color: Color.fromRGBO(255, 255, 255, 1),
           ),
         ),
-        child: Padding(
-          // Uniform padding around the content
-          padding: EdgeInsets.all(dims.widthPercent(4)), // instead of 24
-          child: SafeArea(
+       body: Consumer<Userprofileprovider>(builder:(context, userprovider, hild ){
+        final user =  userprovider.userProfile;
+          return  
+        Container(
+          // Full-screen background image
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/background2.jpg"),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Padding(
+            // Uniform padding around the content
+            padding: EdgeInsets.all(dims.widthPercent(5)), 
             child: Column(
               children: [
                 SizedBox(height: dims.heightPercent(5)), // Top spacing
-
-                // Back button aligned to the top-left corner
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.arrow_back,
-                      size: dims.widthPercent(10), // Responsive size
-                      color: const Color.fromRGBO(255, 255, 255, 1),
-                    ),
-                    onPressed: () {
-                      Navigator.pop(context); // Navigate back
-                    },
-                  ),
-                ),
-
+                  
+                
+                  
                 SizedBox(height: dims.heightPercent(9)), // Spacing before title
-
+                  
                 // Page title
                 Text(
                   "Profile",
@@ -63,18 +61,18 @@ class ProfileScreen extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-
+                  
                 SizedBox(height: dims.heightPercent(2.5)),
-
+                  
                 // User profile image
                 CircleAvatar(
                   radius: dims.widthPercent(20),
                   backgroundImage:
                       const AssetImage("assets/images/Ellipse 4.jpg"),
                 ),
-
+                  
                 SizedBox(height: dims.heightPercent(1.2)),
-
+                  
                 // User name
                 Text(
                   user?.name.join('  ')??'',
@@ -85,7 +83,7 @@ class ProfileScreen extends StatelessWidget {
                                 color: const Color.fromRGBO(255, 255, 255, 1),
                   ),
                 ),
-
+                  
                 // User role/position
                 Text(
                   user?.email??'',
@@ -96,9 +94,9 @@ class ProfileScreen extends StatelessWidget {
                                 color: const Color.fromRGBO(255, 255, 255, 1),
                   ),
                 ),
-
+                  
                 SizedBox(height: dims.heightPercent(6)),
-
+                  
                 // ===== Option Row: Edit Profile =====
                 Row(
                   children: [
@@ -128,9 +126,9 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-
+                  
                 SizedBox(height: dims.heightPercent(4)),
-
+                  
                 // ===== Option Row: Notifications =====
                 Row(
                   children: [
@@ -160,9 +158,9 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-
+                  
                 SizedBox(height: dims.heightPercent(4)),
-
+                  
                 // ===== Option Row: Change Password =====
                 Row(
                   children: [
@@ -195,8 +193,8 @@ class ProfileScreen extends StatelessWidget {
               ],
             ),
           ),
+        );}
         ),
-      );}
       ),
     );
   }

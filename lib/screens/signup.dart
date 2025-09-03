@@ -120,148 +120,134 @@ class _SignupScreenState extends State<SignupScreen> {
 // which provides responsive sizing values based on the current context.
     final dims = AppDimensions(context);
 
-    return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        // Background image
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/background2.jpg'),
-            fit: BoxFit.cover,
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
+          width: double.infinity,
+          height: double.infinity,
+          // Background image
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/background2.jpg'),
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
-        child: Padding(
-          padding: EdgeInsets.all(dims.widthPercent(7.5)), // responsive padding
-          child: Center(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(height: dims.heightPercent(20)), // top spacing
-
-                  // Main text
-                  Text(
-                    'Welcome Onboard',
-                    style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontSize: dims.fontSizeLarge,
-                      fontWeight: FontWeight.w700,
-                      color: const Color.fromRGBO(255, 255, 255, 1),
-                    ),
-                  ),
-
-                  SizedBox(height: dims.spacingMedium),
-
-                  // First name input field
-                  MyTextField(
-                    controller: firstNameController,
-                    hintText: 'First name:',
-                  ),
-
-                  SizedBox(height: dims.spacingMedium),
-
-                  // Last name input field
-                  MyTextField(
-                    controller: lastNameController,
-                    hintText: 'Last name:',
-                  ),
-
-                  SizedBox(height: dims.spacingMedium),
-
-                  // Email input field
-                  MyTextField(
-                    controller: emailController,
-                    hintText: 'Email:',
-                  ),
-
-                  SizedBox(height: dims.spacingMedium),
-
-                  // Password input field with toggle visibility
-                  MyTextField(
-                    controller: passwordController,
-                    hintText: 'Password:',
-                    obscureText: !obscurePassword,
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        obscurePassword
-                            ? Icons.visibility_off
-                            : Icons.visibility,
-                        color: const Color.fromRGBO(0, 0, 0, 1),
+          child: Padding(
+            padding: EdgeInsets.all(dims.widthPercent(5)), // responsive padding
+            child: Center(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(height: dims.heightPercent(20)), // top spacing
+      
+                    // Main text
+                    Text(
+                      'Welcome Onboard',
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontSize: dims.fontSizeLarge,
+                        fontWeight: FontWeight.w700,
+                        color: const Color.fromRGBO(255, 255, 255, 1),
                       ),
-                      onPressed: () {
-                        setState(() {
-                          obscurePassword = !obscurePassword;
-                        });
-                      },
                     ),
-                  ),
-
-                  SizedBox(height: dims.spacingMedium),
-
-                  // Confirm password input field
-                  MyTextField(
-                    controller: confirmPasswordController,
-                    hintText: 'Confirm Password:',
-                    obscureText: !obscurePassword,
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        obscurePassword
-                            ? Icons.visibility_off
-                            : Icons.visibility,
-                        color: const Color.fromRGBO(0, 0, 0, 1),
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          obscurePassword = !obscurePassword;
-                        });
-                      },
+      
+                    SizedBox(height: dims.spacingMedium),
+      
+                    // First name input field
+                    MyTextField(
+                      controller: firstNameController,
+                      hintText: 'First name:',
                     ),
-                  ),
-
-                  SizedBox(height: dims.spacingMedium),
-
-                  // Register button
-                  MyButton(
-                    buttonText: 'Register',
-                    onPressed: () async {
-                      final onsucess = await signUp();
-                      if (onsucess) {
-                        await sendEmailverification();
-                        showSnackBar(
-                          'A verification link has been sent to your email.\n'
-                          'Please check your inbox and spam folder.',
-                        );
-                        // Navigate to verification screen after 5 seconds
-                        Timer(const Duration(seconds: 5), () {
-                          return emailVerificationScreen();
-                        });
-                      }
-                    },
-                  ),
-
-                  SizedBox(height: dims.spacingSmall),
-
-                  // Row for users who already have an account
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Have an account already?',
-                        style: TextStyle(
-                          fontFamily: 'Roboto',
-                          fontSize: dims.fontSizeSmall,
-                          fontWeight: FontWeight.w400,
-                          color: const Color.fromRGBO(255, 255, 255, 1),
+      
+                    SizedBox(height: dims.spacingMedium),
+      
+                    // Last name input field
+                    MyTextField(
+                      controller: lastNameController,
+                      hintText: 'Last name:',
+                    ),
+      
+                    SizedBox(height: dims.spacingMedium),
+      
+                    // Email input field
+                    MyTextField(
+                      controller: emailController,
+                      hintText: 'Email:',
+                    ),
+      
+                    SizedBox(height: dims.spacingMedium),
+      
+                    // Password input field with toggle visibility
+                    MyTextField(
+                      controller: passwordController,
+                      hintText: 'Password:',
+                      obscureText: !obscurePassword,
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          obscurePassword
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color: const Color.fromRGBO(0, 0, 0, 1),
                         ),
-                      ),
-                      TextButton(
                         onPressed: () {
-                          // Navigate to login
-                          // Navigator.pushNamed(context, '/dashboard');
-                          Navigator.pushNamed(context, '/login');
+                          setState(() {
+                            obscurePassword = !obscurePassword;
+                          });
                         },
-                        child: Text(
-                          'Login',
+                      ),
+                    ),
+      
+                    SizedBox(height: dims.spacingMedium),
+      
+                    // Confirm password input field
+                    MyTextField(
+                      controller: confirmPasswordController,
+                      hintText: 'Confirm Password:',
+                      obscureText: !obscurePassword,
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          obscurePassword
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color: const Color.fromRGBO(0, 0, 0, 1),
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            obscurePassword = !obscurePassword;
+                          });
+                        },
+                      ),
+                    ),
+      
+                    SizedBox(height: dims.spacingMedium),
+      
+                    // Register button
+                    MyButton(
+                      buttonText: 'Register',
+                      onPressed: () async {
+                        final onsucess = await signUp();
+                        if (onsucess) {
+                          await sendEmailverification();
+                          showSnackBar(
+                            'A verification link has been sent to your email.\n'
+                            'Please check your inbox and spam folder.',
+                          );
+                          // Navigate to verification screen after 5 seconds
+                          Timer(const Duration(seconds: 5), () {
+                            return emailVerificationScreen();
+                          });
+                        }
+                      },
+                    ),
+      
+                    SizedBox(height: dims.spacingSmall),
+      
+                    // Row for users who already have an account
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Have an account already?',
                           style: TextStyle(
                             fontFamily: 'Roboto',
                             fontSize: dims.fontSizeSmall,
@@ -269,10 +255,26 @@ class _SignupScreenState extends State<SignupScreen> {
                             color: const Color.fromRGBO(255, 255, 255, 1),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                        TextButton(
+                          onPressed: () {
+                            // Navigate to login
+                            // Navigator.pushNamed(context, '/dashboard');
+                            Navigator.pushNamed(context, '/login');
+                          },
+                          child: Text(
+                            'Login',
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontSize: dims.fontSizeSmall,
+                              fontWeight: FontWeight.w400,
+                              color: const Color.fromRGBO(255, 255, 255, 1),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

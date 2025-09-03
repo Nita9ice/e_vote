@@ -26,9 +26,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     // Instantiate AppDimensions
     final dimensions = AppDimensions(context);
 
-    return Scaffold(
-      body: SafeArea(
-        child: Container(
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
           width: double.infinity,
           height: double.infinity,
           decoration: const BoxDecoration(
@@ -38,7 +38,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             ),
           ),
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: dimensions.widthPercent(7.5)), // ~32.25px
+            padding: EdgeInsets.symmetric(horizontal: dimensions.widthPercent(5)), 
             child: Center(
               child: Column(
                 children: [

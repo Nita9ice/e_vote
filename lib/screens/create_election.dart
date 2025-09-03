@@ -286,18 +286,7 @@ class _CreatElectionScreenState extends State<CreatElectionScreen> {
                     }
 
                    
-                    // // Added: Create Election model and pass to next screen
-                    // final election = Election(
-                    //   title: titleController.text,
-                    //   description: descriptionController.text,
-                    //   startDate: _startDate,
-                    //   endDate: _endDate,
-                    // );
-                    // Navigator.pushNamed(
-                    //   context,
-                    //   '/candidate',
-                    //   arguments: election, // Pass the model
-                    // );
+                    
                   },
                 ),
               ],

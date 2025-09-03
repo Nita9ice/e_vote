@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:firebase_auth/firebase_auth.dart';
 
 class Authservices {
@@ -33,7 +35,11 @@ class Emailservices {
     if (user != null && !user.emailVerified) {
       await user.sendEmailVerification();
       
-    }else{print('verification link not sent');}}catch(e){print(e.toString());}
+    }else{
+      print('verification link not sent')
+      ;}}
+      catch(e){
+        (e.toString());}
   }
 
 Future< bool> emailVerified()async{

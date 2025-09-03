@@ -1,7 +1,3 @@
-import 'dart:convert';
-import 'dart:io';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_vote/Services/firestoreservices.dart';
 import 'package:e_vote/components/utilities/app_dimension.dart';
 import 'package:e_vote/components/widgets/button.dart';
@@ -103,7 +99,7 @@ Future< bool> submitVote() async{
           }
           if (snapShot.hasError) {
 
-            print(snapShot.error);
+            
             return Center(child: Text('an error occured ${snapShot.error}'));
           
           }
@@ -281,7 +277,7 @@ Future< bool> submitVote() async{
 
                     MyButton(buttonText: 'Sumbit', onPressed:()async{
                    await submitVote();
-                   print('tapped');
+                   
                     }),
                   ],
                 ),

@@ -13,43 +13,42 @@ class AuditScreen extends StatelessWidget {
 final dims = AppDimensions(context);
 
 
-    return Scaffold(
-      body: Container(
-
-        // Background image
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/background2.jpg'),
-            fit: BoxFit.cover, // Cover entire screen with background image
+    return SafeArea(
+      child: Scaffold(
+         // Extends the body behind the app bar for seamless background
+          extendBodyBehindAppBar: true,
+      
+          // Transparent AppBar with custom icon styling
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            iconTheme: const IconThemeData(
+              size: 40,
+              color: Color.fromRGBO(255, 255, 255, 1),
+            ),
           ),
-        ),
-        child: Center(
-          child: Column(
-            children: [
-             SizedBox(height: dims.heightPercent(5)), // Top spacing
-
-                // Back button aligned to the top-left corner
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.arrow_back,
-                      size: dims.widthPercent(10), // Responsive size
-                      color: const Color.fromRGBO(255, 255, 255, 1),
-                    ),
-                    onPressed: () {
-                      Navigator.pop(context); // Navigate back
-                    },
-                  ),
-                ),
-                const SizedBox(height: 100),
-
-             
-
-             
-
-             
-            ],
+        body: Container(
+      
+          // Background image
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/background2.jpg'),
+              fit: BoxFit.cover, // Cover entire screen with background image
+            ),
+          ),
+          child: Center(
+            child: Column(
+              children: [
+               SizedBox(height: dims.heightPercent(5)), // Top spacing
+      
+                  
+      
+               
+      
+               
+      
+               
+              ],
+            ),
           ),
         ),
       ),

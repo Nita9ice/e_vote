@@ -26,9 +26,9 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
 // which provides responsive sizing values based on the current context.
     final dims = AppDimensions(context);
 
-    return Scaffold(
-      body: SafeArea(
-        child: Container(
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
           //background image 
           decoration: const BoxDecoration(
             image: DecorationImage(
@@ -38,14 +38,14 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
           ),
           child: Padding(
             //horizontal padding (7.5% of screen width)
-            padding: EdgeInsets.symmetric(horizontal: dims.widthPercent(7.5)),
+            padding: EdgeInsets.symmetric(horizontal: dims.widthPercent(5)),
             child: Center(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   // Top spacing (28% of screen height)
                   SizedBox(height: dims.heightPercent(28)),
-
+        
                   // Main heading text
                   Text(
                     'Verify Your Email',
@@ -56,10 +56,10 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                       color: const Color.fromRGBO(255, 255, 255, 1),
                     ),
                   ),
-
+        
                   // Spacing between heading and sub-text
                   SizedBox(height: dims.heightPercent(10)),
-
+        
                   // Sub-text explaining the verification process
                   Text(
                     'A verification link has been sent to your email.\nPlease check your inbox/spam and click the link.',
@@ -71,10 +71,10 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                       color: const Color.fromRGBO(255, 255, 255, 1),
                     ),
                   ),
-
+        
                   // Spacing before resend option
                   SizedBox(height: dims.spacingLarge),
-
+        
                   // Row for resend email option
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -104,10 +104,10 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                       ),
                     ],
                   ),
-
+        
                   //spacing before login option (20% of screen height)
                   SizedBox(height: dims.heightPercent(20)),
-
+        
                   //login option after successful verification
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -123,9 +123,9 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                       ),
                       TextButton(
                         onPressed: () {
-
+        
                           // Navigate to login screen
-
+        
                           Navigator.pushNamed(context, '/login');
                         },
                         child: Text(

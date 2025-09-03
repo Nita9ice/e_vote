@@ -29,40 +29,42 @@ class _SplashScreenState extends State<SplashScreen> {
 // which provides responsive sizing values based on the current context.
     final dims = AppDimensions(context);
 
-    return Scaffold(
-      body: Container(
-        // Background image for the splash screen
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/background1.jpg'),
-            fit: BoxFit.cover, // Cover the entire screen
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
+          // Background image for the splash screen
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/background1.jpg'),
+              fit: BoxFit.cover, // Cover the entire screen
+            ),
           ),
-        ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center, // Vertically center all children
-            children: [
-               SizedBox(height: dims.heightPercent(10)),
-              // App logo
-              Image.asset(
-                'assets/images/logo.png',
-                
-              ),
-
-              // Responsive gap between logo and text
-              SizedBox(height: dims.spacingSmall),
-
-              // App title text
-              Text(
-                'E-Vote',
-                style: TextStyle(
-                  fontFamily: 'Roboto',
-                  fontSize: dims.fontSizeXLarge, // XLarge responsive font
-                  fontWeight: FontWeight.w700,   
-                  color: const Color.fromRGBO(255, 255, 255, 1), 
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center, // Vertically center all children
+              children: [
+                 SizedBox(height: dims.heightPercent(10)),
+                // App logo
+                Image.asset(
+                  'assets/images/logo.png',
+                  
                 ),
-              ),
-            ],
+      
+                // Responsive gap between logo and text
+                SizedBox(height: dims.spacingSmall),
+      
+                // App title text
+                Text(
+                  'E-Vote',
+                  style: TextStyle(
+                    fontFamily: 'Roboto',
+                    fontSize: dims.fontSizeXLarge, // XLarge responsive font
+                    fontWeight: FontWeight.w700,   
+                    color: const Color.fromRGBO(255, 255, 255, 1), 
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

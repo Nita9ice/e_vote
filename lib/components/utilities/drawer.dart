@@ -68,7 +68,9 @@ class MyDrawer extends StatelessWidget {
 
                    SizedBox(height: 30,),
                  MyListTile(text: 'Logout', onPressed: ()async{
+                  
                  await signOut();
+                 
                  Navigator.pushNamed(context, '/login');
                  },
                   icon: Icon(Icons.logout,color: Colors.white,),)
