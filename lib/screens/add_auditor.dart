@@ -1,5 +1,6 @@
 
 
+import 'package:e_vote/Services/firestoreservices.dart';
 import 'package:e_vote/components/widgets/add_button.dart';
 import 'package:e_vote/components/widgets/alert_box_status.dart';
 import 'package:e_vote/components/widgets/auditor_alert_box.dart';
@@ -10,6 +11,7 @@ import 'package:e_vote/models/auditor.dart';
 
 import 'package:e_vote/models/election.dart'; // Import the new model
 import 'package:e_vote/providers/electionprovider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -158,6 +160,8 @@ class _AddAuditorScreenState extends State<AddAuditorScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    final userId = FirebaseAuth.instance.currentUser;
     return Scaffold(
       backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
       body: Container(
@@ -311,10 +315,11 @@ class _AddAuditorScreenState extends State<AddAuditorScreen> {
                 
                       Navigator.pop(context);
                   },
-                  onPressed: ()  {
-
+                  onPressed: ()async {
+               final electionId = await Firestoreservices().getElectionId(userId!.uid);
                        addElection(
                       Election(
+                        ids: electionId,
                         title: _election.title,
                         description: _election.description,
                         startDate: _election.startDate,
@@ -327,6 +332,10 @@ class _AddAuditorScreenState extends State<AddAuditorScreen> {
           
                     // Added: Update Election model
                     // _election.auditors = auditorList;
+
+
+    
+   
 
              
                showDialog(
@@ -350,11 +359,11 @@ class _AddAuditorScreenState extends State<AddAuditorScreen> {
                     );
                   },
                 ),
-              ],
+             ],
             ),
           ),
         ),
       ),
-    );
+);
   }
 }

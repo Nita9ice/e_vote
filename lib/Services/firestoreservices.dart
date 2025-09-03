@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_vote/models/auditor.dart';
 import 'package:e_vote/models/candidate.dart';
 import 'package:e_vote/models/election.dart';
+import 'package:e_vote/models/ids.dart';
 import 'package:e_vote/models/userprofile.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -106,5 +107,17 @@ class Firestoreservices {
 
         }
         
+  }
+
+Future<Ids>getElectionId(String userId)async{
+final colRef =  _firebaseFirestore.collection('users').doc(userId).collection('Elections');
+final snapshot = await colRef.limit(1).get();
+if(snapshot.docs.isEmpty){
+  throw Exception('no election found for user $userId');
+}
+ final electionDoc = snapshot.docs.first;
+ final electionId = electionDoc.id;
+return Ids(userId: userId, electionId: electionId);
+
   }
 }
