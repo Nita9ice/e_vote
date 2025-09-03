@@ -338,25 +338,25 @@ class _AddAuditorScreenState extends State<AddAuditorScreen> {
    
 
              
-              //  showDialog(
-              //         context: context,
-              //         builder: (context) {
-              //           return AlertBoxStatus(
-              //             containerText: 'Successful',
-              //             containerImage: Image.asset(
-              //               'assets/images/logo.png',
-              //               color: Colors.black,
-              //             ),
+               showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertBoxStatus(
+                          containerText: 'Successful',
+                          containerImage: Image.asset(
+                            'assets/images/logo.png',
+                            color: Colors.black,
+                          ),
 
-              //             onPressed: () {
-              //               Navigator.pushNamed(context, '/dashboard');
-              //               // Navigator.pushNamed(context,'/voters',);
-              //             },
-              //             imageHeight: 120,
-              //             imageWidth: 120,
-              //           );
-              //         },
-              //       );
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/dashboard');
+                            // Navigator.pushNamed(context,'/voters',);
+                          },
+                          imageHeight: 120,
+                          imageWidth: 120,
+                        );
+                      },
+                    );
                   },
                 ),
              ],
