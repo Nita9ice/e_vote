@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_vote/Services/firestoreservices.dart';
 import 'package:e_vote/components/utilities/app_dimension.dart';
+import 'package:e_vote/components/widgets/alert_box_status.dart';
 import 'package:e_vote/components/widgets/button.dart';
 import 'package:e_vote/models/candidate.dart';
 import 'package:e_vote/models/election.dart';
@@ -39,7 +40,7 @@ class _VoterScreenState extends State<VoterScreen> {
   // Mock vote submission (replace with actual DB/API logic)
 Future< bool> submitVote() async{
 
-  await  Firestoreservices().incrementVote(_id.userId, _id.electionId, _selectedCandidateIndex );
+  
 
 
 
@@ -47,7 +48,7 @@ Future< bool> submitVote() async{
     if (error != null) {
       return false;
     }
-
+    await Firestoreservices().incrementVote(_id.userId, _id.electionId, _selectedCandidateIndex );
     // Simulate saving vote by incrementing voteCount
     setState(() {
       election.candidates?[_selectedCandidateIndex!].voteCount += 1;
@@ -88,6 +89,13 @@ Future< bool> submitVote() async{
   //   // If needed to refresh
   //  // });
   // }
+
+
+  void showSuccessmessage(){
+    showDialog(context: context, builder: (context){
+    return AlertDialog(title: Text('success'),); //AlertBoxStatus(containerText: 'Success', containerImage: Image.asset('assets/images/logo.png') , onPressed:(){} );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -280,8 +288,10 @@ Future< bool> submitVote() async{
                     ),
 
                     MyButton(buttonText: 'Sumbit', onPressed:()async{
-                   await submitVote();
-                   print('tapped');
+              final success =  await submitVote();
+                   if(success){
+                    showSuccessmessage();
+                   }
                     }),
                   ],
                 ),
