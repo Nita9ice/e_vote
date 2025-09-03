@@ -116,24 +116,27 @@ late Election _election;
                     textAlign: TextAlign.center,
                     
                   ),
-              
-               SizedBox(height: 50),
-                  SizedBox(
-                    height: 200,width: 300,
-                    child: ListView.builder(
-                              // scrollDirection: Axis.vertical,
-                              itemCount: _election.candidates?.length,
-                              itemBuilder: (context, index) {
-                                final candidate = _election.candidates?[index];
-                                return Card(
-                                  margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                                  child: ConstrainedBox(
-                    constraints: const BoxConstraints(
-                      minHeight: 220,
-                      // maxHeight: 300,
-                      minWidth: 160, // prevents card from collapsing too small
-                      // maxWidth: 250, // prevents card from being too wide
-                    ),
+                ]
+                ),
+
+
+                SizedBox(
+                  height: 200,width: 300,
+                  child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: _election.candidates?.length,
+                            itemBuilder: (context, index) {
+                              final candidate = _election.candidates?[index];
+                              return Card(
+                                margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                child: ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    minHeight: 220,
+                    // maxHeight: 300,
+                    minWidth: 160, // prevents card from collapsing too small
+                    // maxWidth: 250, // prevents card from being too wide
+                  ),
+                  child: IntrinsicHeight(
                     child: Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
@@ -181,11 +184,27 @@ late Election _election;
                           const SizedBox(height: 10),
                                         
                         // for the auditorList 
-                       SizedBox(
+                       
+
+                           ],
+                      ),
+                    ),
+                  ),
+                                ),
+                  
+                              );
+                            },
+                          ),
+                ),
+
+// for the auditor
+        
+              SizedBox(
                         height: 200, width: 200,
                          child: ListView.builder(
+                      
                        
-                          physics: NeverScrollableScrollPhysics(),
+                         // physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                               itemCount: _election.auditors?.length,
                               itemBuilder: (context, index) {
@@ -229,22 +248,7 @@ late Election _election;
                                 );
                               },
                             ),
-                       ),
-                                  
-                           ],
-                      ),
-                    ),
-                                  ),
-                    
-                                );
-                              },
-                            ),
-                  ),
-              
-              
-                      
-                ],
-              ),
+                       ),],
             ),
           ),
         ),
