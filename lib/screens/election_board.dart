@@ -138,7 +138,7 @@ late Election _election;
                 SizedBox(
                   height: 200,width: 300,
                   child: ListView.builder(
-                            scrollDirection: Axis.vertical,
+                            scrollDirection: Axis.horizontal,
                             itemCount: _election.candidates?.length,
                             itemBuilder: (context, index) {
                               final candidate = _election.candidates?[index];
@@ -199,11 +199,27 @@ late Election _election;
                           const SizedBox(height: 10),
                   
                         // for the auditorList 
-                       SizedBox(
+                       
+
+                           ],
+                      ),
+                    ),
+                  ),
+                                ),
+                  
+                              );
+                            },
+                          ),
+                ),
+
+// for the auditor
+        
+              SizedBox(
                         height: 200, width: 200,
                          child: ListView.builder(
+                      
                        
-                          physics: NeverScrollableScrollPhysics(),
+                         // physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                               itemCount: _election.auditors?.length,
                               itemBuilder: (context, index) {
@@ -247,22 +263,7 @@ late Election _election;
                                 );
                               },
                             ),
-                       ),
-
-                           ],
-                      ),
-                    ),
-                  ),
-                                ),
-                  
-                              );
-                            },
-                          ),
-                ),
-
-
-        
-              ],
+                       ),],
             ),
           ),
         ),
