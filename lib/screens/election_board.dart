@@ -178,6 +178,9 @@ void didChangeDependencies() {
                                   scrollDirection: Axis.horizontal,
                                   itemCount: _election.candidates?.length,
                                   itemBuilder: (context, index) {
+
+                                    print('electionId: ${_election.ids!.electionId} userId: ${_election.ids!.userId}');
+                                  
                                     final candidate = _election.candidates?[index];
                                     return Card(
                                       margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -312,7 +315,7 @@ void didChangeDependencies() {
                                           ],
                                         ),
                                       );
-                                    },
+                                   },
                                   ),
                              ),
                              SizedBox(height: 50),

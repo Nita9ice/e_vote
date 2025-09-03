@@ -130,7 +130,7 @@ Future<Ids>getElectionId(String userId)async{
   final docRef =await  _firebaseFirestore.collection('users').doc(userId).collection('Elections').add({});
   final electionId = docRef.id;
 
-  final ids = Ids(userId: userId, electionId: electionId);
+  final ids= Ids(userId: userId, electionId: electionId);
 
   await docRef.update({'ids':ids.toMap() });
 

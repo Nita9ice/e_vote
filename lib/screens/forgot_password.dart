@@ -1,8 +1,8 @@
+import 'package:e_vote/Services/authservices.dart';
 import 'package:e_vote/components/utilities/app_dimension.dart';
 import 'package:flutter/material.dart';
 import 'package:e_vote/components/widgets/button.dart';
 import 'package:e_vote/components/widgets/text_field.dart';
-
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
@@ -19,6 +19,30 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   void dispose() {
     emailController.dispose();
     super.dispose();
+  }
+
+  Future<bool> sendPasswordReset() async {
+    try {
+      final auth = Emailservices();
+      await auth.sendPasswordReset(emailController.text.trim());
+      return true;
+    } catch (e) {
+      e.toString();
+      return false;
+    }
+  }
+
+  void passwordResetMessage() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(
+            'a password reset link has been sent to your email/n please check your inbox or spam folder',
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -38,7 +62,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             ),
           ),
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: dimensions.widthPercent(7.5)), // ~32.25px
+            padding: EdgeInsets.symmetric(
+              horizontal: dimensions.widthPercent(7.5),
+            ), // ~32.25px
             child: Center(
               child: Column(
                 children: [
@@ -70,16 +96,20 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   // Space
                   SizedBox(height: dimensions.heightPercent(2.2)), // ~20.50px
                   // Email field
-                  MyTextField(
-                    controller: emailController,
-                    hintText: 'Email',
-                  ),
+                  MyTextField(controller: emailController, hintText: 'Email'),
                   // Space
                   SizedBox(height: dimensions.heightPercent(7.5)), // ~69.90px
                   // Send Reset Link button
                   MyButton(
                     buttonText: 'Send Reset Link',
-                    onPressed: () {},
+                    onPressed: () async {
+                      final success = await sendPasswordReset();
+                      if (success) {
+                        passwordResetMessage();
+                  
+
+                      }
+                    },
                   ),
                   // Space
                   SizedBox(height: dimensions.heightPercent(3.2)), // ~29.82px
