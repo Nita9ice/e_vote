@@ -1,5 +1,10 @@
 
 
+
+
+
+
+
 import 'package:e_vote/Services/firestoreservices.dart';
 import 'package:e_vote/components/widgets/add_button.dart';
 import 'package:e_vote/components/widgets/alert_box_status.dart';
@@ -42,6 +47,9 @@ class _AddAuditorScreenState extends State<AddAuditorScreen> {
   void addElection(Election data) {
     Provider.of<Electionprovider>(context, listen: false).addElection(data);
   }
+
+
+
 
 
 
@@ -317,25 +325,31 @@ class _AddAuditorScreenState extends State<AddAuditorScreen> {
                   },
                   onPressed: ()async {
                final electionId = await Firestoreservices().getElectionId(userId!.uid);
-                       addElection(
-                      Election(
-                        ids: electionId,
-                        title: _election.title,
-                        description: _election.description,
-                        startDate: _election.startDate,
-                        endDate: _election.endDate,
-                        candidates: _election.candidates,
-                        auditors: auditorList
-                      ),
-                    );
 
-          
+            //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(duration: Duration(minutes: 20),content: Text(electionId.electionId)));
+                   //Future.delayed(Duration(seconds: 20));
+                    //    addElection(
+                    //   Election(
+                    //     ids: electionId,
+                    //     title: _election.title,
+                    //     description: _election.description,
+                    //     startDate: _election.startDate,
+                    //     endDate: _election.endDate,
+                    //     candidates: _election.candidates,
+                    //     auditors: auditorList
+                    //   ),
+                    // );
+  await  Firestoreservices().electionToFireStore( electionId,
+                       _election.title,
+                         _election.description,
+                         _election.startDate,
+                         _election.endDate,
+                       _election.candidates,
+                         auditorList);
+         
                     // Added: Update Election model
-                    // _election.auditors = auditorList;
+                    // _election.auditors = auditorLis
 
-
-    
-   
 
              
                showDialog(
@@ -360,10 +374,6 @@ class _AddAuditorScreenState extends State<AddAuditorScreen> {
                   },
                 ),
              ],
-            ),
-          ),
-        ),
-      ),
-);
-  }
-}
+            )
+
+          ))));}}

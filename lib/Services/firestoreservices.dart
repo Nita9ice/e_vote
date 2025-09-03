@@ -33,33 +33,35 @@ class Firestoreservices {
     }
   }
 
-  Future<void> electionToFireStore(
-    String title,
-    String description,
-    DateTime? startDate,
-    DateTime? endDate,
-    List<Candidate>? candidate,
-    List<Auditor>? auditors,
-  ) async {
-    final user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      final userId = user.uid;
-      await _firebaseFirestore
-          .collection('users')
-          .doc(userId)
-          .collection('Elections')
-          .add(
-            Election(
-              title: title,
-              description: description,
-              startDate: startDate,
-              endDate: endDate,
-              candidates: candidate,
-              auditors: auditors,
-            ).toMap(),
-          );
-    }
-  }
+  // Future<void> electionToFireStore(
+  //   Ids? ids,
+  //   String title,
+  //   String description,
+  //   DateTime? startDate,
+  //   DateTime? endDate,
+  //   List<Candidate>? candidate,
+  //   List<Auditor>? auditors,
+  // ) async {
+  //   final user = FirebaseAuth.instance.currentUser;
+  //   if (user != null) {
+  //     final userId = user.uid;
+  //     await _firebaseFirestore
+  //         .collection('users')
+  //         .doc(userId)
+  //         .collection('Elections')
+  //         .add(
+  //           Election(
+  //             ids: ids,
+  //             title: title,
+  //             description: description,
+  //             startDate: startDate,
+  //             endDate: endDate,
+  //             candidates: candidate,
+  //             auditors: auditors,
+  //           ).toMap(),
+  //         );
+  //   }
+  // }
 
   Stream<List<Election>> getElectionStream(String userId) {
     return _firebaseFirestore
@@ -70,7 +72,9 @@ class Firestoreservices {
         .map((snapShot) {
           return snapShot.docs.map((doc) {
             final data = doc.data();
-            return Election.fromMap(data);
+            final election = Election.fromMap(data);
+         election.ids?? Ids(userId: userId, electionId: doc.id);
+         return election;
           }).toList();
         });
   }
@@ -109,15 +113,73 @@ class Firestoreservices {
         
   }
 
-Future<Ids>getElectionId(String userId)async{
-final colRef =  _firebaseFirestore.collection('users').doc(userId).collection('Elections');
-final snapshot = await colRef.limit(1).get();
-if(snapshot.docs.isEmpty){
-  throw Exception('no election found for user $userId');
-}
- final electionDoc = snapshot.docs.first;
- final electionId = electionDoc.id;
-return Ids(userId: userId, electionId: electionId);
+// Future<Ids>getElectionId(String userId)async{
+// final colRef =  _firebaseFirestore.collection('users').doc(userId).collection('Elections');
+// final snapshot = await colRef.limit(1).get();
+// if(snapshot.docs.isEmpty){
+//   throw Exception('no election found for user $userId');
+// }
+//  final electionDoc = snapshot.docs.first;
+//  final electionId = electionDoc.id;
+// return Ids(userId: userId, electionId: electionId);
 
+//   }
+
+Future<Ids>getElectionId(String userId)async{
+
+  final docRef =await  _firebaseFirestore.collection('users').doc(userId).collection('Elections').add({});
+  final electionId = docRef.id;
+
+  final ids = Ids(userId: userId, electionId: electionId);
+
+  await docRef.update({'ids':ids.toMap() });
+
+  return ids;
+}
+
+
+
+
+
+
+
+Future<void> electionToFireStore(
+  Ids? ids,
+  String title,
+  String description,
+  DateTime? startDate,
+  DateTime? endDate,
+  List<Candidate>? candidate,
+  List<Auditor>? auditors,
+) async {
+  final userId = ids?.userId;
+  final electionId = ids?.electionId;
+
+  if (userId != null && electionId != null) {
+    final docRef = _firebaseFirestore
+        .collection('users')
+        .doc(userId)
+        .collection('Elections')
+        .doc(electionId); 
+
+    await docRef.set(
+      Election(
+        ids: ids,
+        title: title,
+        description: description,
+        startDate: startDate,
+        endDate: endDate,
+        candidates: candidate,
+        auditors: auditors,
+      ).toMap(),
+    );
   }
+}
+
+
+
+
+
+
+
 }

@@ -14,7 +14,7 @@ class Election {
 
   factory Election.fromMap(Map<String, dynamic> map) {
     return Election(
-     // ids: map['ids'],
+     ids: map['ids'] != null? Ids.fromMap( map['ids'] ):null,
       title: map['title'],
       description: map['description'],
       startDate: map['startDate'] is Timestamp?(map['startDate']as Timestamp).toDate():null,
@@ -36,7 +36,7 @@ class Election {
 
   Map<String, dynamic> toMap() {
     return {
-      'ids':ids,
+      'ids':ids?.toMap(),
       'title': title,
       'description': description,
       'startDate': startDate,
