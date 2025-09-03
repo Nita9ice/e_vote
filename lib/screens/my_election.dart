@@ -4,8 +4,7 @@ import 'package:e_vote/models/election.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'package:e_vote/components/utilities/app_dimension.dart';
-import 'package:e_vote/models/candidate.dart';
+
 
 import 'package:flutter/material.dart';
 
@@ -134,7 +133,7 @@ class _ElectionListState extends State<ElectionList> {
                                             candidates: election.candidates,
                                             auditors: election.auditors
                                           ),
-                                        ); // Navigate to eleection board screen
+                                        ); // Navigate to election board screen
                                       },
                                       icon: const Icon(
                                         Icons.arrow_forward_ios,

@@ -1,8 +1,7 @@
 import 'dart:io';
 
 import 'package:e_vote/components/utilities/app_dimension.dart';
-import 'package:e_vote/models/auditor.dart';
-import 'package:e_vote/models/candidate.dart';
+
 import 'package:e_vote/models/election.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show Uint8List, kIsWeb;
@@ -16,11 +15,7 @@ const  ElectionBoard({super.key});
 }
 
 class _ElectionBoardState extends State<ElectionBoard> {
-  // List of candidates (now part of Election model, but managed locally until submit)
-//  List<Candidate> candidateList = [];
-
-  // List of Auditors (managed locally until submit)
-//  List<Auditor> auditorList = [];
+  
 late Election _election;
 
   @override
@@ -49,47 +44,47 @@ late Election _election;
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(20),
-            child: Column(
-              // crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                 SizedBox(height: dims.heightPercent(5)), // Top spacing
+            child: Center(
+              child: Column(
+                // crossAxisAlignment: CrossAxisAlignment.start,
 
-                // Back button aligned to the top-left corner
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.arrow_back,
-                      size: dims.widthPercent(10), // Responsive size
-                      color: const Color.fromRGBO(255, 255, 255, 1),
-                    ),
-                    onPressed: () {
-                      Navigator.pop(context); // Navigate back
-                    },
-                  ),
-                ),
-                const SizedBox(height: 30),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset('assets/images/logo.png', width: 100),
-                    const Text(
-                      'E-voting',
-                      style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700,
-                        color: Color.fromRGBO(255, 255, 255, 1),
+                children: [
+                   SizedBox(height: dims.heightPercent(2)), // Top spacing
+              
+                  // Back button aligned to the top-left corner
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.arrow_back,
+                        size: dims.widthPercent(10), // Responsive size
+                        color: const Color.fromRGBO(255, 255, 255, 1),
                       ),
+                      onPressed: () {
+                        Navigator.pop(context); // Navigate back
+                      },
                     ),
-                  ],
-                ),
-
-                SizedBox(height: 70),
-                Align(
-                   alignment: Alignment.topLeft,
-                  child:  Text(
+                  ),
+                  const SizedBox(height: 20),
+              
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset('assets/images/logo.png', width: 100),
+                      const Text(
+                        'E-voting',
+                        style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                          color: Color.fromRGBO(255, 255, 255, 1),
+                        ),
+                      ),
+                    ],
+                  ),
+              
+                  SizedBox(height: 20),
+                  Text(
                   
                     // This should carry the title of the election
                   _election.title,
@@ -103,25 +98,14 @@ late Election _election;
                       // color: Color.fromRGBO(3, 58, 202, 1),
                     ),
                   ),
-                ),
-
-                SizedBox(height: 20),
-
-                Container(
-                  padding: EdgeInsets.all(16),
-                  height: 100,
-                  decoration: BoxDecoration(
-                    // color: Color.fromRGBO(255, 255, 255, 1),
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                      color: Color.fromRGBO(255, 255, 255, 1),
-                      // color: Color.fromRGBO(1, 20, 70, 1),
-                      width: 2,
-                    ),
-                  ),
-                  child: Text(
+              
+                  SizedBox(height: 5),
+              
+                  Text(
+                    
                     // This should carry the description of the election
                    _election.description,
+                   
                     style: TextStyle(
                       color: Color.fromRGBO(255, 255, 255, 1),
                       fontSize: 20,
@@ -132,26 +116,24 @@ late Election _election;
                     textAlign: TextAlign.center,
                     
                   ),
-                ),
-
-
-                SizedBox(
-                  height: 200,width: 300,
-                  child: ListView.builder(
-                            scrollDirection: Axis.vertical,
-                            itemCount: _election.candidates?.length,
-                            itemBuilder: (context, index) {
-                              final candidate = _election.candidates?[index];
-                              return Card(
-                                margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                                child: ConstrainedBox(
-                  constraints: const BoxConstraints(
-                    minHeight: 220,
-                    // maxHeight: 300,
-                    minWidth: 160, // prevents card from collapsing too small
-                    // maxWidth: 250, // prevents card from being too wide
-                  ),
-                  child: IntrinsicHeight(
+              
+               SizedBox(height: 50),
+                  SizedBox(
+                    height: 200,width: 300,
+                    child: ListView.builder(
+                              // scrollDirection: Axis.vertical,
+                              itemCount: _election.candidates?.length,
+                              itemBuilder: (context, index) {
+                                final candidate = _election.candidates?[index];
+                                return Card(
+                                  margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(
+                      minHeight: 220,
+                      // maxHeight: 300,
+                      minWidth: 160, // prevents card from collapsing too small
+                      // maxWidth: 250, // prevents card from being too wide
+                    ),
                     child: Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
@@ -162,7 +144,7 @@ late Election _election;
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const SizedBox(height: 10),
-                  
+                                        
                           CircleAvatar(
                             radius: 50,
                             backgroundImage: candidate?.image != null
@@ -174,7 +156,7 @@ late Election _election;
                                 ? const Icon(Icons.person, size: 50)
                                 : null,
                           ),
-                  
+                                        
                           const SizedBox(height: 8),
                           Flexible(
                             child: Text(
@@ -195,9 +177,9 @@ late Election _election;
                             'Votes: ${candidate?.voteCount}',
                             style: const TextStyle(fontSize: 14),
                           ),
-                  
+                                        
                           const SizedBox(height: 10),
-                  
+                                        
                         // for the auditorList 
                        SizedBox(
                         height: 200, width: 200,
@@ -248,21 +230,21 @@ late Election _election;
                               },
                             ),
                        ),
-
+                                  
                            ],
                       ),
                     ),
+                                  ),
+                    
+                                );
+                              },
+                            ),
                   ),
-                                ),
-                  
-                              );
-                            },
-                          ),
-                ),
-
-
-        
-              ],
+              
+              
+                      
+                ],
+              ),
             ),
           ),
         ),
