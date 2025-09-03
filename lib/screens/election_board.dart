@@ -15,16 +15,31 @@ class _ElectionBoardState extends State<ElectionBoard> {
  
 //  List<Auditor> auditorList = [];
 late Election _election;
+ bool _inits = false;
 
-  @override
-  void initState() {
-    super.initState();
-    // Added: Get Election from arguments
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-     
-      setState(() { _election = ModalRoute.of(context)!.settings.arguments as Election;}); // If needed to refresh
-    });
+@override
+ 
+void didChangeDependencies() {
+  super.didChangeDependencies();
+  if(!_inits){
+
+    _election = ModalRoute.of(context)!.settings.arguments as Election;
+   _inits =true;
   }
+  
+}
+
+
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   // Added: Get Election from arguments
+  //   WidgetsBinding.instance.addPostFrameCallback((_) {
+     
+  //     setState(() { _election = ModalRoute.of(context)!.settings.arguments as Election;}); // If needed to refresh
+  //   });
+  // }
   
 
   @override
@@ -108,7 +123,7 @@ late Election _election;
 
                   Text(
                     // This should carry the election ID
-                  'Election ID:',
+                  'Election ID: ${_election.ids?.electionId??''}',
                     style: TextStyle(
                       color: Color.fromRGBO(255, 255, 255, 1),
                       fontSize: 12,
@@ -123,7 +138,7 @@ late Election _election;
 
                   Text(
                     // This should carry the voter ID
-                   "Voter's ID",
+                   "User Id:${_election.ids?.userId??''}",
                     style: TextStyle(
                       color: Color.fromRGBO(255, 255, 255, 1),
                       fontSize: 12,

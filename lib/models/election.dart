@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_vote/models/candidate.dart';
 import 'package:e_vote/models/auditor.dart';
+import 'package:e_vote/models/ids.dart';
 
 class Election {
+  Ids? ids;
   String title;
   String description;
   DateTime? startDate;
@@ -12,6 +14,7 @@ class Election {
 
   factory Election.fromMap(Map<String, dynamic> map) {
     return Election(
+     ids: map['ids'] != null? Ids.fromMap( map['ids'] ):null,
       title: map['title'],
       description: map['description'],
       startDate: map['startDate'] is Timestamp?(map['startDate']as Timestamp).toDate():null,
@@ -22,6 +25,7 @@ class Election {
   }
 
   Election({
+   this.ids,
     this.title = '',
     this.description = '',
     this.startDate,
@@ -32,6 +36,7 @@ class Election {
 
   Map<String, dynamic> toMap() {
     return {
+      'ids':ids?.toMap(),
       'title': title,
       'description': description,
       'startDate': startDate,

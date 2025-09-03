@@ -13,6 +13,7 @@ try{
     final fireStore = Firestoreservices();
     
    await fireStore.electionToFireStore(
+       electionData.ids,
       electionData.title,
       electionData.description,
       electionData.startDate,

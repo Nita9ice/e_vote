@@ -135,6 +135,7 @@ class _ElectionListState extends State<ElectionList> {
                                               context,
                                               '/board',
                                               arguments: Election(
+                                                ids: election.ids,
                                                 title: election.title,
                                                 description: election.description,
                                                 startDate: election.startDate,
